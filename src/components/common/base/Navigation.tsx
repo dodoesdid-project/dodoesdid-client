@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
   const location = useLocation();
-  const url = '/' + location.pathname.split('/')[1];
+  const url = `/${location.pathname.split('/')[1]}`;
 
   return (
     <nav className="w-full h-[90px] fixed bottom-0 desktop:w-[375px] shadow-[0_-8px_12px_0_rgba(0,0,0,0.05)] bg-white">
