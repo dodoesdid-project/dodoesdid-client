@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 
-type ButtonProps = {
-  type:
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  buttonType:
     | 'fill-semibold'
     | 'fill-normal'
     | 'fill-round'
@@ -15,11 +15,11 @@ type ButtonProps = {
     | 'disabled-normal'
     | 'disabled-round';
   name: string;
-};
+}
 
-const Button: React.FC<ButtonProps> = ({ type, name }) => {
+const Button = ({ buttonType, name, ...props }: ButtonProps) => {
   const getButtonType = (
-    type:
+    buttonType:
       | 'fill-semibold'
       | 'fill-normal'
       | 'fill-round'
@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({ type, name }) => {
       | 'disabled-normal'
       | 'disabled-round',
   ) => {
-    switch (type) {
+    switch (buttonType) {
       case 'fill-semibold':
         return 'bg-primary-500 text-white text-[16px] font-semibold rounded-[8px] active:bg-primary-700';
       case 'fill-normal':
@@ -65,7 +65,8 @@ const Button: React.FC<ButtonProps> = ({ type, name }) => {
 
   return (
     <button
-      className={`w-full px-[16px] py-[12px] flex justify-center items-center max-w-[347px] min-w-[52px] ${getButtonType(type)}`}
+      {...props}
+      className={`w-full px-[16px] py-[12px] flex justify-center items-center max-w-[350px] min-w-[55px] ${getButtonType(buttonType)}`}
     >
       {name}
     </button>
