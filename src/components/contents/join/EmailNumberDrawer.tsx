@@ -56,9 +56,14 @@ const EmailNumber = ({ isOpen, onClose }: EmailNumberProps) => {
         <input
           type="number"
           ref={inputRef}
-          className="p-[10px] mb-[25px] focus:outline-none text-center dark:bg-[#2a2a2a] dark:focus:ring-white"
+          onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+            if (e.target.value.length >= 6) {
+              e.target.value = e.target.value.slice(0, 6);
+            }
+          }}
+          className="p-[10px] mb-[25px] focus:outline-none text-center text-[32px] text-gray-100 font-bold dark:bg-[#2a2a2a] dark:focus:ring-white"
         />
-        <Button buttonType="disabled-semibold" name="확인" />
+        <Button buttonType={`disabled-semibold`} name="확인" />
       </div>
     </Drawer>
   );
