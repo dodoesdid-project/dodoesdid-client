@@ -8,9 +8,14 @@ import { ReactComponent as CloseIcon } from '@assets/images/common/close.svg';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-type TopBarProps = { backLink?: string; title: string; close?: boolean };
+type TopBarProps = {
+  backLink?: string;
+  title: string;
+  close?: boolean;
+  onClickBack?: () => void;
+};
 
-const TopBar = ({ backLink, title, close }: TopBarProps) => {
+const TopBar = ({ backLink, title, close, onClickBack }: TopBarProps) => {
   const isDarkMode = useIsDarkMode();
 
   return (
@@ -23,6 +28,15 @@ const TopBar = ({ backLink, title, close }: TopBarProps) => {
             <BackIcon className="m-[10px] cursor-pointer" />
           )}
         </Link>
+      ) : onClickBack ? (
+        isDarkMode ? (
+          <BackDarkIcon
+            className="m-[10px] cursor-pointer"
+            onClick={onClickBack}
+          />
+        ) : (
+          <BackIcon className="m-[10px] cursor-pointer" onClick={onClickBack} />
+        )
       ) : (
         <div className="w-[38px]"></div>
       )}

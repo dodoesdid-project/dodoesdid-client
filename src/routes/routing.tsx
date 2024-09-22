@@ -2,8 +2,11 @@ import DodoesdidPage from '@pages/DodoesdidPage';
 import FeedPage from '@pages/FeedPage';
 import Homepage from '@pages/Homepage';
 import Mypage from '@pages/Mypage';
+import JoinPage from '@pages/join';
+import LoginPage from '@pages/login';
 
 import DefaultLayout from '@components/common/base/DefaultLayout';
+import NoNavLayout from '@components/common/base/NoNavLayout';
 
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
@@ -28,6 +31,13 @@ const router = createBrowserRouter([
         path: '/mypage',
         element: <Mypage />,
       },
+    ],
+  },
+  {
+    element: <NoNavLayout />,
+    children: [
+      { path: '/join', element: <JoinPage /> },
+      { path: '/login', element: <LoginPage /> },
     ],
   },
 ]);
