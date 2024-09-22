@@ -10,9 +10,10 @@ import React from 'react';
 
 type EmailDrawerProps = {
   onClose: () => void;
+  onClick: () => void;
 };
 
-const EmailDrawer = ({ onClose }: EmailDrawerProps) => {
+const EmailDrawer = ({ onClose, onClick }: EmailDrawerProps) => {
   const isDarkMode = useIsDarkMode();
   return (
     <Drawer
@@ -39,7 +40,7 @@ const EmailDrawer = ({ onClose }: EmailDrawerProps) => {
           <br />
           메일에서 인증번호 6자리를 확인하고 입력해주세요.
         </p>
-        <Button buttonType="fill-semibold" name="확인" />
+        <Button buttonType="fill-semibold" name="확인" onClick={onClick} />
       </div>
     </Drawer>
   );
