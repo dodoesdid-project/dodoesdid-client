@@ -9,6 +9,7 @@ import {
   UseFormSetValue,
   useWatch,
 } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 type AgreeStepProps = {
   control: Control<FieldValues, unknown>;
@@ -90,18 +91,21 @@ const AgreeStep = ({ control, setValue, onClick }: AgreeStepProps) => {
               />
             )}
           />
-          <Button
-            buttonType="outline-round"
-            name="보기"
-            style={{ width: '28px', padding: '8px 6px', fontSize: '12px' }}
-          />
+          <Link
+            to={`https://hissing-friend-bd0.notion.site/1085ad085e3a801ab3add7c9e4f41f4c`}
+          >
+            <Button
+              buttonType="outline-round"
+              name="보기"
+              style={{ width: '28px', padding: '8px 6px', fontSize: '12px' }}
+            />
+          </Link>
         </div>
         <div className="rdounded-[8px] flex justify-between items-center">
           <Controller
             name="agreePrivacy"
             control={control}
             render={({ field }) => {
-              console.log(field);
               return (
                 <CheckBox
                   label="개인정보 수집 및 이용에 동의 (필수)"
@@ -118,11 +122,15 @@ const AgreeStep = ({ control, setValue, onClick }: AgreeStepProps) => {
               );
             }}
           />
-          <Button
-            buttonType="outline-round"
-            name="보기"
-            style={{ width: '28px', padding: '8px 6px', fontSize: '12px' }}
-          />
+          <Link
+            to={`https://hissing-friend-bd0.notion.site/1085ad085e3a808e8b9adf6c74d55266`}
+          >
+            <Button
+              buttonType="outline-round"
+              name="보기"
+              style={{ width: '28px', padding: '8px 6px', fontSize: '12px' }}
+            />
+          </Link>
         </div>
       </div>
       <Button
