@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import useDarkMode from '@lib/hooks/useDarkMode';
 
 import Button from '@components/common/Button';
@@ -9,11 +10,20 @@ import { Drawer } from 'antd';
 import React, { useEffect, useRef } from 'react';
 
 type EmailNumberProps = {
+  authNumber: any;
   isOpen: unknown;
   onClose: () => void;
+  onChange: (e: any) => void;
+  onClick: () => void;
 };
 
-const EmailNumber = ({ isOpen, onClose }: EmailNumberProps) => {
+const EmailNumber = ({
+  authNumber,
+  isOpen,
+  onClose,
+  onChange,
+  onClick,
+}: EmailNumberProps) => {
   const isDarkMode = useDarkMode();
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -61,9 +71,17 @@ const EmailNumber = ({ isOpen, onClose }: EmailNumberProps) => {
               e.target.value = e.target.value.slice(0, 6);
             }
           }}
+          onChange={onChange}
           className="p-[10px] mb-[25px] focus:outline-none text-center text-[32px] text-gray-100 font-bold dark:bg-[#2a2a2a] dark:focus:ring-white"
         />
-        <Button buttonType={`disabled-semibold`} name="확인" />
+        <Button
+          disabled={authNumber?.length === 6 ? false : true}
+          buttonType={
+            authNumber?.length === 6 ? `fill-semibold` : `disabled-semibold`
+          }
+          name="확인"
+          onClick={onClick}
+        />
       </div>
     </Drawer>
   );
