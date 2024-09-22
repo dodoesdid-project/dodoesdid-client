@@ -1,9 +1,9 @@
 import DodoesdidPage from '@pages/DodoesdidPage';
 import FeedPage from '@pages/FeedPage';
 import Homepage from '@pages/Homepage';
-import JoinPage from '@pages/JoinPage';
-import LoginPage from '@pages/LoginPage';
 import Mypage from '@pages/Mypage';
+import JoinPage from '@pages/join';
+import LoginPage from '@pages/login';
 
 import DefaultLayout from '@components/common/base/DefaultLayout';
 import NoNavLayout from '@components/common/base/NoNavLayout';
