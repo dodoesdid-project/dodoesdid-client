@@ -1,4 +1,4 @@
-import JoinContainer from '@/containers/JoinContainer';
+import JoinContainer from '@/containers/join/JoinContainer';
 
 import React from 'react';
 

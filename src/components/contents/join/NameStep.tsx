@@ -20,7 +20,8 @@ const NameStep = ({ control, isValid, onClick }: NameStepProps) => {
           required: true,
           pattern: {
             value: /^[가-힣a-zA-Z0-9]{2,16}$/,
-            message: '공백을 제외한 영어, 숫자, 한글 2자 ~ 12자',
+            message:
+              '공백을 제외한 영어, 숫자, 한글 2자 ~ 12자로 입력해주세요.',
           },
         }}
         render={({ field, fieldState }) => (

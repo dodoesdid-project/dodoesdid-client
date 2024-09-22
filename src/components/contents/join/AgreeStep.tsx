@@ -93,6 +93,7 @@ const AgreeStep = ({ control, setValue, onClick }: AgreeStepProps) => {
           />
           <Link
             to={`https://hissing-friend-bd0.notion.site/1085ad085e3a801ab3add7c9e4f41f4c`}
+            target="_blank"
           >
             <Button
               buttonType="outline-round"
@@ -124,6 +125,7 @@ const AgreeStep = ({ control, setValue, onClick }: AgreeStepProps) => {
           />
           <Link
             to={`https://hissing-friend-bd0.notion.site/1085ad085e3a808e8b9adf6c74d55266`}
+            target="_blank"
           >
             <Button
               buttonType="outline-round"
