@@ -1,3 +1,4 @@
+import { createUser, emailAuthCompare, emailAuthSend } from '@lib/api/join';
 import useToggle from '@lib/hooks/useToggle';
 
 import TopBar from '@components/common/TopBar';
@@ -11,8 +12,10 @@ import PasswordStep from '@components/contents/join/PasswordStep';
 import PhoneStep from '@components/contents/join/PhoneStep';
 import SuccessDrawer from '@components/contents/join/SuccessDrawer';
 
+import { useMutation } from '@tanstack/react-query';
+
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 
 const JoinContainer = () => {
   const [current, setCurrent] = useState(0);
@@ -32,27 +35,69 @@ const JoinContainer = () => {
     formState: { isValid },
     setValue,
     getValues,
+    handleSubmit,
   } = useForm({ mode: 'onChange' });
 
-  const onClickSubmit = () => {
-    console.log(getValues());
-  };
   const { email } = getValues();
 
-  const onClickEmailAuth = () => {
-    toggleEmailDrawer();
-    toggleEmailNumberDrawer();
-    console.log(email);
+  const emailSendMutation = useMutation({
+    mutationFn: emailAuthSend,
+    onSuccess: () => {
+      toggleEmailDrawer();
+    },
+  });
+
+  const emailAuthMutation = useMutation({
+    mutationFn: emailAuthCompare,
+    onSuccess: () => {
+      toggleEmailNumberDrawer();
+      next();
+    },
+  });
+
+  const createUserMutation = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      toggleSuccessDrawer();
+    },
+  });
+
+  const onClickEmail = (data: FieldValues) => {
+    emailSendMutation.mutate(data.email);
   };
 
-  // 인증번호드로우테스트중
-  const [authNumber, setAuthNumber] = useState<number | unknown>();
+  const onClickAuth = () => {
+    emailAuthMutation.mutate({
+      email: email,
+      verifyCode: authNumber as string,
+    });
+  };
+
+  const onClickSubmit = () => {
+    const values = getValues();
+
+    const userData: {
+      userEmail: string;
+      password: string;
+      userName: string;
+      userBirth: string;
+      userPhone: string;
+    } = {
+      userEmail: values.email,
+      password: values.password,
+      userName: values.name,
+      userBirth: values.date,
+      userPhone: values.phone,
+    };
+
+    createUserMutation.mutate(userData);
+  };
+
+  const [authNumber, setAuthNumber] = useState<string | unknown>();
   const onChangeAuthNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(e.target.value);
-    console.log(authNumber);
   };
 
-  // 데이터
   const steps = [
     {
       id: 1,
@@ -60,7 +105,7 @@ const JoinContainer = () => {
         <EmailStep
           control={control}
           isValid={isValid}
-          onClick={toggleEmailDrawer}
+          onClick={handleSubmit(onClickEmail)}
         />
       ),
     },
@@ -100,16 +145,23 @@ const JoinContainer = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-4 pt-[44px]">
-      <TopBar title="회원가입" onClickBack={current === 0 ? undefined : prev} />
-      {steps[current].content}
+    <>
+      <div className="flex flex-col gap-4 pt-[44px]">
+        <TopBar
+          title="회원가입"
+          onClickBack={current === 0 ? undefined : prev}
+        />
+        {steps[current].content}
+      </div>
 
-      {/* step 1-2*/}
-      {/* <button onClick={toggleEmailDrawer}>EmailDrawer</button> */}
-      {/* <button onClick={toggleEmailNumberDrawer}>EmailNumber</button> */}
-      {/* <button onClick={toggleSuccessDrawer}>SuccessDrawer</button> */}
       {isOpenEmailDrawer && (
-        <EmailDrawer onClose={toggleEmailDrawer} onClick={onClickEmailAuth} />
+        <EmailDrawer
+          onClose={toggleEmailDrawer}
+          onClick={() => {
+            toggleEmailDrawer();
+            toggleEmailNumberDrawer();
+          }}
+        />
       )}
       {isOpenEmailNumberDrawer && (
         <EmailNumberDrawer
@@ -117,14 +169,11 @@ const JoinContainer = () => {
           isOpen={isOpenEmailNumberDrawer}
           onClose={toggleEmailNumberDrawer}
           onChange={onChangeAuthNumber}
-          onClick={() => {
-            next();
-            toggleEmailNumberDrawer();
-          }}
+          onClick={onClickAuth}
         />
       )}
       {isOpenSuccessDrawer && <SuccessDrawer onClose={toggleSuccessDrawer} />}
-    </div>
+    </>
   );
 };
 

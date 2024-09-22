@@ -2,6 +2,7 @@ import Button from '@components/common/Button';
 
 import { Drawer } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type SuccessDrawerProps = {
   onClose: () => void;
@@ -22,7 +23,9 @@ const SuccessDrawer = ({ onClose }: SuccessDrawerProps) => {
           <br />
           로그인을 완료해주세요.
         </p>
-        <Button buttonType="fill-semibold" name="확인" />
+        <Link to={`/login`}>
+          <Button buttonType="fill-semibold" name="확인" />
+        </Link>
       </div>
     </Drawer>
   );

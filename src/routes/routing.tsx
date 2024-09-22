@@ -2,6 +2,7 @@ import DodoesdidPage from '@pages/DodoesdidPage';
 import FeedPage from '@pages/FeedPage';
 import Homepage from '@pages/Homepage';
 import JoinPage from '@pages/JoinPage';
+import LoginPage from '@pages/LoginPage';
 import Mypage from '@pages/Mypage';
 
 import DefaultLayout from '@components/common/base/DefaultLayout';
@@ -34,7 +35,10 @@ const router = createBrowserRouter([
   },
   {
     element: <NoNavLayout />,
-    children: [{ path: '/join', element: <JoinPage /> }],
+    children: [
+      { path: '/join', element: <JoinPage /> },
+      { path: '/login', element: <LoginPage /> },
+    ],
   },
 ]);
 
