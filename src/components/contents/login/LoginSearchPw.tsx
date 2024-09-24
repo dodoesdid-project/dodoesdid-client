@@ -36,15 +36,13 @@ const LoginSearchPw = ({ control, isValid, onClick }: LoginSearchPwProps) => {
               value={field.value || ''}
               onChange={(e) => field.onChange(e.target.value)}
               placeholder="이메일을 입력하세요"
-              errorMessage={
-                fieldState.error ? fieldState.error.message : undefined
-              }
+              errorMessage={fieldState?.error?.message}
             />
           )}
         />
       </div>
       <Button
-        disabled={isValid ? false : true}
+        disabled={!isValid}
         buttonType={isValid ? `fill-semibold` : `disabled-semibold`}
         name="확인"
         style={{
