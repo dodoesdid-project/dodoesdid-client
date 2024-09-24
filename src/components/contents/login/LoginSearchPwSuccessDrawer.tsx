@@ -7,6 +7,7 @@ import { ReactComponent as CloseButton } from '@assets/images/common/close.svg';
 
 import { Drawer } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type LoginSearchPwSuccessDrawerProps = { onClose: () => void };
 
@@ -14,6 +15,7 @@ const LoginSearchPwSuccessDrawer = ({
   onClose,
 }: LoginSearchPwSuccessDrawerProps) => {
   const isDarkMode = useIsDarkMode();
+  const navigate = useNavigate();
 
   return (
     <Drawer
@@ -40,7 +42,11 @@ const LoginSearchPwSuccessDrawer = ({
           <br />
           두더지로 돌아가서 재로그인 해주세요.
         </p>
-        <Button buttonType="fill-semibold" name="두더지로 이동" />
+        <Button
+          buttonType="fill-semibold"
+          name="두더지로 이동"
+          onClick={() => navigate('/login-email')}
+        />
       </div>
     </Drawer>
   );
