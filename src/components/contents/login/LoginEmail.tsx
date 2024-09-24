@@ -1,20 +1,25 @@
+import useDarkMode from '@lib/hooks/useDarkMode';
+
 import Button from '@components/common/Button';
 import CheckBox from '@components/common/CheckBox';
 import Input from '@components/common/Input';
 import TopBar from '@components/common/TopBar';
 
+import { ReactComponent as LogoDark } from '@assets/images/common/logo-mix-dark.svg';
 import { ReactComponent as Logo } from '@assets/images/common/logo-mix.svg';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LoginEmail = () => {
+  const isDarkMode = useDarkMode();
+
   return (
     <div className="pt-[44px] flex flex-col h-lvh justify-between">
       <div>
         <TopBar title="로그인" backLink="/login" />
         <div className="px-[16px]">
-          <Logo />
+          {isDarkMode ? <LogoDark /> : <Logo />}
           <p className="py-[22px] text-[20px] font-semibold text-gray-100 dark:text-white">
             시작해볼까요?
           </p>
