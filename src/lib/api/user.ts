@@ -13,6 +13,11 @@ export const emailAuthCompare = async (data: {
   await defaultAxios.post(`/email/verify`, data);
 };
 
+// 이메일 비밀번호재설정 링크보내기
+export const emailAuthResetPassword = async (data: { email: string }) => {
+  return defaultAxios.post(`email/reset-email`, data);
+};
+
 // 회원가입
 export const createUser = async (data: {
   userEmail: string;
@@ -22,4 +27,17 @@ export const createUser = async (data: {
   userPhone: string;
 }) => {
   await defaultAxios.post(`/user/sign-up`, data);
+};
+
+// 아이디찾기
+export const userIdFind = async (data: { userPhone: string }) => {
+  return await defaultAxios.post(`/user/find-id`, data);
+};
+
+// 비밀번호재설정
+export const userPasswordReset = async (data: {
+  token: string;
+  password: string;
+}) => {
+  await defaultAxios.post(`/user/reset-password`, data);
 };

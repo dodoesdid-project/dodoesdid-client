@@ -9,10 +9,11 @@ import { Drawer } from 'antd';
 import React from 'react';
 
 type LoginSearchPwDrawerProps = {
+  email: string;
   onClose: () => void;
 };
 
-const LoginSearchPwDrawer = ({ onClose }: LoginSearchPwDrawerProps) => {
+const LoginSearchPwDrawer = ({ email, onClose }: LoginSearchPwDrawerProps) => {
   const isDarkMode = useDarkMode();
   return (
     <Drawer
@@ -34,8 +35,8 @@ const LoginSearchPwDrawer = ({ onClose }: LoginSearchPwDrawerProps) => {
             className="cursor-pointer mb-[24px] self-end"
           />
         )}
-        <p className="mt-[32px] text-primary font-semibold text-[16px] text-center">
-          dodoesdid@dazim.com
+        <p className="text-primary font-semibold text-[16px] text-center mb-[18px]">
+          {email}
         </p>
         <p className="text-gray-100 font-semibold text-[16px] text-center mb-[56px] dark:text-gray-30">
           비밀번호 재설정 메일이 발송되었습니다.
