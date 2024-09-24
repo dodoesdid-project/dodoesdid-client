@@ -1,4 +1,4 @@
-import { createUser, emailAuthCompare, emailAuthSend } from '@lib/api/join';
+import { createUser, emailAuthCompare, emailAuthSend } from '@lib/api/user';
 import useToggle from '@lib/hooks/useToggle';
 
 import TopBar from '@components/common/TopBar';
