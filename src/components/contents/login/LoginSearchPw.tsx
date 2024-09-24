@@ -14,7 +14,16 @@ const LoginSearchPw = () => {
         </p>
         <Input placeholder="이메일을 입력하세요" />
       </div>
-      <Button buttonType="disabled-semibold" name="확인" />
+      <Button
+        buttonType="disabled-semibold"
+        name="확인"
+        style={{
+          position: 'absolute',
+          bottom: '50px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }}
+      />
     </div>
   );
 };

@@ -24,7 +24,7 @@ const LoginEmail = () => {
           <div className="flex flex-col gap-[16px] mb-[24px]">
             <Input placeholder="이메일을 입력하세요" />
             <Input placeholder="비밀번호를 입력하세요" />
-            <CheckBox label="자동로그인" />
+            <CheckBox label="자동 로그인" />
           </div>
           <div className="flex gap-[8px] justify-center text-gray-90 text-[14px] dark:text-white">
             <Link to={'/login-email/search/id'}>아이디 찾기</Link> |{' '}
