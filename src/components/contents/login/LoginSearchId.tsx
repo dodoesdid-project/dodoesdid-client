@@ -31,9 +31,7 @@ const LoginSearchId = ({ control, isValid, onClick }: LoginSearchIdProps) => {
             onChange={(e) => field.onChange(e.target.value)}
             label="가입시 사용한 휴대폰 번호를 입력해주세요."
             placeholder="‘-’없이 숫자만 입력해주세요"
-            errorMessage={
-              fieldState.error ? fieldState.error.message : undefined
-            }
+            errorMessage={fieldState?.error?.message}
           />
         )}
       />

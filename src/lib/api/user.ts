@@ -41,3 +41,8 @@ export const userPasswordReset = async (data: {
 }) => {
   await defaultAxios.post(`/user/reset-password`, data);
 };
+
+// 로그인
+export const login = async (data: { username: string; password: string }) => {
+  return await defaultAxios.post(`/login`, data);
+};

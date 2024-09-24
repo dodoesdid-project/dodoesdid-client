@@ -45,9 +45,7 @@ const LoginSearchPwReset = ({
               onChange={(e) => field.onChange(e.target.value)}
               label="새 비밀번호"
               placeholder="8자리 이상, 영문 대소문자/숫자/특수문자 사용 가능"
-              errorMessage={
-                fieldState.error ? fieldState.error.message : undefined
-              }
+              errorMessage={fieldState?.error?.message}
             />
           )}
         />
@@ -71,9 +69,7 @@ const LoginSearchPwReset = ({
               onChange={(e) => field.onChange(e.target.value)}
               label="새 비밀번호 확인"
               placeholder="비밀번호를 한 번 더 입력해주세요"
-              errorMessage={
-                fieldState.error ? fieldState.error.message : undefined
-              }
+              errorMessage={fieldState?.error?.message}
             />
           )}
         />
