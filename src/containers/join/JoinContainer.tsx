@@ -24,10 +24,10 @@ const JoinContainer = () => {
   const [isOpenSuccessDrawer, toggleSuccessDrawer] = useToggle();
 
   const prev = () => {
-    setCurrent(current - 1);
+    setCurrent((prev) => --prev);
   };
   const next = () => {
-    setCurrent(current + 1);
+    setCurrent((prev) => ++prev);
   };
 
   const {
@@ -41,6 +41,7 @@ const JoinContainer = () => {
   const { email } = getValues();
 
   const emailSendMutation = useMutation({
+    mutationKey: ['email-send'],
     mutationFn: emailAuthSend,
     onSuccess: () => {
       toggleEmailDrawer();

@@ -75,7 +75,7 @@ const EmailNumber = ({
           className="p-[10px] mb-[25px] focus:outline-none text-center text-[32px] text-gray-100 font-bold dark:bg-[#2a2a2a] dark:focus:ring-white"
         />
         <Button
-          disabled={authNumber?.length === 6 ? false : true}
+          disabled={authNumber?.length !== 6}
           buttonType={
             authNumber?.length === 6 ? `fill-semibold` : `disabled-semibold`
           }
