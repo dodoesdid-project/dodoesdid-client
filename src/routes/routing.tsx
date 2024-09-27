@@ -1,8 +1,9 @@
 import DodoesdidPage from '@pages/DodoesdidPage';
 import FeedDetailPage from '@pages/FeedDetailPage';
 import FeedPage from '@pages/FeedPage';
-import Homepage from '@pages/Homepage';
 import Mypage from '@pages/Mypage';
+import Homepage from '@pages/home';
+import ProfilePersonalPage from '@pages/home/profile-personal';
 import JoinPage from '@pages/join';
 import LoginPage from '@pages/login';
 import LoginEmailPage from '@pages/login/email';
@@ -27,6 +28,17 @@ const router = createBrowserRouter([
           { path: '/feed', element: <FeedPage /> },
           { path: '/dodoesdid', element: <DodoesdidPage /> },
           { path: '/mypage', element: <Mypage /> },
+        ],
+      },
+    ],
+  },
+  {
+    element: <NoNavLayout />,
+    children: [
+      {
+        element: <PrivateRoute />,
+        children: [
+          { path: '/home/profile-personal', element: <ProfilePersonalPage /> },
         ],
       },
     ],
