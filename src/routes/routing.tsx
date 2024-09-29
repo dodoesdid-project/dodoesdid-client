@@ -3,6 +3,9 @@ import FeedDetailPage from '@pages/FeedDetailPage';
 import FeedPage from '@pages/FeedPage';
 import Mypage from '@pages/Mypage';
 import Homepage from '@pages/home';
+import JoinGroupPage from '@pages/home/join-group';
+import ProfileGroupPage from '@pages/home/profile-group';
+import ProfileGroupSuccessPage from '@pages/home/profile-group-success';
 import ProfilePersonalPage from '@pages/home/profile-personal';
 import JoinPage from '@pages/join';
 import LoginPage from '@pages/login';
@@ -39,6 +42,12 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           { path: '/home/profile-personal', element: <ProfilePersonalPage /> },
+          { path: '/home/profile-group', element: <ProfileGroupPage /> },
+          {
+            path: '/home/profile-group/success',
+            element: <ProfileGroupSuccessPage />,
+          },
+          { path: '/home/join-group', element: <JoinGroupPage /> },
         ],
       },
     ],

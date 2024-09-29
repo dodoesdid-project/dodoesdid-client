@@ -1,15 +1,9 @@
-import TopBar from '@components/common/TopBar';
-import NoProfileGuide from '@components/contents/home/NoProfileGuide';
+import HomeContainer from '@/containers/home/HomeContainer';
 
 import React from 'react';
 
 const Homepage = () => {
-  return (
-    <div>
-      <TopBar title="홈" />
-      <NoProfileGuide />
-    </div>
-  );
+  return <HomeContainer />;
 };
 
 export default Homepage;
