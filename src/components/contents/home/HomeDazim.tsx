@@ -1,7 +1,7 @@
 import useToggle from '@lib/hooks/useToggle';
 
+import { ReactComponent as DodoesdidFull } from '@assets/images/common/dodoesdid-full.svg';
 import { ReactComponent as DodoesdidHalf } from '@assets/images/common/dodoesdid-half.svg';
-import { ReactComponent as DodoesdidFull } from '@assets/images/common/dodoesdid-half.svg';
 import { ReactComponent as DodoesdidHide } from '@assets/images/common/dodoesdid-hide.svg';
 import { ReactComponent as PlusIcon } from '@assets/images/home/plus.svg';
 
