@@ -5,16 +5,30 @@ import HomeToastPopup from '@components/contents/home/HomeToastPopup';
 
 import React from 'react';
 
-const HomeDazimContainer = () => {
+type HomeDazimContainerProps = {
+  user: {
+    groupName: string | null;
+    userImageUrl: string;
+    userNickName: string;
+  };
+  state: string;
+};
+
+const HomeDazimContainer = ({ user, state }: HomeDazimContainerProps) => {
   const [isOpenToastPopup, toggleToastPopup] = useToggle();
+
+  const onClickDazim = () => {
+    console.log(user);
+
+    if (state === 'null') {
+      return toggleToastPopup();
+    }
+  };
 
   return (
     <>
       <div className="grid grid-cols-2 gap-[24px]">
-        <HomeDazim state="null" />
-        <HomeDazim state="hide" />
-        <HomeDazim state="full" />
-        <HomeDazim state="half" />
+        <HomeDazim user={user} state={state} onClick={onClickDazim} />
       </div>
       {isOpenToastPopup && <HomeToastPopup onClose={toggleToastPopup} />}
     </>
