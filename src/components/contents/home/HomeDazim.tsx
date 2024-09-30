@@ -11,24 +11,30 @@ import { Tooltip } from 'antd';
 import React from 'react';
 
 type HomeDazimProps = {
+  user: {
+    groupName: string | null;
+    userImageUrl: string;
+    userNickName: string;
+  };
   state: string;
+  onClick: () => void;
 };
 
-const HomeDazim = ({ state }: HomeDazimProps) => {
+const HomeDazim = ({ user, state, onClick }: HomeDazimProps) => {
   const [isOpenTitleDrawer, toggleTitleDrawer] = useToggle();
   const [isOpenUploadDrawer, toggleUploadDrawer] = useToggle();
 
   return (
     <>
-      <div className="w-full aspect-square">
+      <div className="w-full aspect-square" onClick={onClick}>
         <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
           <img
-            src="http://via.placeholder.com/640x480"
+            src={user.userImageUrl}
             alt="유저이미지"
             className="w-[36px] aspect-square rounded-full"
           />
           <p className="text-gray-100 text-[16px] dark:text-gray-30">
-            사용자이름
+            {user.userNickName}
           </p>
         </div>
         {state === 'null' && (

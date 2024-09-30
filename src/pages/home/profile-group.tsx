@@ -1,3 +1,4 @@
+import { createGroup } from '@lib/api/home';
 import useDarkMode from '@lib/hooks/useDarkMode';
 import useInput from '@lib/hooks/useInput';
 
@@ -8,6 +9,9 @@ import TopBar from '@components/common/TopBar';
 import { ReactComponent as CameraDarkIcon } from '@assets/images/home/camera-white.svg';
 import { ReactComponent as CameraIcon } from '@assets/images/home/camera.svg';
 
+import { useMutation } from '@tanstack/react-query';
+
+import { AxiosError } from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -26,8 +30,23 @@ const ProfileGroupPage = () => {
     nickname: null,
   });
 
-  const onClickSuccess = () => {
-    console.log('성공');
+  const createGroupMutation = useMutation({
+    mutationFn: createGroup,
+    onSuccess: (response) => {
+      console.log(response);
+      navigate('/');
+    },
+    onError: (err: AxiosError) => {
+      const errorMessage = err?.response?.data;
+      console.log(errorMessage);
+    },
+  });
+
+  const onClickSubmit = () => {
+    createGroupMutation.mutate({
+      groupImage: info.image,
+      groupName: info.nickname,
+    } as { groupImage: File; groupName: string });
   };
 
   const previewImage = () => {
@@ -93,7 +112,7 @@ const ProfileGroupPage = () => {
           left: '50%',
           transform: 'translateX(-50%)',
         }}
-        onClick={onClickSuccess}
+        onClick={onClickSubmit}
       />
       <Link
         to={'#'}

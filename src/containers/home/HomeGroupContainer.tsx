@@ -4,11 +4,14 @@ import { ReactComponent as GroupPlusIcon } from '@assets/images/home/groupplus.s
 
 import { Tooltip } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 // Import Swiper styles
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 const HomeGroupContainer = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Swiper className="px-[16px!important] my-[8px]" slidesPerView={4.2}>
@@ -26,7 +29,10 @@ const HomeGroupContainer = () => {
             color="#3F73F7"
             overlayInnerStyle={{ padding: '12px' }}
           >
-            <div className="w-[72px] h-[72px] rounded-full flex justify-center items-center bg-gray-30 cursor-pointer dark:bg-[#2a2a2a]">
+            <div
+              onClick={() => navigate('/home/profile-group')}
+              className="w-[72px] h-[72px] rounded-full flex justify-center items-center bg-gray-30 cursor-pointer dark:bg-[#2a2a2a]"
+            >
               <GroupPlusIcon />
             </div>
           </Tooltip>
