@@ -70,7 +70,7 @@ const JoinContainer = () => {
   const onClickAuth = () => {
     emailAuthMutation.mutate({
       email: email,
-      verifyCode: authNumber as string,
+      code: authNumber as string,
     });
   };
 
@@ -78,17 +78,17 @@ const JoinContainer = () => {
     const values = getValues();
 
     const userData: {
-      userEmail: string;
+      email: string;
       password: string;
-      userName: string;
-      userBirth: string;
-      userPhone: string;
+      name: string;
+      birth: string;
+      phone: string;
     } = {
-      userEmail: values.email,
+      email: values.email,
       password: values.password,
-      userName: values.name,
-      userBirth: values.date,
-      userPhone: values.phone,
+      name: values.name,
+      birth: values.date,
+      phone: values.phone,
     };
 
     createUserMutation.mutate(userData);
