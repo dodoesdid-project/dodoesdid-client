@@ -1,4 +1,5 @@
 import DodoesdidPage from '@pages/DodoesdidPage';
+import FeedDetailPage from '@pages/FeedDetailPage';
 import FeedPage from '@pages/FeedPage';
 import Homepage from '@pages/Homepage';
 import JoinPage from '@pages/join';
@@ -61,6 +62,8 @@ const router = createBrowserRouter([
       { path: '/login-email/search/pw', element: <LoginSearchPwPage /> },
       { path: '/mypage/account/signout', element: <SignOutPage /> },
       { path: '/mypage/account/signout-agree', element: <SignOutAgreePage /> },
+      { path: '/feed/:id', element: <FeedDetailPage /> },
+
     ],
   },
 ]);
