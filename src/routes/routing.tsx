@@ -1,5 +1,5 @@
 import DodoesdidPage from '@pages/DodoesdidPage';
-import { FeedDetailPage } from '@pages/FeedDetailPage';
+import FeedDetailPage from '@pages/FeedDetailPage';
 import FeedPage from '@pages/FeedPage';
 import Homepage from '@pages/Homepage';
 import Mypage from '@pages/Mypage';
