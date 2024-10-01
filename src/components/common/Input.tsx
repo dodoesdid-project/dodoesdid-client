@@ -3,9 +3,15 @@ import React, { InputHTMLAttributes } from 'react';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   errorMessage?: string;
+  successMessage?: string;
 }
 
-const Input = ({ label, errorMessage, ...props }: InputProps) => {
+const Input = ({
+  label,
+  errorMessage,
+  successMessage,
+  ...props
+}: InputProps) => {
   return (
     <div>
       {label && (
@@ -20,6 +26,11 @@ const Input = ({ label, errorMessage, ...props }: InputProps) => {
       {errorMessage && (
         <p className="text-[#ff0000] ml-[16px] mt-[8px] text-[11px] ">
           *{errorMessage}
+        </p>
+      )}
+      {successMessage && (
+        <p className="text-primary ml-[16px] mt-[8px] text-[11px] ">
+          *{successMessage}
         </p>
       )}
     </div>

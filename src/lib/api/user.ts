@@ -20,6 +20,16 @@ export const emailAuthResetPassword = async (data: { email: string }) => {
   return defaultAxios.post(`email/reset-email`, data);
 };
 
+// 이메일 중복검사
+export const emailDuplicate = async (data: { email: string }) => {
+  await defaultAxios.post(`/api/v1/user/email-duplicate-check`, data);
+};
+
+// 휴대폰 중복검사
+export const phoneDuplicate = async (data: { phone: string }) => {
+  await defaultAxios.post(`/api/v1/user/phone-duplicate-check`, data);
+};
+
 // 회원가입
 export const createUser = async (data: {
   email: string;
