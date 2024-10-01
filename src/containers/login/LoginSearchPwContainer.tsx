@@ -57,7 +57,6 @@ const LoginSearchPwContainer = () => {
   const onClickPwReset = () => {
     const { password } = getValues();
     passwordResetMutation.mutate({
-      token: token,
       password: password,
     });
   };
@@ -66,7 +65,7 @@ const LoginSearchPwContainer = () => {
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState('');
   useEffect(() => {
-    const tokenFromURL = searchParams.get('token');
+    const tokenFromURL = searchParams.get('accessToken');
     if (tokenFromURL) {
       setToken(tokenFromURL);
       setCurrent(1);
