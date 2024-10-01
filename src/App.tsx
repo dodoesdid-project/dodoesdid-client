@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient();
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
