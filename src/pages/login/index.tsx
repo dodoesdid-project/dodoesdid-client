@@ -1,4 +1,5 @@
 import { ReactComponent as Logo } from '@assets/images/common/logo.svg';
+import DodosedidImage from '@assets/images/login/dodoesdid-login.png';
 import { ReactComponent as GoogleIcon } from '@assets/images/login/google.svg';
 import { ReactComponent as KakaoIcon } from '@assets/images/login/kakao.svg';
 
@@ -13,7 +14,7 @@ const LoginPage = () => {
           친구들과 함께 하는 1일 1다짐
         </p>
         <Logo />
-        <img src="http://via.placeholder.com/262x215" alt="임시이미지" />
+        <img src={DodosedidImage} alt="두더지이미지" />
       </div>
       <div className="pb-[50px] flex flex-col items-center px-[16px]">
         <button className="w-full h-[52px] rounded-[8px] bg-[#fee500] text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[12px]">
