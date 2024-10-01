@@ -2,15 +2,17 @@ import { defaultAxios } from '@lib/api/deafultAxios';
 
 // 이메일 인증 보내기
 export const emailAuthSend = async (email: string) => {
-  await defaultAxios.post(`/email/send`, { email });
+  await defaultAxios.post(`/api/v1/auth/email-verification-code-send`, {
+    email,
+  });
 };
 
 // 이메일 인증번호 맞는지 비교
 export const emailAuthCompare = async (data: {
   email: string;
-  verifyCode: string;
+  code: string;
 }) => {
-  await defaultAxios.post(`/email/verify`, data);
+  await defaultAxios.post(`/api/v1/auth/email-verify`, data);
 };
 
 // 이메일 비밀번호재설정 링크보내기
@@ -20,13 +22,13 @@ export const emailAuthResetPassword = async (data: { email: string }) => {
 
 // 회원가입
 export const createUser = async (data: {
-  userEmail: string;
+  email: string;
   password: string;
-  userName: string;
-  userBirth: string;
-  userPhone: string;
+  name: string;
+  birth: string;
+  phone: string;
 }) => {
-  await defaultAxios.post(`/user/sign-up`, data);
+  await defaultAxios.post(`/api/v1/user/sign-up`, data);
 };
 
 // 아이디찾기
@@ -45,4 +47,20 @@ export const userPasswordReset = async (data: {
 // 로그인
 export const login = async (data: { username: string; password: string }) => {
   return await defaultAxios.post(`/login`, data);
+};
+
+// 개인프로필등록
+export const profile = async ({
+  image,
+  nickname,
+}: {
+  image: File;
+  nickname: string;
+}) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  formData.append('nickname', nickname);
+  return await defaultAxios.post(`/user/profile`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 };
