@@ -1,7 +1,6 @@
 import DodoesdidPage from '@pages/DodoesdidPage';
 import FeedDetailPage from '@pages/FeedDetailPage';
 import FeedPage from '@pages/FeedPage';
-import Mypage from '@pages/Mypage';
 import Homepage from '@pages/home';
 import JoinGroupPage from '@pages/home/join-group';
 import ProfileGroupPage from '@pages/home/profile-group';
