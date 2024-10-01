@@ -47,3 +47,15 @@ input[type='number'] {
 .ant-drawer-body {
   padding: 16px 16px 24px !important;
 }
+
+/* table */
+thead {
+  display: none;
+}
+.ant-table {
+  background-color: transparent !important;
+}
+
+.Toastify__close-button {
+  display: none;
+}

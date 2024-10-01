@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Divider = () => {
-  return <hr className="m-[16px] text-white" />;
+  return <hr className="text-gray-30" />;
 };
 
 export default Divider;
