@@ -55,3 +55,7 @@ thead {
 .ant-table {
   background-color: transparent !important;
 }
+
+.Toastify__close-button {
+  display: none;
+}

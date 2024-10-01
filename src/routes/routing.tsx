@@ -84,7 +84,6 @@ const router = createBrowserRouter([
       { path: '/mypage/account/signout', element: <SignOutPage /> },
       { path: '/mypage/account/signout-agree', element: <SignOutAgreePage /> },
       { path: '/feed/:id', element: <FeedDetailPage /> },
-
     ],
   },
 ]);
