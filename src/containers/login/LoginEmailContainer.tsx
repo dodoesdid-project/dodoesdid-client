@@ -39,7 +39,7 @@ const LoginEmailContainer = () => {
   });
 
   const onClickLogin = (data: FieldValues) => {
-    loginMutation.mutate({ username: data.email, password: data.password });
+    loginMutation.mutate({ email: data.email, password: data.password });
   };
 
   return (

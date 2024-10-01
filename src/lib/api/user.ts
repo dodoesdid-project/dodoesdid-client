@@ -2,49 +2,58 @@ import { defaultAxios } from '@lib/api/deafultAxios';
 
 // 이메일 인증 보내기
 export const emailAuthSend = async (email: string) => {
-  await defaultAxios.post(`/email/send`, { email });
+  await defaultAxios.post(`/api/v1/auth/email-verification-code-send`, {
+    email,
+  });
 };
 
 // 이메일 인증번호 맞는지 비교
 export const emailAuthCompare = async (data: {
   email: string;
-  verifyCode: string;
+  code: string;
 }) => {
-  await defaultAxios.post(`/email/verify`, data);
+  await defaultAxios.post(`/api/v1/auth/email-verify`, data);
 };
 
 // 이메일 비밀번호재설정 링크보내기
 export const emailAuthResetPassword = async (data: { email: string }) => {
-  return defaultAxios.post(`email/reset-email`, data);
+  return defaultAxios.post(`/api/v1/auth/password-find-email-send`, data);
+};
+
+// 이메일 중복검사
+export const emailDuplicate = async (data: { email: string }) => {
+  await defaultAxios.post(`/api/v1/user/email-duplicate-check`, data);
+};
+
+// 휴대폰 중복검사
+export const phoneDuplicate = async (data: { phone: string }) => {
+  await defaultAxios.post(`/api/v1/user/phone-duplicate-check`, data);
 };
 
 // 회원가입
 export const createUser = async (data: {
-  userEmail: string;
+  email: string;
   password: string;
-  userName: string;
-  userBirth: string;
-  userPhone: string;
+  name: string;
+  birth: string;
+  phone: string;
 }) => {
-  await defaultAxios.post(`/user/sign-up`, data);
+  await defaultAxios.post(`/api/v1/user/sign-up`, data);
 };
 
 // 아이디찾기
-export const userIdFind = async (data: { userPhone: string }) => {
-  return await defaultAxios.post(`/user/find-id`, data);
+export const userIdFind = async (data: { phone: string }) => {
+  return await defaultAxios.post(`/api/v1/auth/email-find`, data);
 };
 
-// 비밀번호재설정
-export const userPasswordReset = async (data: {
-  token: string;
-  password: string;
-}) => {
-  await defaultAxios.post(`/user/reset-password`, data);
+// 비밀번호변경
+export const userPasswordReset = async (data: { password: string }) => {
+  await defaultAxios.post(`/api/v1/user/me/password`, data);
 };
 
 // 로그인
-export const login = async (data: { username: string; password: string }) => {
-  return await defaultAxios.post(`/login`, data);
+export const login = async (data: { email: string; password: string }) => {
+  return await defaultAxios.post(`/api/v1/auth/sign-in`, data);
 };
 
 // 개인프로필등록

@@ -24,8 +24,7 @@ const LoginSearchIdContainer = () => {
   const findIdMutation = useMutation({
     mutationFn: userIdFind,
     onSuccess: (response) => {
-      const data = response?.data.data;
-      setReturnEmail(data);
+      setReturnEmail(response?.data.email);
       setCurrent(1);
     },
     onError: (err: AxiosError) => {
@@ -37,7 +36,7 @@ const LoginSearchIdContainer = () => {
 
   const onClickSearchId = () => {
     const { phone } = getValues();
-    findIdMutation.mutate({ userPhone: phone });
+    findIdMutation.mutate({ phone: phone });
   };
 
   const pages = [

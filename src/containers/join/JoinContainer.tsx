@@ -1,26 +1,37 @@
-import { createUser, emailAuthCompare, emailAuthSend } from '@lib/api/user';
+import {
+  createUser,
+  emailAuthCompare,
+  emailAuthSend,
+  emailDuplicate,
+  phoneDuplicate,
+} from '@lib/api/user';
 import useToggle from '@lib/hooks/useToggle';
 
 import TopBar from '@components/common/TopBar';
 import AgreeStep from '@components/contents/join/AgreeStep';
 import BirthStep from '@components/contents/join/BirthStep';
 import EmailDrawer from '@components/contents/join/EmailDrawer';
+import EmailDuplicateDrawer from '@components/contents/join/EmailDuplicateDrawer';
 import EmailNumberDrawer from '@components/contents/join/EmailNumberDrawer';
 import EmailStep from '@components/contents/join/EmailStep';
 import NameStep from '@components/contents/join/NameStep';
 import PasswordStep from '@components/contents/join/PasswordStep';
+import PhoneDuplicateDrawer from '@components/contents/join/PhoneDuplicateDrawer';
 import PhoneStep from '@components/contents/join/PhoneStep';
 import SuccessDrawer from '@components/contents/join/SuccessDrawer';
 
 import { useMutation } from '@tanstack/react-query';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
 const JoinContainer = () => {
   const [current, setCurrent] = useState(0);
+  const [isOkEmail, setIsOkEmail] = useState<boolean>(false);
   const [isOpenEmailDrawer, toggleEmailDrawer] = useToggle();
   const [isOpenEmailNumberDrawer, toggleEmailNumberDrawer] = useToggle();
+  const [isOpenEmailDuplicateDrawer, toggleEmailDuplicateDrawer] = useToggle();
+  const [isOpenPhoneDuplicateDrawer, togglePhoneDuplicateDrawer] = useToggle();
   const [isOpenSuccessDrawer, toggleSuccessDrawer] = useToggle();
 
   const prev = () => {
@@ -56,6 +67,26 @@ const JoinContainer = () => {
     },
   });
 
+  const emailDuplicateMutation = useMutation({
+    mutationFn: emailDuplicate,
+    onSuccess: () => {
+      setIsOkEmail(true);
+    },
+    onError: () => {
+      toggleEmailDuplicateDrawer();
+    },
+  });
+
+  const phoneDuplicateMutation = useMutation({
+    mutationFn: phoneDuplicate,
+    onSuccess: () => {
+      next();
+    },
+    onError: () => {
+      togglePhoneDuplicateDrawer();
+    },
+  });
+
   const createUserMutation = useMutation({
     mutationFn: createUser,
     onSuccess: () => {
@@ -70,25 +101,35 @@ const JoinContainer = () => {
   const onClickAuth = () => {
     emailAuthMutation.mutate({
       email: email,
-      verifyCode: authNumber as string,
+      code: authNumber as string,
     });
+  };
+
+  const onClickEmailDuplicate = () => {
+    const values = getValues();
+    emailDuplicateMutation.mutate({ email: values.email });
+  };
+
+  const onClickPhoneDuplicate = () => {
+    const values = getValues();
+    phoneDuplicateMutation.mutate({ phone: values.phone });
   };
 
   const onClickSubmit = () => {
     const values = getValues();
 
     const userData: {
-      userEmail: string;
+      email: string;
       password: string;
-      userName: string;
-      userBirth: string;
-      userPhone: string;
+      name: string;
+      birth: string;
+      phone: string;
     } = {
-      userEmail: values.email,
+      email: values.email,
       password: values.password,
-      userName: values.name,
-      userBirth: values.date,
-      userPhone: values.phone,
+      name: values.name,
+      birth: values.date,
+      phone: values.phone,
     };
 
     createUserMutation.mutate(userData);
@@ -106,7 +147,9 @@ const JoinContainer = () => {
         <EmailStep
           control={control}
           isValid={isValid}
-          onClick={handleSubmit(onClickEmail)}
+          isOkEmail={isOkEmail}
+          onClickDuplicate={onClickEmailDuplicate}
+          onClickEmailSend={handleSubmit(onClickEmail)}
         />
       ),
     },
@@ -131,7 +174,13 @@ const JoinContainer = () => {
     },
     {
       id: 5,
-      content: <PhoneStep control={control} isValid={isValid} onClick={next} />,
+      content: (
+        <PhoneStep
+          control={control}
+          isValid={isValid}
+          onClick={onClickPhoneDuplicate}
+        />
+      ),
     },
     {
       id: 6,
@@ -144,6 +193,10 @@ const JoinContainer = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    console.log(isOkEmail);
+  }, [isOkEmail]);
 
   return (
     <>
@@ -172,6 +225,12 @@ const JoinContainer = () => {
           onChange={onChangeAuthNumber}
           onClick={onClickAuth}
         />
+      )}
+      {isOpenEmailDuplicateDrawer && (
+        <EmailDuplicateDrawer onClose={toggleEmailDuplicateDrawer} />
+      )}
+      {isOpenPhoneDuplicateDrawer && (
+        <PhoneDuplicateDrawer onClose={togglePhoneDuplicateDrawer} />
       )}
       {isOpenSuccessDrawer && <SuccessDrawer onClose={toggleSuccessDrawer} />}
     </>
