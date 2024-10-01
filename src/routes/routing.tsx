@@ -1,4 +1,5 @@
 import DodoesdidPage from '@pages/DodoesdidPage';
+import { FeedDetailPage } from '@pages/FeedDetailPage';
 import FeedPage from '@pages/FeedPage';
 import Homepage from '@pages/Homepage';
 import Mypage from '@pages/Mypage';
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       { path: '/login-email', element: <LoginEmailPage /> },
       { path: '/login-email/search/id', element: <LoginSearchIdPage /> },
       { path: '/login-email/search/pw', element: <LoginSearchPwPage /> },
+      { path: '/feed/:id', element: <FeedDetailPage /> },
     ],
   },
 ]);
