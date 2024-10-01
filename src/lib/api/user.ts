@@ -46,3 +46,19 @@ export const userPasswordReset = async (data: {
 export const login = async (data: { username: string; password: string }) => {
   return await defaultAxios.post(`/login`, data);
 };
+
+// 개인프로필등록
+export const profile = async ({
+  image,
+  nickname,
+}: {
+  image: File;
+  nickname: string;
+}) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  formData.append('nickname', nickname);
+  return await defaultAxios.post(`/user/profile`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+};
