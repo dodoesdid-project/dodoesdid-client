@@ -2,6 +2,7 @@ import { getGroups } from '@lib/api/groups';
 import { getUser } from '@lib/api/user';
 
 import TopBar from '@components/common/TopBar';
+import HomeTimer from '@components/contents/home/HomeTimer';
 import NoProfileGuide from '@components/contents/home/NoProfileGuide';
 
 import { ReactComponent as ArrowLeft } from '@assets/images/common/arrow-left-gray.svg';
@@ -51,9 +52,7 @@ const HomeContainer = () => {
               <ArrowRight className="cursor-pointer" />
             </div>
             {/* 타이머 */}
-            <p className="text-primary text-[32px] font-bold text-center mb-[8px] dark:text-primary-200">
-              00:08:20
-            </p>
+            <HomeTimer />
             {/* 다짐 */}
             <HomeDazimContainer />
           </div>
