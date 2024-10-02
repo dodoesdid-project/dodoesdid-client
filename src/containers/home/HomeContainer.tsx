@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getGroups } from '@lib/api/groups';
 import { getUser } from '@lib/api/user';
 
@@ -13,7 +12,7 @@ import HomeGroupContainer from '@/containers/home/HomeGroupContainer';
 import { useQuery } from '@tanstack/react-query';
 
 import HomeDazimContainer from './HomeDazimContainer';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const HomeContainer = () => {
   const { data: user } = useQuery({
@@ -28,7 +27,7 @@ const HomeContainer = () => {
 
   return (
     <div>
-      <TopBar title="홈" />
+      <TopBar title="홈" darkButton />
       {/* 프로필X */}
       {!user?.data.profile && <NoProfileGuide />}
       {/* 프로필O */}

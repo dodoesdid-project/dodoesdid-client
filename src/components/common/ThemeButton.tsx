@@ -7,11 +7,11 @@ import { ReactComponent as LightModeIcon } from '@assets/images/common/sun.svg';
 
 import React from 'react';
 
-const ThemeButton = () => {
+const ThemeButton = ({ ...props }) => {
   const [dark, toggleDarkMode] = useDarkMode();
   return (
-    <>
-      <div className="flex gap-[3px] px-[6px] py-[4px] bg-gray-40 w-min rounded-[60px] dark:bg-gray-100">
+    <div {...props}>
+      <div className="flex gap-[3px] px-[6px] py-[4px] bg-gray-30 w-min rounded-[60px] dark:bg-gray-100">
         <button
           onClick={toggleDarkMode}
           className="p-[6px] rounded-full bg-primary dark:bg-gray-100"
@@ -29,7 +29,7 @@ const ThemeButton = () => {
           {dark ? <DarkModeIconActive /> : <DarkModeIcon />}
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
