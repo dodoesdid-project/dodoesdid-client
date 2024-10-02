@@ -28,10 +28,9 @@ const HomeContainer = () => {
   return (
     <div>
       <TopBar title="홈" darkButton />
-      {/* 프로필X */}
-      {!user?.data.profile && <NoProfileGuide />}
-      {/* 프로필O */}
-      {user?.data.profile && (
+      {!user?.data.profile ? (
+        <NoProfileGuide />
+      ) : (
         <>
           {/* 그룹 */}
           <HomeGroupContainer groups={groups} />
