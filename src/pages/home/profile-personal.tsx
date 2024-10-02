@@ -21,11 +21,11 @@ const ProfilePersonalPage = () => {
   const imgRef = useRef<HTMLInputElement>(null);
   const [previewImgPath, setPreviewImgPath] = useState<null | string>(null);
   const [info, setInfo] = useState<{
-    image: File | null;
     nickname: string | null;
+    thumbnail: File | null;
   }>({
-    image: null,
     nickname: null,
+    thumbnail: null,
   });
 
   const profileMutation = useMutation({
@@ -37,13 +37,13 @@ const ProfilePersonalPage = () => {
   });
 
   const onClickSuccess = () => {
-    profileMutation.mutate(info as { image: File; nickname: string });
+    profileMutation.mutate(info as { nickname: string; thumbnail: File });
   };
 
   const previewImage = () => {
     if (imgRef.current && imgRef.current.files) {
       const img = imgRef.current.files[0];
-      setInfo((prev) => ({ ...prev, image: img }));
+      setInfo((prev) => ({ ...prev, thumbnail: img }));
 
       //이미지 미리보기 기능
       const reader = new FileReader();
@@ -90,9 +90,9 @@ const ProfilePersonalPage = () => {
         onChange={onChangeNickname}
       />
       <Button
-        disabled={!info.image || info.nickname === '' ? true : false}
+        disabled={!info.thumbnail || info.nickname === '' ? true : false}
         buttonType={
-          !info.image || info.nickname === ''
+          !info.thumbnail || info.nickname === ''
             ? 'disabled-semibold'
             : 'fill-semibold'
         }

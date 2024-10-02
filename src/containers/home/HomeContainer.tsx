@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { getGroups } from '@lib/api/home';
+import { getUser } from '@lib/api/user';
 
 import TopBar from '@components/common/TopBar';
 import NoProfileGuide from '@components/contents/home/NoProfileGuide';
@@ -14,22 +15,18 @@ import HomeDazimContainer from './HomeDazimContainer';
 import React, { useEffect, useState } from 'react';
 
 const HomeContainer = () => {
-  const [dazimState, setDazimState] = useState<
-    'null' | 'start' | 'progress' | 'done'
-  >('null');
-
-  const { data: groups } = useQuery({
-    queryKey: ['groups'],
-    queryFn: () => getGroups(),
+  const { data: user } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => getUser(),
   });
-
-  if (!groups) return null;
 
   return (
     <div>
       <TopBar title="홈" />
-      {!groups.data.userNickName && <NoProfileGuide />}
-      {groups.data.userNickName && (
+      {/* 그룹없을때 */}
+      {!user?.data.profile && <NoProfileGuide />}
+      {/* 그룹있을때 */}
+      {user?.data.profile && (
         <>
           {/* 그룹 */}
           <HomeGroupContainer />
@@ -51,7 +48,7 @@ const HomeContainer = () => {
               00:08:20
             </p>
             {/* 다짐 */}
-            <HomeDazimContainer user={groups.data} state={dazimState} />
+            <HomeDazimContainer />
           </div>
         </>
       )}
