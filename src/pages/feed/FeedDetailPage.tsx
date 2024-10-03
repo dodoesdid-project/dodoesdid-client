@@ -1,10 +1,10 @@
 import TopBar from '@components/common/TopBar';
-import CommentSheet from '@components/contents/feed/Comment/CommentSheet';
-import EmojiGroup from '@components/contents/feed/Emoji/EmojiGroup';
-import FeedCard from '@components/contents/feed/FeedCard/FeedCard';
+import CommentSheet from '@components/contents/feed/comment/CommentSheet';
+import EmojiGroup from '@components/contents/feed/emoji/EmojiGroup';
+import FeedCard from '@components/contents/feed/feedCard/FeedCard';
 import FeedInput from '@components/contents/feed/FeedInput';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const FeedDetailPage = () => {
   const [comments, setComments] = useState<any[]>([]);

@@ -1,6 +1,6 @@
 import TopBar from '@components/common/TopBar';
-import FeedCard from '@components/contents/feed/FeedCard/FeedCard';
-
+import FeedCard from '@components/contents/feed/feedCard/FeedCard';
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PullToRefresh from 'react-simple-pull-to-refresh';
