@@ -58,7 +58,7 @@ export const phoneDuplicate = async (data: { phone: string }) => {
 
 // 비밀번호변경
 export const userPasswordReset = async (data: { password: string }) => {
-  await defaultAxios.post(`/api/v1/user/me/password`, data);
+  await defaultAxios.patch(`/api/v1/user/me/password`, data);
 };
 
 // 내정보조회
@@ -79,5 +79,27 @@ export const profile = async ({
   formData.append('thumbnail', thumbnail);
   return await defaultAxios.post(`/api/v1/user/me/profile`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
+  });
+};
+
+// 닉네임변경
+export const updateUserNickname = async (nickName: string) => {
+  await defaultAxios.patch(`/api/v1/user/me/nickname`, { nickName });
+};
+
+// 패스워드검증
+export const verifyPassword = async (password: string) => {
+  await defaultAxios.post(`/api/v1/user/me/password-verify`, { password });
+};
+
+// 패스워드변경
+export const updatePassword = async (password: string) => {
+  await defaultAxios.patch(`/api/v1/user/me/password`, { password });
+};
+
+// 회원탈퇴
+export const deleteUser = async (withdrawalReason: string) => {
+  await defaultAxios.delete(`/api/v1/user/me/withdrawal`, {
+    data: { withdrawalReason },
   });
 };

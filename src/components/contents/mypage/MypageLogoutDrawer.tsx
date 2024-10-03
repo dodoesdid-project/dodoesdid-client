@@ -7,12 +7,10 @@ import { ReactComponent as CloseButton } from '@assets/images/common/close.svg';
 
 import { Drawer } from 'antd';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-type Props = { onClose: () => void };
+type Props = { onClose: () => void; onClick: () => void };
 
-const MypageLogoutDrawer = ({ onClose }: Props) => {
-  const navigate = useNavigate();
+const MypageLogoutDrawer = ({ onClose, onClick }: Props) => {
   const isDarkMode = useDarkMode();
 
   return (
@@ -38,11 +36,7 @@ const MypageLogoutDrawer = ({ onClose }: Props) => {
         <p className="text-gray-100 font-semibold text-[16px] dark:text-gray-30 mb-[54px] text-center">
           정말 로그아웃하시겠어요?
         </p>
-        <Button
-          buttonType="fill-semibold"
-          name="로그아웃"
-          onClick={() => navigate('/login')}
-        />
+        <Button buttonType="fill-semibold" name="로그아웃" onClick={onClick} />
       </div>
     </Drawer>
   );

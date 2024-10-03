@@ -1,15 +1,43 @@
+import { deleteUser } from '@lib/api/user';
+import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 import useToggle from '@lib/hooks/useToggle';
+import showToast from '@lib/utils/toast';
 
 import Button from '@components/common/Button';
 import TopBar from '@components/common/TopBar';
 import MyPageSignOutDrawer from '@components/contents/mypage/MyPageSignOutDrawer';
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import DodosedidImageDark from '@assets/images/home/dodoesdid-disabled-dark.png';
+import DodosedidImage from '@assets/images/home/dodoesdid-disabled.png';
+
+import { useMutation } from '@tanstack/react-query';
+
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SignOutAgreePage = () => {
   const navigate = useNavigate();
+  const isDarkMode = useIsDarkMode();
   const [isOpenSignOutDrawer, toggleSignOutDrawer] = useToggle();
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const { state } = useLocation();
+
+  const deleteUserMutation = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      navigate('/login');
+      showToast('탈퇴가 완료되었습니다.');
+    },
+    onError: () => {},
+  });
+
+  const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+  };
+
+  const onClickSignOutSubmit = () => {
+    deleteUserMutation.mutate(state);
+  };
 
   return (
     <>
@@ -28,6 +56,8 @@ const SignOutAgreePage = () => {
             type="checkbox"
             id="agree"
             className="w-[18px] h-[18px] cursor-pointer appearance-none rounded-[4px] bg-[url('../../assets/images/common/check-white.svg')] bg-[length:88%_95%] bg-no-repeat bg-center bg-gray-60 checked:bg-primary"
+            checked={isChecked}
+            onChange={onChangeCheckbox}
           />
           <label
             htmlFor="agree"
@@ -36,9 +66,13 @@ const SignOutAgreePage = () => {
             위 주의사항을 모두 확인하였으며, 탈퇴에 동의합니다.
           </label>
         </div>
-        <img src="http://via.placeholder.com/640x480" alt="두더지이미지" />
+        <img
+          src={isDarkMode ? DodosedidImageDark : DodosedidImage}
+          alt="두더지"
+        />
         <Button
-          buttonType="fill-semibold"
+          disabled={!isChecked}
+          buttonType={isChecked ? 'fill-semibold' : 'disabled-semibold'}
           name="탈퇴하기"
           style={{
             position: 'absolute',
@@ -50,7 +84,10 @@ const SignOutAgreePage = () => {
         />
       </div>
       {isOpenSignOutDrawer && (
-        <MyPageSignOutDrawer onClose={toggleSignOutDrawer} />
+        <MyPageSignOutDrawer
+          onClose={toggleSignOutDrawer}
+          onClick={onClickSignOutSubmit}
+        />
       )}
     </>
   );

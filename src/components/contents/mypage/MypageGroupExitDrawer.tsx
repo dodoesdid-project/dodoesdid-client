@@ -8,9 +8,9 @@ import { ReactComponent as CloseButton } from '@assets/images/common/close.svg';
 import { Drawer } from 'antd';
 import React, { useEffect, useRef } from 'react';
 
-type Props = { isOpen: boolean; onClose: () => void };
+type Props = { isOpen: boolean; onClose: () => void; onClick: () => void };
 
-const MypageGroupExitDrawer = ({ isOpen, onClose }: Props) => {
+const MypageGroupExitDrawer = ({ isOpen, onClose, onClick }: Props) => {
   const isDarkMode = useDarkMode();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -55,8 +55,12 @@ const MypageGroupExitDrawer = ({ isOpen, onClose }: Props) => {
           그룹에서 달성한 다짐 기록은 모두 삭제됩니다.
         </p>
         <div className="flex gap-[11px]">
-          <Button buttonType="fill-semibold" name="취소" />
-          <Button buttonType="tinted-semibold" name="나가기" />
+          <Button buttonType="fill-semibold" name="취소" onClick={onClose} />
+          <Button
+            buttonType="tinted-semibold"
+            name="나가기"
+            onClick={onClick}
+          />
         </div>
       </div>
     </Drawer>
