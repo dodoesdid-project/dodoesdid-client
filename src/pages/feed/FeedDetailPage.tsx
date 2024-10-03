@@ -1,8 +1,8 @@
 import TopBar from '@components/common/TopBar';
-import CommentSheet from '@components/contents/Feed/Comment/CommentSheet';
-import EmojiGroup from '@components/contents/Feed/Emoji/EmojiGroup';
-import FeedCard from '@components/contents/Feed/FeedCard/FeedCard';
-import FeedInput from '@components/contents/Feed/FeedInput';
+import CommentSheet from '@components/contents/feed/Comment/CommentSheet';
+import EmojiGroup from '@components/contents/feed/Emoji/EmojiGroup';
+import FeedCard from '@components/contents/feed/FeedCard/FeedCard';
+import FeedInput from '@components/contents/feed/FeedInput';
 
 import { useState } from 'react';
 

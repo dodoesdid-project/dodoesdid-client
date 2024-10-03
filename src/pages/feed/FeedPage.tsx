@@ -1,5 +1,5 @@
 import TopBar from '@components/common/TopBar';
-import FeedCard from '@components/contents/Feed/FeedCard/FeedCard';
+import FeedCard from '@components/contents/feed/FeedCard/FeedCard';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
