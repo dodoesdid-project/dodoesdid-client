@@ -1,5 +1,8 @@
 import { defaultAxios } from '@lib/api/deafultAxios';
 
+import { User } from '../../types/user';
+import { AxiosResponse } from 'axios';
+
 // 이메일 인증 보내기
 export const emailAuthSend = async (email: string) => {
   await defaultAxios.post(`/api/v1/auth/email-verification-code-send`, {
@@ -59,7 +62,7 @@ export const userPasswordReset = async (data: { password: string }) => {
 };
 
 // 내정보조회
-export const getUser = async () => {
+export const getUser = async (): Promise<AxiosResponse<User>> => {
   return await defaultAxios.get(`/api/v1/user/me`);
 };
 

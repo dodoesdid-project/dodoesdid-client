@@ -1,9 +1,11 @@
 import { defaultAxios } from '@lib/api/deafultAxios';
 
+import { Groups } from '../../types/groups';
+import { AxiosResponse } from 'axios';
+
 // 그룹 전체목록 조회
-export const getGroups = async () => {
-  const { data } = await defaultAxios.get(`/api/v1/groups`);
-  return data;
+export const getGroups = async (): Promise<AxiosResponse<Groups>> => {
+  return await defaultAxios.get(`/api/v1/groups`);
 };
 
 // 그룹 생성

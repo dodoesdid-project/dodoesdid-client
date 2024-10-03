@@ -1,95 +1,152 @@
-import useToggle from '@lib/hooks/useToggle';
+import showToast from '@lib/utils/toast';
 
 import { ReactComponent as DodoesdidFull } from '@assets/images/common/dodoesdid-full.svg';
 import { ReactComponent as DodoesdidHalf } from '@assets/images/common/dodoesdid-half.svg';
 import { ReactComponent as DodoesdidHide } from '@assets/images/common/dodoesdid-hide.svg';
 import { ReactComponent as PlusIcon } from '@assets/images/home/plus.svg';
 
-import HomeDazimTitleDrawer from './HomeDazimTitleDrawer';
-import HomeDazimUploadDrawer from './HomeDazimUploadDrawer';
+import { Groups } from '../../../types/groups';
+import { User } from '../../../types/user';
 import { Tooltip } from 'antd';
 import React from 'react';
 
-const HomeDazim = () => {
-  const [isOpenTitleDrawer, toggleTitleDrawer] = useToggle();
-  const [isOpenUploadDrawer, toggleUploadDrawer] = useToggle();
+type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: User | any;
+  isMe?: boolean;
+  groups?: Groups;
+  onClick?: () => void;
+};
 
+const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
+  // console.log(user);
   return (
     <>
-      {/* 1.그룹등록전 */}
-      <div className="w-full aspect-square">
-        <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
-          <img
-            src={'http://via.placeholder.com/640x480'}
-            alt="유저이미지"
-            className="w-[36px] aspect-square rounded-full"
-          />
-          <p className="text-gray-100 text-[16px] dark:text-gray-30">
-            유저닉네임
-          </p>
-        </div>
-        {/* 2.다짐등록전 */}
-        <div className="w-full aspect-square rounded-[16px] bg-gray-30 flex justify-center items-center cursor-pointer dark:bg-[#2a2a2a]">
-          <PlusIcon />
-        </div>
-        <Tooltip
-          open
-          placement="right"
-          title={
-            <span>
-              시작이 반이에요.
-              <br />
-              다짐을 등록하고 실천해보세요!
-            </span>
-          }
-          color="#3F73F7"
-          overlayInnerStyle={{ padding: '12px' }}
+      {groups?.length === 0 ? (
+        <div
+          className="w-full aspect-square"
+          onClick={() => showToast('그룹을 먼저 등록하세요.')}
         >
-          {/* 3.글등록 */}
-          <div className="w-full aspect-square rounded-[16px] bg-gray-30 flex justify-center items-center cursor-pointer relative dark:bg-[#2a2a2a]">
-            <PlusIcon />
-            <DodoesdidHide className="absolute bottom-[44px] right-[10px]" />
-          </div>
-        </Tooltip>
-        <Tooltip
-          open
-          placement="right"
-          title={
-            <span>
-              다짐을 완료하셨다면,
-              <br />
-              인증샷을 업로드 하세요!
-            </span>
-          }
-          color="#3F73F7"
-          overlayInnerStyle={{ padding: '12px' }}
-        >
-          {/* 4.이미지등록 */}
-          <div className="w-full aspect-square rounded-[16px] bg-gray-30 flex justify-center items-center cursor-pointer relative dark:bg-[#2a2a2a]">
-            <PlusIcon />
-            <DodoesdidHalf className="absolute bottom-[44px] right-[10px]" />
-            <p className="w-[136px] py-[4px] text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
-              책10장읽기
+          <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
+            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+              <img
+                src={user.profile?.thumbnail}
+                alt="유저이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            </div>
+            <p className="text-gray-100 text-[16px] dark:text-gray-30">
+              {user.profile?.nickName}
             </p>
           </div>
-        </Tooltip>
-        <div className="w-full aspect-square rounded-[16px] bg-gray-30 flex cursor-pointer relative overflow-hidden dark:bg-[#2a2a2a]">
-          <img src="http://via.placeholder.com/640x480" alt="" />
-          <DodoesdidFull className="absolute bottom-[44px] right-[10px]" />
-          <p className="w-[136px] py-[4px] text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px] left-[50%] translate-x-[-50%]">
-            책10장읽기
-          </p>
+          <div className="w-full aspect-square rounded-[16px] bg-gray-30 flex justify-center items-center cursor-pointer dark:bg-[#2a2a2a]">
+            <PlusIcon />
+          </div>
         </div>
-      </div>
+      ) : isMe ? (
+        <Tooltip
+          open={!user?.dazim?.isSuccess}
+          placement="right"
+          title={
+            !user?.dazim ? (
+              <span>
+                시작이 반이에요.
+                <br />
+                다짐을 등록하고 실천해보세요!
+              </span>
+            ) : (
+              <span>
+                다짐을 완료하셨다면,
+                <br />
+                인증샷을 업로드 하세요!
+              </span>
+            )
+          }
+          color="#3F73F7"
+          overlayInnerStyle={{ padding: '12px' }}
+        >
+          <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
+            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+              <img
+                src={user.profile?.thumbnail}
+                alt="유저이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            </div>
+            <p className="text-gray-100 text-[16px] dark:text-gray-30">
+              {user.profile?.nickName}
+            </p>
+          </div>
+          <div
+            className="w-full aspect-square rounded-[16px] flex justify-center overflow-hidden items-center bg-gray-30 cursor-pointer relative dark:bg-[#2a2a2a] border-[1px] border-solid border-[#ddd] dark:border-[#444]"
+            onClick={onClick}
+          >
+            {/* 사진 */}
+            {user?.dazim?.photo ? (
+              <img
+                src={user?.dazim?.photo}
+                alt="다짐이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            ) : (
+              <PlusIcon />
+            )}
+            {/* 두더지 */}
+            {!user?.dazim ? (
+              <DodoesdidHide className="absolute bottom-[44px] right-[10px]" />
+            ) : !user?.dazim?.isSuccess ? (
+              <DodoesdidHalf className="absolute bottom-[44px] right-[10px]" />
+            ) : (
+              <DodoesdidFull className="absolute bottom-[44px] right-[10px]" />
+            )}
 
-      {isOpenTitleDrawer && (
-        <HomeDazimTitleDrawer
-          isOpen={isOpenTitleDrawer}
-          onClose={toggleTitleDrawer}
-        />
-      )}
-      {isOpenUploadDrawer && (
-        <HomeDazimUploadDrawer onClose={toggleUploadDrawer} />
+            {/* 글 */}
+            {user?.dazim?.content && (
+              <p className="w-[136px] py-[4px] text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
+                {user?.dazim?.content}
+              </p>
+            )}
+          </div>
+        </Tooltip>
+      ) : (
+        <>
+          <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
+            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+              <img
+                src={user.profile?.thumbnail}
+                alt="유저이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            </div>
+            <p className="text-gray-100 text-[16px] dark:text-gray-30">
+              {user.profile?.nickName}
+            </p>
+          </div>
+          <div className="w-full aspect-square rounded-[16px] flex justify-center overflow-hidden items-center bg-gray-30 cursor-pointer relative dark:bg-[#2a2a2a] border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+            {/* 사진 */}
+            {user?.dazim?.photo && (
+              <img
+                src={user?.dazim?.photo}
+                alt="다짐이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            )}
+            {/* 두더지 */}
+            {!user?.dazim ? (
+              <DodoesdidHide className="absolute bottom-[44px] right-[10px]" />
+            ) : !user?.dazim?.isSuccess ? (
+              <DodoesdidHalf className="absolute bottom-[44px] right-[10px]" />
+            ) : (
+              <DodoesdidFull className="absolute bottom-[44px] right-[10px]" />
+            )}
+            {/* 글 */}
+            {user?.dazim?.content && (
+              <p className="w-[136px] py-[4px] text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
+                {user?.dazim?.content}
+              </p>
+            )}
+          </div>
+        </>
       )}
     </>
   );

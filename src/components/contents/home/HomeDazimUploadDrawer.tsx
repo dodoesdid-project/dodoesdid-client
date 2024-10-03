@@ -1,16 +1,20 @@
 import useDarkMode from '@lib/hooks/useDarkMode';
 
-import Button from '@components/common/Button';
-
 import { ReactComponent as CloseDarkButton } from '@assets/images/common/close-white.svg';
 import { ReactComponent as CloseButton } from '@assets/images/common/close.svg';
 
 import { Drawer } from 'antd';
 import React from 'react';
 
-type HomeDazimUploadDrawerProps = { onClose: () => void };
+type HomeDazimUploadDrawerProps = {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClose: () => void;
+};
 
-const HomeDazimUploadDrawer = ({ onClose }: HomeDazimUploadDrawerProps) => {
+const HomeDazimUploadDrawer = ({
+  onChange,
+  onClose,
+}: HomeDazimUploadDrawerProps) => {
   const isDarkMode = useDarkMode();
 
   return (
@@ -39,7 +43,13 @@ const HomeDazimUploadDrawer = ({ onClose }: HomeDazimUploadDrawerProps) => {
           <br />
           다짐 인증을 완료하세요.
         </p>
-        <Button disabled buttonType={`fill-semibold`} name="업로드" />
+        <label
+          htmlFor="dazimPhoto"
+          className="w-full h-[54px] rounded-[8px] bg-primary text-white text-[16px] font-semibold flex justify-center items-center cursor-pointer"
+        >
+          업로드
+        </label>
+        <input type="file" id="dazimPhoto" hidden onChange={onChange} />
       </div>
     </Drawer>
   );

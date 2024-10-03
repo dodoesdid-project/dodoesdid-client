@@ -11,9 +11,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 type Props = {
   groups: Groups;
+  onClickGroup: (id: string) => void;
 };
 
-const HomeGroupContainer = ({ groups }: Props) => {
+const HomeGroupContainer = ({ groups, onClickGroup }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -50,10 +51,14 @@ const HomeGroupContainer = ({ groups }: Props) => {
             </Tooltip>
           )}
         </SwiperSlide>
-        {groups?.length > 0 &&
+        {groups.length > 0 &&
           groups.map((group) => (
             <SwiperSlide key={group.id}>
-              <HomeGroup imagePath={group.thumbnail} name={group.name} />
+              <HomeGroup
+                imagePath={group.thumbnail}
+                name={group.name}
+                onclick={() => onClickGroup(group.id)}
+              />
             </SwiperSlide>
           ))}
       </Swiper>
