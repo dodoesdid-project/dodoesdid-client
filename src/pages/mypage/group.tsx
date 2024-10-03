@@ -1,11 +1,13 @@
 import { getGroups, updateGroupOrder } from '@lib/api/groups';
+import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 
 import Button from '@components/common/Button';
 import TopBar from '@components/common/TopBar';
 
 import { ReactComponent as SortIcon } from '@assets/images/common/sort.svg';
+import DodosedidImageDark from '@assets/images/home/dodoesdid-disabled-dark.png';
+import DodosedidImage from '@assets/images/home/dodoesdid-disabled.png';
 
-// import MyPageGroupList from '@components/contents/mypage/MyPageGroupList';
 import {
   DndContext,
   PointerSensor,
@@ -142,6 +144,8 @@ const MyGroupPage = () => {
     onError: () => {},
   });
 
+  const isDarkMode = useIsDarkMode();
+
   return (
     <div>
       <TopBar title="그룹관리" onClickBack={() => navigate(-1)} />
@@ -160,7 +164,11 @@ const MyGroupPage = () => {
               style={{ marginBottom: '102px' }}
               onClick={() => navigate('/home/profile-group')}
             />
-            <img src=" http://via.placeholder.com/640x480" alt="두더지이미지" />
+            <img
+              src={isDarkMode ? DodosedidImageDark : DodosedidImage}
+              alt="두더지"
+              className="mx-auto"
+            />
           </div>
         ) : (
           <DndContext
