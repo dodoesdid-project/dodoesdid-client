@@ -6,6 +6,7 @@ import JoinGroupPage from '@pages/home/join-group';
 import ProfileGroupPage from '@pages/home/profile-group';
 import ProfileGroupSuccessPage from '@pages/home/profile-group-success';
 import ProfilePersonalPage from '@pages/home/profile-personal';
+import SuccessGroupPage from '@pages/home/success-group';
 import JoinPage from '@pages/join';
 import LoginPage from '@pages/login';
 import LoginEmailPage from '@pages/login/email';
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
             path: '/home/profile-group/success',
             element: <ProfileGroupSuccessPage />,
           },
+          { path: '/home/success-group', element: <SuccessGroupPage /> },
           { path: '/home/join-group', element: <JoinGroupPage /> },
         ],
       },

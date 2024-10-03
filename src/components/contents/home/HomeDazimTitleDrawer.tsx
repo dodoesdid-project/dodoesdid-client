@@ -5,13 +5,26 @@ import Button from '@components/common/Button';
 import { ReactComponent as CloseDarkButton } from '@assets/images/common/close-white.svg';
 import { ReactComponent as CloseButton } from '@assets/images/common/close.svg';
 
-import { Drawer } from 'antd';
+import { Drawer, RadioChangeEvent } from 'antd';
 import React, { useEffect, useRef } from 'react';
 
-type HomeDazimTitleDrawerProps = { isOpen: unknown; onClose: () => void };
+type HomeDazimTitleDrawerProps = {
+  value: string;
+  isOpen: unknown;
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | RadioChangeEvent,
+  ) => void;
+  onClick: () => void;
+  onClose: () => void;
+};
 
 const HomeDazimTitleDrawer = ({
+  value,
   isOpen,
+  onChange,
+  onClick,
   onClose,
 }: HomeDazimTitleDrawerProps) => {
   const isDarkMode = useDarkMode();
@@ -55,10 +68,17 @@ const HomeDazimTitleDrawer = ({
         </p>
         <input
           type="text"
+          value={value}
           ref={inputRef}
           className="p-[10px] mb-[25px] focus:outline-none text-center text-[32px] text-gray-100 font-bold dark:bg-[#2a2a2a] dark:focus:ring-white dark:text-gray-30"
+          onChange={onChange}
         />
-        <Button disabled buttonType={`fill-semibold`} name="완료" />
+        <Button
+          disabled={value === ''}
+          buttonType={`fill-semibold`}
+          name="완료"
+          onClick={onClick}
+        />
       </div>
     </Drawer>
   );

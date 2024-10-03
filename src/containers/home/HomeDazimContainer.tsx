@@ -1,36 +1,30 @@
-import useToggle from '@lib/hooks/useToggle';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import HomeDazim from '@components/contents/home/HomeDazim';
-import HomeToastPopup from '@components/contents/home/HomeToastPopup';
 
+import { Groups } from '../../types/groups';
+import { User } from '../../types/user';
 import React from 'react';
 
-type HomeDazimContainerProps = {
-  user: {
-    groupName: string | null;
-    userImageUrl: string;
-    userNickName: string;
-  };
-  state: string;
+type Props = {
+  groups: Groups;
+  user: User;
+  dazims: any;
+  onClickDazim: () => void;
 };
 
-const HomeDazimContainer = ({ user, state }: HomeDazimContainerProps) => {
-  const [isOpenToastPopup, toggleToastPopup] = useToggle();
-
-  const onClickDazim = () => {
-    console.log(user);
-
-    if (state === 'null') {
-      return toggleToastPopup();
-    }
-  };
+const HomeDazimContainer = ({ groups, user, dazims, onClickDazim }: Props) => {
+  // console.log(dazims);
 
   return (
     <>
       <div className="grid grid-cols-2 gap-[24px]">
-        <HomeDazim user={user} state={state} onClick={onClickDazim} />
+        {groups.length === 0 && <HomeDazim user={user} groups={groups} />}
+        {dazims?.data.map((dazim: any) => (
+          <div key={dazim.id}>
+            <HomeDazim user={dazim} isMe={dazim.isMe} onClick={onClickDazim} />
+          </div>
+        ))}
       </div>
-      {isOpenToastPopup && <HomeToastPopup onClose={toggleToastPopup} />}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { createGroup } from '@lib/api/home';
+import { createGroup } from '@lib/api/groups';
 import useDarkMode from '@lib/hooks/useDarkMode';
 import useInput from '@lib/hooks/useInput';
 
@@ -33,8 +33,7 @@ const ProfileGroupPage = () => {
   const createGroupMutation = useMutation({
     mutationFn: createGroup,
     onSuccess: (response) => {
-      console.log(response);
-      navigate('/');
+      navigate(`/home/success-group?id=${response.data.id}`);
     },
     onError: (err: AxiosError) => {
       const errorMessage = err?.response?.data;
@@ -44,9 +43,9 @@ const ProfileGroupPage = () => {
 
   const onClickSubmit = () => {
     createGroupMutation.mutate({
-      groupImage: info.image,
-      groupName: info.nickname,
-    } as { groupImage: File; groupName: string });
+      thumbnail: info.image,
+      name: info.nickname,
+    } as { thumbnail: File; name: string });
   };
 
   const previewImage = () => {
@@ -115,7 +114,7 @@ const ProfileGroupPage = () => {
         onClick={onClickSubmit}
       />
       <Link
-        to={'#'}
+        to={'/home/join-group'}
         className="text-primary text-[14px] underline block text-center mt-[24px]"
       >
         초대받은 링크로 입장하기
