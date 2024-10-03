@@ -17,13 +17,18 @@ const AccountManagePage = () => {
   const navigate = useNavigate();
   const [isOpenLogoutDrawer, toggleLogoutDrawer] = useToggle();
 
+  const onClickLogout = () => {
+    localStorage.removeItem('authorization');
+    navigate('/login');
+  };
+
   return (
     <>
       <TopBar title="계정 관리" onClickBack={() => navigate(-1)} />
       <div className="px-[16px]">
         <div
           className="py-[16px] flex items-center justify-between cursor-pointer"
-          onClick={() => navigate('/mypage/account/password')}
+          onClick={() => navigate(`/mypage/account/password`)}
         >
           <p className="text-gray-100 text-[16px] font-semibold dark:text-gray-30">
             비밀번호 변경
@@ -31,7 +36,7 @@ const AccountManagePage = () => {
           {isDarkMode ? <ArrowRightDark /> : <ArrowRight />}
         </div>
         <Divider />
-        <div
+        {/* <div
           className="py-[16px] flex items-center justify-between cursor-pointer"
           onClick={() => navigate('/mypage/account/phone')}
         >
@@ -40,7 +45,7 @@ const AccountManagePage = () => {
           </p>
           {isDarkMode ? <ArrowRightDark /> : <ArrowRight />}
         </div>
-        <Divider />
+        <Divider /> */}
         <Link
           to={
             'https://hissing-friend-bd0.notion.site/1085ad085e3a801ab3add7c9e4f41f4c'
@@ -82,7 +87,10 @@ const AccountManagePage = () => {
         </p>
       </div>
       {isOpenLogoutDrawer && (
-        <MypageLogoutDrawer onClose={toggleLogoutDrawer} />
+        <MypageLogoutDrawer
+          onClose={toggleLogoutDrawer}
+          onClick={onClickLogout}
+        />
       )}
     </>
   );

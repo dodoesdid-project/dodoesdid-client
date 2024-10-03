@@ -8,9 +8,21 @@ import { ReactComponent as CloseButton } from '@assets/images/common/close.svg';
 import { Drawer } from 'antd';
 import React, { useEffect, useRef } from 'react';
 
-type Props = { isOpen: boolean; onClose: () => void };
+type Props = {
+  value: string;
+  isOpen: boolean;
+  onClick: () => void;
+  onClose: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
-const MypageGroupNotifyDrawer = ({ isOpen, onClose }: Props) => {
+const MypageGroupNotifyDrawer = ({
+  value,
+  isOpen,
+  onClick,
+  onClose,
+  onChange,
+}: Props) => {
   const isDarkMode = useDarkMode();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -51,11 +63,12 @@ const MypageGroupNotifyDrawer = ({ isOpen, onClose }: Props) => {
         </p>
         <input
           type="text"
+          value={value}
           ref={inputRef}
-          // onChange={onChange}
+          onChange={onChange}
           className="p-[10px] mb-[25px] focus:outline-none text-center text-[20px] text-gray-100 font-semibold dark:bg-[#2a2a2a] dark:focus:ring-white dark:text-gray-30"
         />
-        <Button buttonType="fill-semibold" name="확인" />
+        <Button buttonType="fill-semibold" name="확인" onClick={onClick} />
       </div>
     </Drawer>
   );

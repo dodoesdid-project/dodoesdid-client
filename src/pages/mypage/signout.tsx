@@ -1,3 +1,5 @@
+import useInput from '@lib/hooks/useInput';
+
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import TopBar from '@components/common/TopBar';
@@ -8,11 +10,16 @@ import { useNavigate } from 'react-router-dom';
 
 const SignOutPage = () => {
   const navigate = useNavigate();
-  const [value, setValue] = useState(1);
+  const [reason, setReason] = useState<string>('');
+  const [text, onChangeText] = useInput('');
 
   const onChange = (e: RadioChangeEvent) => {
-    console.log('radio checked', e.target.value);
-    setValue(e.target.value);
+    setReason(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    const messageContent = reason === '직접입력' ? text : `${reason}`;
+    navigate(`/mypage/account/signout-agree`, { state: messageContent });
   };
 
   return (
@@ -34,43 +41,54 @@ const SignOutPage = () => {
         </p>
         <Radio.Group
           onChange={onChange}
-          value={value}
+          value={reason}
           className="flex flex-col gap-[24px] mb-[40px]"
         >
           <Radio
-            value={1}
+            value={'자주 사용하지 않아요'}
             className="text-gray-100 font-semibold dark:text-gray-30"
           >
             자주 사용하지 않아요
           </Radio>
           <Radio
-            value={2}
+            value={'사용 방법이 어렵고 불편해요'}
             className="text-gray-100 font-semibold dark:text-gray-30"
           >
             사용 방법이 어렵고 불편해요
           </Radio>
           <Radio
-            value={3}
+            value={'다짐 작성과 인증과정이 불편해요'}
             className="text-gray-100 font-semibold dark:text-gray-30"
           >
             다짐 작성과 인증과정이 불편해요
           </Radio>
           <Radio
-            value={4}
+            value={'개인정보가 걱정돼요'}
             className="text-gray-100 font-semibold dark:text-gray-30"
           >
             개인정보가 걱정돼요
           </Radio>
           <Radio
-            value={5}
+            value={'직접입력'}
             className="text-gray-100 font-semibold dark:text-gray-30"
           >
             직접입력
           </Radio>
         </Radio.Group>
-        <Input placeholder="서비스 이용 중 아쉬운 점에 대해 이야기 해주세요." />
+        {reason === '직접입력' && (
+          <Input
+            value={text}
+            onChange={onChangeText}
+            placeholder="서비스 이용 중 아쉬운 점에 대해 이야기 해주세요."
+          />
+        )}
         <Button
-          buttonType="fill-semibold"
+          disabled={reason === '직접입력' && text === ''}
+          buttonType={
+            reason === '직접입력' && text === ''
+              ? 'disabled-semibold'
+              : 'fill-semibold'
+          }
           name="다음"
           style={{
             position: 'absolute',
@@ -78,7 +96,7 @@ const SignOutPage = () => {
             bottom: '50px',
             transform: 'translateX(-50%)',
           }}
-          onClick={() => navigate('/mypage/account/signout-agree')}
+          onClick={handleSubmit}
         />
       </div>
     </div>

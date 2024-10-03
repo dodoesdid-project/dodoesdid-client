@@ -11,6 +11,7 @@ import { ReactComponent as Logo } from '@assets/images/common/logo-mix.svg';
 
 import { useMutation } from '@tanstack/react-query';
 
+import { message } from 'antd';
 import { AxiosError } from 'axios';
 import React from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
@@ -32,9 +33,14 @@ const LoginEmailContainer = () => {
       localStorage.setItem('authorization', token);
       navigate('/');
     },
-    onError: (err: AxiosError) => {
-      const errorMessage = err?.response?.data;
-      console.log(errorMessage);
+    onError: (error: AxiosError) => {
+      console.log(error);
+      if (error.status === 403) {
+        return message.error('이미 탈퇴한 회원입니다.');
+      }
+      if (error.status === 401) {
+        return message.error('이메일과 비밀번호를 확인해주세요.');
+      }
     },
   });
 
