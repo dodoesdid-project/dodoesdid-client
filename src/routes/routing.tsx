@@ -1,4 +1,3 @@
-import DodoesdidPage from '@pages/DodoesdidPage';
 import FeedDetailPage from '@pages/feed/FeedDetailPage';
 import FeedPage from '@pages/feed/FeedPage';
 import Homepage from '@pages/home';
@@ -23,6 +22,7 @@ import ChangePhonePage from '@pages/mypage/phone';
 import ChangeProfilePage from '@pages/mypage/profile';
 import SignOutPage from '@pages/mypage/signout';
 import SignOutAgreePage from '@pages/mypage/signout-agree';
+import DodoesdidPage from '@pages/statistics/DodoesdidPage';
 
 import DefaultLayout from '@components/common/base/DefaultLayout';
 import NoNavLayout from '@components/common/base/NoNavLayout';
