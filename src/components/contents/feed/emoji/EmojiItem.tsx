@@ -4,7 +4,7 @@ import { ReactComponent as HeartEmoji } from '@assets/images/feed/heart-emoji.sv
 import { ReactComponent as NoteEmoji } from '@assets/images/feed/note-emoji.svg';
 import { ReactComponent as ShinyEmoji } from '@assets/images/feed/shiny-emoji.svg';
 
-import { IEmojiItem, ReactionType } from '../../../../types/feedType';
+import { IEmojiItem } from '../../../../types/feedType';
 
 const EmojiItem = ({ emojiType, count, isClicked, onClick }: IEmojiItem) => {
   const emojis = {

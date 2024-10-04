@@ -37,7 +37,6 @@ const EmojiGroup = ({
     // 클릭 상태 토글
     const newClickedState = !clickedStates[reactionType];
 
-    // 카운트 증가 또는 감소
     const newCount = counts[reactionType] + (newClickedState ? 1 : -1);
 
     setClickedStates({
@@ -50,14 +49,7 @@ const EmojiGroup = ({
       [reactionType]: newCount,
     });
 
-    // 서버에 리액션 전송
-    updateReaction(feedId, reactionType)
-      .then(() => {
-        console.log(`${reactionType} 리액션 업데이트 성공`);
-      })
-      .catch((error) => {
-        console.error(`${reactionType} 리액션 업데이트 실패`, error);
-      });
+    updateReaction(feedId, reactionType);
   };
 
   const emojis = [
