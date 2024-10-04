@@ -1,7 +1,7 @@
 import { addCommentReply, addFeedComment, editComment } from '@lib/api/feed';
 import { getUser } from '@lib/api/user';
 
-import { ReactComponent as SendIcon } from '@assets/images/send-icon.svg';
+import { ReactComponent as SendIcon } from '@assets/images/feed/send-icon.svg';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
