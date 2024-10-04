@@ -1,41 +1,59 @@
+import { getFeeds } from '@lib/api/feed';
+
 import TopBar from '@components/common/TopBar';
 import FeedCard from '@components/contents/feed/feedCard/FeedCard';
-import React from 'react';
-import { useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { IFeed } from '../../types/feedType';
 import { useNavigate } from 'react-router-dom';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
 const FeedPage = () => {
-  const [dummy, setDummy] = useState([1, 2, 3, 4, 5, 6]);
   const navigate = useNavigate();
+
+  const { data: feeds, refetch } = useQuery<IFeed[]>({
+    queryKey: ['feeds'],
+    queryFn: getFeeds,
+    refetchOnWindowFocus: false,
+  });
 
   const feedRefresh = (): Promise<void> => {
     return new Promise((res) => {
-      setTimeout(() => {
-        setDummy((item) => [item.length + 1, ...item]);
-        res();
-      }, 1000);
+      refetch();
+      res();
     });
   };
+
+  // 피드 최신 등록 순으로 뿌리기
+  const newFeeds = feeds
+    ? [...feeds].sort(
+        (a, b) =>
+          new Date(b.updateAt).getTime() - new Date(a.updateAt).getTime(),
+      )
+    : [];
 
   return (
     <>
       <TopBar backLink="" title="피드" close={false} />
       <PullToRefresh onRefresh={feedRefresh} pullingContent={''}>
         <div className="px-4">
-          {dummy.map((id, index) => (
-            <FeedCard
-              key={index}
-              id={id}
-              name="옐"
-              time="1분 전"
-              profileImageUrl="http://via.placeholder.com/40x40"
-              dazimImageUrl="http://via.placeholder.com/362x362"
-              onClick={() => navigate(`/feed/${id}`)}
-              overlayText="책 10장 읽기 성공~"
-              showActionIcons={true}
-            />
-          ))}
+          {newFeeds &&
+            newFeeds.map((feed) => (
+              <FeedCard
+                key={feed.id}
+                id={feed.id}
+                name={feed.user.profile?.nickName || ''}
+                time={feed.updateAt}
+                profileImageUrl={feed.user.profile?.thumbnail || ''}
+                dazimImageUrl={feed.photo || ''}
+                onClick={() => navigate(`/feed/${feed.id}`)}
+                overlayText={feed.content}
+                showActionIcons={true}
+                reactionCount={feed.reactionCount}
+                commentCount={feed.commentCount}
+              />
+            ))}
         </div>
       </PullToRefresh>
     </>

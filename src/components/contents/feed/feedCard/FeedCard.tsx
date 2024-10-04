@@ -1,8 +1,8 @@
 import ActionIcons from '../feedIcons/ActionIcons';
 import React from 'react';
 
-interface FeedCardProps {
-  id?: number;
+interface IFeedCard {
+  id?: string;
   name: string;
   time: string;
   profileImageUrl: string;
@@ -10,10 +10,11 @@ interface FeedCardProps {
   onClick?: () => void;
   overlayText?: string;
   showActionIcons?: boolean;
+  reactionCount?: number;
+  commentCount?: number;
 }
 
 const FeedCard = ({
-  id,
   name,
   time,
   profileImageUrl,
@@ -21,7 +22,9 @@ const FeedCard = ({
   onClick,
   overlayText,
   showActionIcons = false,
-}: FeedCardProps) => {
+  reactionCount = 0,
+  commentCount = 0,
+}: IFeedCard) => {
   return (
     <article>
       <header className="flex items-center mb-4">
@@ -29,7 +32,7 @@ const FeedCard = ({
           <img
             src={profileImageUrl}
             alt="프로필 이미지"
-            className="rounded-full"
+            className="rounded-full w-10 h-10"
           />
         </section>
 
@@ -48,14 +51,23 @@ const FeedCard = ({
         onClick={onClick}
         className={`relative ${onClick ? 'cursor-pointer' : ''} `}
       >
-        <img className="rounded-2xl" src={dazimImageUrl} alt="다짐 사진" />
+        <img
+          className="rounded-2xl w-[343px] h-[343px]"
+          src={dazimImageUrl}
+          alt="다짐 사진"
+        />
         {overlayText && (
           <span className="text-center bg-black text-white bg-opacity-70 w-[303px] py-[11px] rounded-lg absolute bottom-4 left-1/2 transform -translate-x-1/2 text-[20px] font-semibold whitespace-nowrap">
             {overlayText}
           </span>
         )}
       </div>
-      {showActionIcons && <ActionIcons />}
+      {showActionIcons && (
+        <ActionIcons
+          reactionCount={reactionCount}
+          commentCount={commentCount}
+        />
+      )}
     </article>
   );
 };
