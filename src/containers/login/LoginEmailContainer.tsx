@@ -2,7 +2,7 @@ import { login } from '@lib/api/user';
 import useDarkMode from '@lib/hooks/useDarkMode';
 
 import Button from '@components/common/Button';
-import CheckBox from '@components/common/CheckBox';
+// import CheckBox from '@components/common/CheckBox';
 import Input from '@components/common/Input';
 import TopBar from '@components/common/TopBar';
 
@@ -108,11 +108,17 @@ const LoginEmailContainer = () => {
                 />
               )}
             />
-            <CheckBox label="자동 로그인" />
+            {/* <CheckBox label="자동 로그인" /> */}
           </div>
           <div className="flex gap-[8px] justify-center text-gray-90 text-[14px] dark:text-white">
             <Link to={'/login-email/search/id'}>아이디 찾기</Link> |{' '}
-            <Link to={'/login-email/search/pw'}>비밀번호 찾기</Link>
+            {/* <Link to={'/login-email/search/pw'}>비밀번호 찾기</Link> */}
+            <div
+              className="cursor-pointer"
+              onClick={() => message.warning('서비스 준비중입니다.')}
+            >
+              비밀번호 찾기
+            </div>
           </div>
         </div>
       </div>

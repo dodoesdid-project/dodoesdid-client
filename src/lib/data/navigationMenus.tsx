@@ -1,5 +1,5 @@
-import { ReactComponent as DodoesdidIconActive } from '@assets/images/nav/dodoesdid-active.svg';
-import { ReactComponent as DodoesdidIcon } from '@assets/images/nav/dodoesdid.svg';
+// import { ReactComponent as DodoesdidIconActive } from '@assets/images/nav/dodoesdid-active.svg';
+// import { ReactComponent as DodoesdidIcon } from '@assets/images/nav/dodoesdid.svg';
 import { ReactComponent as FeedIconActive } from '@assets/images/nav/feed-active.svg';
 import { ReactComponent as FeedIcon } from '@assets/images/nav/feed.svg';
 import { ReactComponent as HomeIconActive } from '@assets/images/nav/home-active.svg';
@@ -30,13 +30,13 @@ export const navigationMenus: {
     iconActive: <FeedIconActive />,
     link: '/feed',
   },
-  {
-    id: 3,
-    name: '두더지',
-    icon: <DodoesdidIcon />,
-    iconActive: <DodoesdidIconActive />,
-    link: '/dodoesdid',
-  },
+  // {
+  //   id: 3,
+  //   name: '두더지',
+  //   icon: <DodoesdidIcon />,
+  //   iconActive: <DodoesdidIconActive />,
+  //   link: '/dodoesdid',
+  // },
   {
     id: 4,
     name: 'MY',

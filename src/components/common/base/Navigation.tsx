@@ -11,7 +11,7 @@ const Navigation = () => {
     <nav className="w-full h-[90px] fixed bottom-0 desktop:w-[375px] shadow-[0_-8px_12px_0_rgba(0,0,0,0.05)] bg-white dark:bg-black">
       <div className="w-full h-[56px] flex mt-[4px]">
         {navigationMenus.map((menu) => (
-          <Link to={menu.link} key={menu.id} className="w-1/4 relative">
+          <Link to={menu.link} key={menu.id} className="w-1/3 relative">
             <div
               className={
                 url === menu.link

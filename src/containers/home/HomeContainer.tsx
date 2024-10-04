@@ -131,7 +131,10 @@ const HomeContainer = () => {
   };
 
   useEffect(() => {
-    if (groups) setGroupId(groups?.data[0]?.id);
+    if (groups) {
+      setGroupId(groups?.data[0]?.id);
+      setNotice(groups?.data[0]?.notice);
+    }
   }, [groups]);
 
   useEffect(() => {

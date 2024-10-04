@@ -22,6 +22,7 @@ import SuccessDrawer from '@components/contents/join/SuccessDrawer';
 
 import { useMutation } from '@tanstack/react-query';
 
+import { message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
@@ -95,6 +96,7 @@ const JoinContainer = () => {
   });
 
   const onClickEmail = (data: FieldValues) => {
+    message.success('메일을 전송중입니다.');
     emailSendMutation.mutate(data.email);
   };
 
@@ -195,7 +197,7 @@ const JoinContainer = () => {
   ];
 
   useEffect(() => {
-    console.log(isOkEmail);
+    // console.log(isOkEmail);
   }, [isOkEmail]);
 
   return (
