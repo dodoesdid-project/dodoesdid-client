@@ -2,7 +2,7 @@ import HomeGroup from '@components/contents/home/HomeGroup';
 
 import { ReactComponent as GroupPlusIcon } from '@assets/images/home/groupplus.svg';
 
-import { Groups } from '../../types/groups';
+import { Group, Groups } from '../../types/groups';
 import { Tooltip } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 type Props = {
   groups: Groups;
-  onClickGroup: (id: string) => void;
+  onClickGroup: (group: Group) => void;
 };
 
 const HomeGroupContainer = ({ groups, onClickGroup }: Props) => {
@@ -57,7 +57,7 @@ const HomeGroupContainer = ({ groups, onClickGroup }: Props) => {
               <HomeGroup
                 imagePath={group.thumbnail}
                 name={group.name}
-                onclick={() => onClickGroup(group.id)}
+                onclick={() => onClickGroup(group)}
               />
             </SwiperSlide>
           ))}
