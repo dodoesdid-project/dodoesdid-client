@@ -77,11 +77,12 @@ const FeedDetailPage = () => {
               time={feedDetail.updateAt}
               profileImageUrl={feedDetail.user.profile?.thumbnail || ''}
               dazimImageUrl={feedDetail.photo || ''}
-              overlayText={feedDetail.content}
             />
           )}
           <div className="pl-1 py-4">
-            <span className="text-gray-100">{feedDetail?.content}</span>
+            <span className="text-gray-100 dark:text-gray-30">
+              {feedDetail?.content}
+            </span>
           </div>
           {feedDetail && (
             <EmojiGroup

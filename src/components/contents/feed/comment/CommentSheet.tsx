@@ -4,7 +4,9 @@ import CommentAndReply from './CommentAndReply';
 const CommentSheet = ({ comments, feedId, onReply }: ICommentSheet) => {
   return (
     <div className="flex flex-col pb-[100px] gap-4">
-      <span className="text-gray-100 font-semibold">댓글</span>
+      <span className="text-gray-100 font-semibold dark:text-gray-30">
+        댓글
+      </span>
 
       {comments?.map((comment) => (
         <div key={comment.id}>
