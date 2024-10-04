@@ -1,8 +1,8 @@
 import { ReactComponent as Logo } from '@assets/images/common/logo.svg';
 import DodosedidImage from '@assets/images/login/dodoesdid-login.png';
-import { ReactComponent as GoogleIcon } from '@assets/images/login/google.svg';
-import { ReactComponent as KakaoIcon } from '@assets/images/login/kakao.svg';
 
+// import { ReactComponent as GoogleIcon } from '@assets/images/login/google.svg';
+// import { ReactComponent as KakaoIcon } from '@assets/images/login/kakao.svg';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,18 +17,30 @@ const LoginPage = () => {
         <img src={DodosedidImage} alt="두더지이미지" />
       </div>
       <div className="pb-[50px] flex flex-col items-center px-[16px]">
-        <button className="w-full h-[52px] rounded-[8px] bg-[#fee500] text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[12px]">
+        {/* <a className="w-full h-[52px] rounded-[8px] bg-[#fee500] text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[12px]">
           <KakaoIcon />
           <p>카카오 계정으로 로그인</p>
-        </button>
-        <button className="w-full h-[52px] rounded-[8px] bg-white text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[36px]">
+        </a>
+        <a className="w-full h-[52px] rounded-[8px] bg-white text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[36px]">
           <GoogleIcon />
           <p>Goole 계정으로 로그인</p>
-        </button>
+        </a>
         <p className="text-white text-[16px] ">
           <Link to={'/login-email'}>이메일로 로그인</Link> /{' '}
           <Link to={'/join'}>회원가입</Link>
-        </p>
+        </p> */}
+        <Link
+          to={'/login-email'}
+          className="w-full h-[52px] rounded-[8px] bg-white text-black text-[16px] font-semibold cursor-pointer flex items-center justify-center gap-[8px] mb-[16px]"
+        >
+          <p>이메일로 로그인</p>
+        </Link>
+        <Link
+          to={'/join'}
+          className="text-white text-[16px] cursor-pointer flex items-center justify-center gap-[8px] mb-[36px]"
+        >
+          <p>회원가입</p>
+        </Link>
       </div>
     </div>
   );

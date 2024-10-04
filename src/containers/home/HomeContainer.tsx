@@ -22,7 +22,7 @@ import HomeGroupContainer from '@/containers/home/HomeGroupContainer';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { Dazims } from '../../types/dazims';
-import { Groups } from '../../types/groups';
+import { Group, Groups } from '../../types/groups';
 import { User } from '../../types/user';
 import HomeDazimContainer from './HomeDazimContainer';
 import { message } from 'antd';
@@ -35,6 +35,7 @@ const HomeContainer = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const today = dayjs(new Date()).format('YYYY-MM-DD');
   const [searchDate, setSearchDate] = useState<string>(today);
+  const [notice, setNotice] = useState<string | null>(null);
   const [titleInput, onChangeTitleInput] = useInput('');
 
   const [isOpenTitleDrawer, toggleTitleDrawer] = useToggle();
@@ -87,8 +88,9 @@ const HomeContainer = () => {
     },
   });
 
-  const onClickGroup = (id: string) => {
-    setGroupId(id);
+  const onClickGroup = (group: Group) => {
+    setGroupId(group.id);
+    setNotice(group.notice);
   };
 
   const onClickDazim = () => {
@@ -129,7 +131,10 @@ const HomeContainer = () => {
   };
 
   useEffect(() => {
-    if (groups) setGroupId(groups?.data[0]?.id);
+    if (groups) {
+      setGroupId(groups?.data[0]?.id);
+      setNotice(groups?.data[0]?.notice);
+    }
   }, [groups]);
 
   useEffect(() => {
@@ -161,7 +166,7 @@ const HomeContainer = () => {
             <div className="px-[16px] py-[12px] bg-[#E2F8FF] mb-[12px] flex items-center gap-[12px] dark:bg-[#1e3060]">
               <Notice />
               <p className="text-primary text-[12px] font-semibold">
-                그룹 공지사항을 입력해보세요.
+                {notice ? notice : '그룹 공지사항을 입력해보세요.'}
               </p>
             </div>
             <div className="px-[16px]">

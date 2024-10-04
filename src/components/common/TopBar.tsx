@@ -36,11 +36,14 @@ const TopBar = ({
       {onClickBack &&
         (isDarkMode ? (
           <BackDarkIcon
-            className="m-[10px] cursor-pointer"
+            className="m-[10px] cursor-pointer absolute"
             onClick={onClickBack}
           />
         ) : (
-          <BackIcon className="m-[10px] cursor-pointer" onClick={onClickBack} />
+          <BackIcon
+            className="m-[10px] cursor-pointer absolute"
+            onClick={onClickBack}
+          />
         ))}
       <p className="flex-1 text-center text-gray-100 text-[17px] font-semibold dark:text-white">
         {title}
