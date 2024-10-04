@@ -1,6 +1,5 @@
 import { addCommentReply, addFeedComment, editComment } from '@lib/api/feed';
 import { getUser } from '@lib/api/user';
-import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 
 import { ReactComponent as SendIcon } from '@assets/images/feed/send-icon.svg';
 
@@ -20,7 +19,6 @@ const FeedInput = ({
   const queryClient = useQueryClient();
   const [input, setInput] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const isDarkMode = useIsDarkMode();
 
   // input 유저 사진용
   const { data: user } = useQuery({
@@ -94,7 +92,7 @@ const FeedInput = ({
 
   return (
     <form
-      className="fixed bottom-0 left-0 right-0 py-2 px-4 w-full border-t border-t-gray-40 bg-white dark:bg-black dark:border-t-[#2A2A2A]"
+      className="fixed bottom-0 left-[50%] translate-x-[-50%] py-2 px-4 w-full border-t border-t-gray-40 bg-white desktop:w-[375px] dark:bg-black dark:border-t-[#2A2A2A]"
       onSubmit={handleSubmit}
     >
       <div className="flex flex-row items-center">
