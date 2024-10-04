@@ -1,1 +1,1 @@
-export const defaultURL = 'http://localhost:3000';
+export const defaultURL = `${process.env.APP_URL}`;
