@@ -192,6 +192,7 @@ const MyGroupPage = () => {
                   name: group.name,
                   thumbnail: group.thumbnail,
                   inviteCode: group.inviteCode,
+                  notice: group.notice,
                 }))}
                 pagination={false}
                 className="bg-[transparent]"
