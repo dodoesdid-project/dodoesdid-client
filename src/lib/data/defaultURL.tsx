@@ -1,1 +1,1 @@
-export const defaultURL = `${process.env.APP_URL}`;
+export const defaultURL = `${process.env.REACT_APP_URL}`;
