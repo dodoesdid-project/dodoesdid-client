@@ -196,7 +196,7 @@ const MyGroupInfoPage = () => {
               className="w-full px-[16px] py-[10px] flex justify-between items-center bg-gray-30 rounded-[8px] cursor-pointer dark:bg-[#2a2a2a]"
               onClick={toggleNotifyDrawer}
             >
-              <p className="text-gray-70 dark:text-gray-30 dark:text-gray-60">
+              <p className="text-gray-70 dark:text-gray-60">
                 {groupDetail.notice
                   ? groupDetail.notice
                   : '그룹의 공지사항을 적어보세요'}
