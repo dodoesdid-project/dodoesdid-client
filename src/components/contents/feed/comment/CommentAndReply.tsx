@@ -1,8 +1,10 @@
 import { deleteComment } from '@lib/api/feed';
+import useDarkMode from '@lib/hooks/useDarkMode';
 
 import { ReactComponent as EditIcon } from '@assets/images/feed/edit-icon.svg';
 import { ReactComponent as TrashIcon } from '@assets/images/feed/trash-icon.svg';
 import { ReactComponent as VerticalEllipsis } from '@assets/images/feed/vertical-ellipsis.svg';
+import { ReactComponent as XIconDark } from '@assets/images/feed/x-icon-dark.svg';
 import { ReactComponent as XIcon } from '@assets/images/feed/x-icon.svg';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -58,6 +60,8 @@ const CommentAndReply = ({
     setDeleteModalOpen(false);
   };
 
+  const isDarkMode = useDarkMode();
+
   return (
     <>
       <article
@@ -73,10 +77,10 @@ const CommentAndReply = ({
         <section className="pl-2 w-full">
           <div className="flex justify-between items-center">
             <div>
-              <span className="text-gray-100 font-semibold">
+              <span className="text-gray-100 font-semibold dark:text-gray-30">
                 {comment.user?.profile?.nickName}
               </span>
-              <time className="pl-2 text-gray-60 text-[11px]">
+              <time className="pl-2 text-gray-60 text-[11px] dark:text-gray-70">
                 {comment.updateAt}
               </time>
             </div>
@@ -86,12 +90,14 @@ const CommentAndReply = ({
           </div>
 
           <div>
-            <span className="break-words">{comment.content}</span>
+            <span className="break-words dark:text-gray-30">
+              {comment.content}
+            </span>
           </div>
 
           {!isReply && (
             <button
-              className="font-semibold text-gray-60 text-[11px] cursor-pointer"
+              className="font-semibold text-gray-60 text-[11px] cursor-pointer dark:text-gray-70"
               onClick={() => onReply && onReply(comment)}
             >
               답글 달기
@@ -109,7 +115,7 @@ const CommentAndReply = ({
           ></div>
           <div className="fixed inset-x-0 bottom-0 z-50 px-4 pb-8 ">
             <button
-              className="flex justify-center bg-[#E2F8FF] text-primary-700 w-full text-left px-4 py-[12px] font-semibold rounded-lg gap-2"
+              className="flex justify-center bg-[#E2F8FF] text-primary-700 w-full text-left px-4 py-[12px] font-semibold rounded-lg gap-2 dark:bg-[#1E3060]"
               onClick={handleEditClick}
             >
               <EditIcon />
@@ -134,14 +140,14 @@ const CommentAndReply = ({
             onClick={closeDeleteModal}
           ></div>
 
-          <div className="fixed inset-x-0 bottom-0 px-4 rounded-t-xl p-4 bg-white z-50">
+          <div className="fixed inset-x-0 bottom-0 px-4 rounded-t-xl p-4 bg-white z-50 dark:bg-[#2A2A2A]">
             <div className="flex justify-end">
               <button onClick={closeDeleteModal}>
-                <XIcon />
+                {isDarkMode ? <XIconDark /> : <XIcon />}
               </button>
             </div>
 
-            <p className="text-center text-gray-100 font-semibold pt-[32px] pb-[51px]">
+            <p className="text-center text-gray-100 font-semibold pt-[32px] pb-[51px] dark:text-gray-30">
               댓글을 삭제하시겠습니까?
             </p>
 
