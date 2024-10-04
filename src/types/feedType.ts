@@ -32,6 +32,19 @@ export interface IFeed {
   reactionCount: number;
 }
 
+export interface IFeedCard {
+  id?: string;
+  name: string;
+  time: string;
+  profileImageUrl: string;
+  dazimImageUrl: string;
+  onClick?: () => void;
+  overlayText?: string;
+  showActionIcons?: boolean;
+  reactionCount?: number;
+  commentCount?: number;
+}
+
 export type ReactionType =
   | 'FIRE'
   | 'STAR'
@@ -68,4 +81,46 @@ export interface IEmojiItem {
 export interface IActionIcons {
   reactionCount: number;
   commentCount: number;
+}
+export interface IComment {
+  id: string;
+  content: string;
+  createAt: string;
+  updateAt: string;
+  user: IUser;
+  replies?: IReply[];
+}
+export interface IReply {
+  id: string;
+  parentId: string;
+  content: string;
+  createAt: string;
+  updateAt: string;
+  user?: IUser;
+}
+
+export interface IMessageResponse {
+  message: string;
+}
+
+export interface ICommentSheet {
+  comments: IComment[];
+  feedId: string;
+  onReply: (comment: IComment | IReply, isEditMode?: boolean) => void;
+}
+
+export interface ICommentAndReply {
+  comment: IComment | IReply;
+  feedId: string;
+  isReply?: boolean;
+  onReply?: (comment: IComment | IReply, isEditMode?: boolean) => void;
+}
+
+export interface IFeedInput {
+  feedId: string;
+  reply: boolean;
+  edit: boolean;
+  commentState: IComment | IReply | null;
+  onCancelReply: () => void;
+  onEditComplete: () => void;
 }
