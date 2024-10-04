@@ -1,4 +1,4 @@
-import { getFeedDetail } from '@lib/api/feed';
+import { getFeedComments, getFeedDetail } from '@lib/api/feed';
 
 import TopBar from '@components/common/TopBar';
 import FeedInput from '@components/contents/feed/FeedInput';
@@ -8,96 +8,63 @@ import FeedCard from '@components/contents/feed/feedCard/FeedCard';
 
 import { useQuery } from '@tanstack/react-query';
 
+import { IComment, IReply } from '../../types/feedType';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const FeedDetailPage = () => {
-  const { feedId } = useParams<{ feedId: string }>(); // URL에서 feedId 가져오기
-  const [comments, setComments] = useState<any[]>([]);
-  const [isReplying, setIsReplying] = useState(false);
-  const [currentComment, setCurrentComment] = useState<any>(null);
+  const { feedId } = useParams<{ feedId: string }>();
 
-  // 피드 상세 정보 가져오기
+  const [reply, setReply] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [commentState, setCommentState] = useState<IComment | IReply | null>(
+    null,
+  );
+
   const {
     data: feedDetail,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['feedDetail', feedId as string],
+    queryKey: ['feedDetail', feedId],
     queryFn: () => getFeedDetail(feedId as string),
-    enabled: !!feedId,
   });
 
-  // 댓글 추가 함수
-  const addComment = (content: string) => {
-    const newComment = {
-      id: Date.now(),
-      content,
-      userName: '찬영',
-      time: '10분 전',
-      img: '',
-      isReply: false,
-      replies: [],
-    };
-    setComments((comments) => [...comments, newComment]);
-  };
+  const {
+    data: comments,
+    isLoading: commentsLoading,
+    isError: commentsError,
+  } = useQuery({
+    queryKey: ['comments', feedId],
+    queryFn: () => getFeedComments(feedId as string),
+  });
 
-  const addReply = (content: string, parentId: number) => {
-    const newReply = {
-      id: Date.now(),
-      content,
-      userName: '소현',
-      time: '5분 전',
-      img: '',
-      isReply: true,
-    };
-    setComments((comments) =>
-      comments.map((comment) =>
-        comment.id === parentId
-          ? { ...comment, replies: [...comment.replies, newReply] }
-          : comment,
-      ),
-    );
-    setIsReplying(false);
-    setCurrentComment(null);
-  };
-
-  const handleReply = (comment: any) => {
-    setIsReplying(true);
-    setCurrentComment(comment);
-  };
-
-  const handleDelete = (id: number, isReply = false, parentId?: number) => {
-    if (isReply && parentId) {
-      setComments((comments) =>
-        comments.map((comment) =>
-          comment.id === parentId
-            ? {
-                ...comment,
-                replies: comment.replies.filter(
-                  (reply: any) => reply.id !== id,
-                ),
-              }
-            : comment,
-        ),
-      );
+  const handleReply = (comment: IComment | IReply, isEdit?: boolean) => {
+    if (isEdit) {
+      setEdit(true);
+      setCommentState(comment);
     } else {
-      setComments((comments) =>
-        comments.filter((comment) => comment.id !== id),
-      );
+      setReply(true);
+      setCommentState(comment);
     }
   };
 
-  const handleEdit = (id: number, updatedContent: string) => {
-    setComments((comments) =>
-      comments.map((comment) =>
-        comment.id === id ? { ...comment, content: updatedContent } : comment,
-      ),
-    );
+  // 답글 달고 다시 댓글 작성 시 댓글 형식으로
+  const handleCancelReply = () => {
+    setReply(false);
   };
 
-  if (isLoading) return <div>로딩중..</div>;
-  if (isError) return <div>에러..</div>;
+  const handleEditComplete = () => {
+    setEdit(false);
+  };
+
+  // feedId가 없을 경우 처리
+  if (!feedId) {
+    return <span>feedId 없음</span>;
+  }
+
+  if (isLoading || commentsLoading) return <div>로딩중..</div>;
+  if (isError || commentsError) return <div>에러..</div>;
 
   return (
     <>
@@ -116,7 +83,7 @@ const FeedDetailPage = () => {
           <div className="pl-1 py-4">
             <span className="text-gray-100">{feedDetail?.content}</span>
           </div>
-          {feedDetail && feedId && (
+          {feedDetail && (
             <EmojiGroup
               fireCount={feedDetail.fireCount ?? 0}
               starCount={feedDetail.starCount ?? 0}
@@ -135,17 +102,21 @@ const FeedDetailPage = () => {
           )}
           <div className="border-t border-gray-30 my-[10px]"></div>
           {/* 댓글, 대댓글 목록 */}
-          <CommentSheet
-            comments={comments}
-            handleReply={handleReply}
-            handleDelete={handleDelete}
-          />
+          {comments && (
+            <CommentSheet
+              comments={comments}
+              feedId={feedId}
+              onReply={handleReply}
+            />
+          )}
         </article>
         <FeedInput
-          addComment={addComment}
-          addReply={addReply}
-          isReplying={isReplying}
-          currentComment={currentComment}
+          feedId={feedId}
+          reply={reply}
+          edit={edit}
+          commentState={commentState}
+          onCancelReply={handleCancelReply}
+          onEditComplete={handleEditComplete}
         />
       </div>
     </>
