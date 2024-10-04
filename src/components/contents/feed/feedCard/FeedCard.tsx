@@ -1,18 +1,5 @@
+import { IFeedCard } from '../../../../types/feedType';
 import ActionIcons from '../feedIcons/ActionIcons';
-import React from 'react';
-
-interface IFeedCard {
-  id?: string;
-  name: string;
-  time: string;
-  profileImageUrl: string;
-  dazimImageUrl: string;
-  onClick?: () => void;
-  overlayText?: string;
-  showActionIcons?: boolean;
-  reactionCount?: number;
-  commentCount?: number;
-}
 
 const FeedCard = ({
   name,

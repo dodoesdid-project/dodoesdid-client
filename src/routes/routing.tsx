@@ -28,7 +28,6 @@ import DefaultLayout from '@components/common/base/DefaultLayout';
 import NoNavLayout from '@components/common/base/NoNavLayout';
 
 import PrivateRoute from './PrivateRoute';
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -85,7 +84,7 @@ const router = createBrowserRouter([
       { path: '/login-email/search/pw', element: <LoginSearchPwPage /> },
       { path: '/mypage/account/signout', element: <SignOutPage /> },
       { path: '/mypage/account/signout-agree', element: <SignOutAgreePage /> },
-      { path: '/feed/:id', element: <FeedDetailPage /> },
+      { path: '/feed/:feedId', element: <FeedDetailPage /> },
     ],
   },
 ]);

@@ -1,14 +1,74 @@
+import { addCommentReply, addFeedComment, editComment } from '@lib/api/feed';
+import { getUser } from '@lib/api/user';
+
 import { ReactComponent as SendIcon } from '@assets/images/send-icon.svg';
 
-import React, { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
+import { IFeedInput } from '../../../types/feedType';
+import React, { useEffect, useRef, useState } from 'react';
 
 const FeedInput = ({
-  addComment,
-  addReply,
-  isReplying,
-  currentComment,
-}: any) => {
+  feedId,
+  reply,
+  edit,
+  commentState,
+  onCancelReply,
+  onEditComplete,
+}: IFeedInput) => {
+  const queryClient = useQueryClient();
   const [input, setInput] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // input 유저 사진용
+  const { data: user } = useQuery({
+    queryKey: ['user'],
+    queryFn: getUser,
+  });
+
+  // 댓글 추가
+  const addCommentMutation = useMutation({
+    mutationFn: (content: string) => addFeedComment(feedId, content),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments', feedId] });
+      setInput('');
+    },
+  });
+
+  // 대댓글 추가
+  const addReplyMutation = useMutation({
+    mutationFn: (content: string) =>
+      addCommentReply(commentState?.id as string, content),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments', feedId] });
+      setInput('');
+      onCancelReply();
+    },
+  });
+
+  // 댓글 수정
+  const editCommentMutation = useMutation({
+    mutationFn: (content: string) =>
+      editComment(commentState?.id as string, content),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['comments', feedId] });
+      setInput('');
+      onEditComplete();
+    },
+  });
+
+  // commentState, 수정 클릭했을 떄 input focus
+  useEffect(() => {
+    if (edit && commentState) {
+      setInput(commentState.content);
+      inputRef.current?.focus();
+    } else if (reply) {
+      setInput('');
+      inputRef.current?.focus();
+    } else {
+      setInput('');
+    }
+  }, [edit, reply, commentState]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -17,25 +77,15 @@ const FeedInput = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim()) {
-      if (isReplying && currentComment) {
-        addReply(input, currentComment.id);
+      if (edit && commentState) {
+        // 수정시 댓글 또는 대댓글 수정
+        editCommentMutation.mutate(input);
+      } else if (reply && commentState) {
+        // 답글 클릭했을 때 대댓글 추가
+        addReplyMutation.mutate(input);
       } else {
-        addComment(input);
-      }
-      setInput('');
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
-      e.preventDefault();
-      if (input.trim()) {
-        if (isReplying && currentComment) {
-          addReply(input, currentComment.id);
-        } else {
-          addComment(input);
-        }
-        setInput('');
+        //  댓글 추가
+        addCommentMutation.mutate(input);
       }
     }
   };
@@ -48,20 +98,20 @@ const FeedInput = ({
       <div className="flex flex-row items-center">
         <div className="w-14">
           <img
-            className="rounded-2xl"
-            src="http://via.placeholder.com/40x40"
+            className="rounded-2xl w-10 h-10"
+            src={user?.data.profile?.thumbnail}
             alt="프로필 이미지"
           />
         </div>
 
         <div className="relative flex flex-row w-full">
           <input
+            ref={inputRef}
             className="w-full py-[11px] text-base rounded-lg px-4 placeholder:text-gray-70 bg-gray-30"
             type="text"
-            placeholder={isReplying ? '답글 달기' : '댓글 달기'}
+            placeholder={'댓글 달기'}
             value={input}
             onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
           />
 
           {input && (

@@ -1,41 +1,26 @@
+import { ICommentSheet } from '../../../../types/feedType';
 import CommentAndReply from './CommentAndReply';
 
-interface CommentSheetProps {
-  comments: any[];
-  handleReply: (comment: any) => void;
-  handleDelete: (commentId: number) => void;
-}
-
-const CommentSheet = ({
-  comments,
-  handleReply,
-  handleDelete,
-}: CommentSheetProps) => {
+const CommentSheet = ({ comments, feedId, onReply }: ICommentSheet) => {
   return (
     <div className="flex flex-col pb-[100px] gap-4">
       <span className="text-gray-100 font-semibold">댓글</span>
 
-      {comments.map((comment: any) => (
+      {comments?.map((comment) => (
         <div key={comment.id}>
           <CommentAndReply
-            id={comment.id}
-            userName={comment.userName}
-            time={comment.time}
-            content={comment.content}
-            isReply={false}
-            handleReply={() => handleReply(comment)}
-            handleDelete={() => handleDelete(comment.id)}
+            comment={comment}
+            feedId={feedId}
+            onReply={onReply}
           />
           {comment.replies &&
-            comment.replies.map((reply: any) => (
+            comment.replies.map((reply) => (
               <CommentAndReply
                 key={reply.id}
-                id={reply.id}
-                userName={reply.userName}
-                time={reply.time}
-                content={reply.content}
+                comment={reply}
+                feedId={feedId}
                 isReply={true}
-                handleDelete={() => handleDelete(reply.id)}
+                onReply={onReply}
               />
             ))}
         </div>

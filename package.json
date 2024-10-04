@@ -42,6 +42,7 @@
   "scripts": {
     "start": "craco start",
     "start:https": "set HTTPS=true&&set SSL_CRT_FILE=./mkcert/cert.pem&&set SSL_KEY_FILE=./mkcert/key.pem&&craco start",
+    "start:https:mac": "export HTTPS=true && export SSL_CRT_FILE=./mkcert/localhost+2.pem && export SSL_KEY_FILE=./mkcert/localhost+2-key.pem && craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
