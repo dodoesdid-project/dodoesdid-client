@@ -1,3 +1,4 @@
+import { logout } from '@lib/api/user';
 import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 import useToggle from '@lib/hooks/useToggle';
 
@@ -8,6 +9,9 @@ import MypageLogoutDrawer from '@components/contents/mypage/MypageLogoutDrawer';
 import { ReactComponent as ArrowRightDark } from '@assets/images/common/arrow-right-gray60.svg';
 import { ReactComponent as ArrowRight } from '@assets/images/common/arrow-right-gray70.svg';
 
+import { useMutation } from '@tanstack/react-query';
+
+import { message } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -17,9 +21,19 @@ const AccountManagePage = () => {
   const navigate = useNavigate();
   const [isOpenLogoutDrawer, toggleLogoutDrawer] = useToggle();
 
+  const loggoutMutation = useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      message.success('로그아웃 되었습니다.');
+      navigate('/login');
+    },
+    onError: () => {
+      message.error('로그아웃을 할 수 없습니다.');
+    },
+  });
+
   const onClickLogout = () => {
-    localStorage.removeItem('authorization');
-    navigate('/login');
+    loggoutMutation.mutate();
   };
 
   return (
