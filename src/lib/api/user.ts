@@ -103,3 +103,8 @@ export const deleteUser = async (withdrawalReason: string) => {
     data: { withdrawalReason },
   });
 };
+
+// 로그아웃
+export const logout = async () => {
+  await defaultAxios.post(`/api/v1/auth/sign-out`);
+};
