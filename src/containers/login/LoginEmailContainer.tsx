@@ -28,9 +28,7 @@ const LoginEmailContainer = () => {
 
   const loginMutation = useMutation({
     mutationFn: login,
-    onSuccess: (response) => {
-      const token = response.headers['authorization'].split(' ')[1];
-      localStorage.setItem('authorization', token);
+    onSuccess: () => {
       navigate('/');
     },
     onError: (error: AxiosError) => {
