@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { emailAuthResetPassword, userPasswordReset } from '@lib/api/user';
+import {
+  emailAuthResetPassword,
+  emailCodeVerifyPassword,
+  userPasswordReset,
+} from '@lib/api/user';
 import useToggle from '@lib/hooks/useToggle';
 
 import TopBar from '@components/common/TopBar';
@@ -10,10 +14,11 @@ import LoginSearchPwSuccessDrawer from '@components/contents/login/LoginSearchPw
 
 import { useMutation } from '@tanstack/react-query';
 
+import { message } from 'antd';
 import { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const LoginSearchPwContainer = () => {
   const navigate = useNavigate();
@@ -35,6 +40,19 @@ const LoginSearchPwContainer = () => {
     onError: (err: AxiosError) => {
       const errorMessage = err.response?.data;
       console.log(errorMessage);
+    },
+  });
+
+  const emailAuthVerifyPasswordMutation = useMutation({
+    mutationFn: emailCodeVerifyPassword,
+    onSuccess: () => {
+      message.success('비밀번호를 재설정 해주세요.');
+      setCurrent(1);
+    },
+    onError: (err: AxiosError) => {
+      if (err.status === 404) {
+        message.error('인증되지 않은 코드입니다.');
+      }
     },
   });
 
@@ -61,18 +79,16 @@ const LoginSearchPwContainer = () => {
     });
   };
 
-  // 토큰이 있으면, 토큰을저장하고 비밀번호재설정페이지로이동
-  const [searchParams] = useSearchParams();
-  const [token, setToken] = useState('');
+  // code가 있으면, code를 인증하고 성공하면, 비밀번호재설정페이지로이동
+  const location = useLocation();
+  const urlCode = location.search.split('=')[1];
   useEffect(() => {
-    const tokenFromURL = searchParams.get('accessToken');
-    if (tokenFromURL) {
-      setToken(tokenFromURL);
-      setCurrent(1);
+    if (urlCode) {
+      emailAuthVerifyPasswordMutation.mutate({ code: urlCode });
     } else {
       setCurrent(0);
     }
-  }, [searchParams]);
+  }, []);
 
   const steps = [
     {
