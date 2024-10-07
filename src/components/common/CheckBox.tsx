@@ -13,7 +13,7 @@ const CheckBox = ({ label, ...props }: CheckBoxProps) => {
         {...props}
       />
       {label && (
-        <p className="text-gray-100 text-[16px] font-semibold cursor-pointer dark:text-white">
+        <p className="text-gray-100 text-[14px] font-semibold cursor-pointer dark:text-white desktop:text-[16px]">
           {label}
         </p>
       )}
