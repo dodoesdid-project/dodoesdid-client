@@ -23,6 +23,11 @@ export const emailAuthResetPassword = async (data: { email: string }) => {
   return defaultAxios.post(`/api/v1/auth/password-find-email-send`, data);
 };
 
+// 비밀번호재설정 코드인증 (맞는지확인)
+export const emailCodeVerifyPassword = async (data: { code: string }) => {
+  return defaultAxios.post(`/api/v1/auth/password-find-code-verify`, data);
+};
+
 // 아이디찾기
 export const userIdFind = async (data: { phone: string }) => {
   return await defaultAxios.post(`/api/v1/auth/email-find`, data);
