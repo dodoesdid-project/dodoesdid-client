@@ -29,7 +29,11 @@ export const userIdFind = async (data: { phone: string }) => {
 };
 
 // 로그인
-export const login = async (data: { email: string; password: string }) => {
+export const login = async (data: {
+  email: string;
+  password: string;
+  isAuto: boolean;
+}) => {
   return await defaultAxios.post(`/api/v1/auth/sign-in`, data);
 };
 

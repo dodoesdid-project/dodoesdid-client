@@ -2,7 +2,7 @@ import { login } from '@lib/api/user';
 import useDarkMode from '@lib/hooks/useDarkMode';
 
 import Button from '@components/common/Button';
-// import CheckBox from '@components/common/CheckBox';
+import CheckBox from '@components/common/CheckBox';
 import Input from '@components/common/Input';
 import TopBar from '@components/common/TopBar';
 
@@ -43,7 +43,11 @@ const LoginEmailContainer = () => {
   });
 
   const onClickLogin = (data: FieldValues) => {
-    loginMutation.mutate({ email: data.email, password: data.password });
+    loginMutation.mutate({
+      email: data.email,
+      password: data.password,
+      isAuto: data.isAuto,
+    });
   };
 
   return (
@@ -106,7 +110,18 @@ const LoginEmailContainer = () => {
                 />
               )}
             />
-            {/* <CheckBox label="자동 로그인" /> */}
+            <Controller
+              name="isAuto"
+              control={control}
+              defaultValue={false} // 기본값 false
+              render={({ field }) => (
+                <CheckBox
+                  label="자동 로그인"
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
+                />
+              )}
+            />
           </div>
           <div className="flex gap-[8px] justify-center text-gray-90 text-[14px] dark:text-white">
             <Link to={'/login-email/search/id'}>아이디 찾기</Link> |{' '}
