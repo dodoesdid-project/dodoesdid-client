@@ -125,13 +125,7 @@ const LoginEmailContainer = () => {
           </div>
           <div className="flex gap-[8px] justify-center text-gray-90 text-[14px] dark:text-white">
             <Link to={'/login-email/search/id'}>아이디 찾기</Link> |{' '}
-            {/* <Link to={'/login-email/search/pw'}>비밀번호 찾기</Link> */}
-            <div
-              className="cursor-pointer"
-              onClick={() => message.warning('서비스 준비중입니다.')}
-            >
-              비밀번호 찾기
-            </div>
+            <Link to={'/login-email/search/pw'}>비밀번호 찾기</Link>
           </div>
         </div>
       </div>
