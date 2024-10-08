@@ -12,11 +12,6 @@ import { ReactComponent as XIcon } from '@assets/images/feed/x-icon.svg';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ICommentAndReply } from '../../../../types/feedType';
-import {
-  differenceInHours,
-  differenceInMinutes,
-  differenceInSeconds,
-} from 'date-fns';
 import { useState } from 'react';
 
 const CommentAndReply = ({
