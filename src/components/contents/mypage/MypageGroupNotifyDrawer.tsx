@@ -58,7 +58,7 @@ const MypageGroupNotifyDrawer = ({
             className="cursor-pointer mb-[24px] self-end"
           />
         )}
-        <p className="text-gray-100 font-semibold text-[16px] dark:text-gray-30">
+        <p className="text-gray-100 font-semibold text-[16px] text-center dark:text-gray-30">
           그룹원의 홈에 표시될 공지사항을 적어보세요.
         </p>
         <input
@@ -66,7 +66,7 @@ const MypageGroupNotifyDrawer = ({
           value={value}
           ref={inputRef}
           onChange={onChange}
-          className="p-[10px] mb-[25px] focus:outline-none text-center text-[20px] text-gray-100 font-semibold dark:bg-[#2a2a2a] dark:focus:ring-white dark:text-gray-30"
+          className="p-[10px] mb-[25px] focus:outline-none text-center text-[20px] text-gray-100 font-semibold border-b-[1px] dark:bg-[#2a2a2a] dark:focus:ring-white dark:text-gray-30"
         />
         <Button buttonType="fill-semibold" name="확인" onClick={onClick} />
       </div>

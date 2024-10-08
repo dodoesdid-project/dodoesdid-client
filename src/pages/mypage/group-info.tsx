@@ -214,7 +214,7 @@ const MyGroupInfoPage = () => {
               )}
             </div>
           </div>
-          <div className="mb-[16px]">
+          <div className="mb-[48px]">
             <p className="text-gray-100 font-semibold text-[16px] mb-[16px] dark:text-gray-30">
               그룹 초대링크
             </p>
@@ -229,12 +229,6 @@ const MyGroupInfoPage = () => {
           <Button
             buttonType="tinted-semibold"
             name="그룹 나가기"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              bottom: '120px',
-            }}
             onClick={toggleExitDrawer}
           />
         </div>
