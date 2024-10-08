@@ -1,3 +1,5 @@
+import { putUpCommentTime } from '@lib/hooks/useCalendar';
+
 import { IFeedCard } from '../../../../types/feedType';
 import ActionIcons from '../feedIcons/ActionIcons';
 
@@ -31,7 +33,7 @@ const FeedCard = ({
           </div>
           <div>
             <time className="text-[11px] text-gray-70 dark:text-gray-60">
-              {time}
+              {putUpCommentTime(time)}
             </time>
           </div>
         </section>
@@ -41,7 +43,7 @@ const FeedCard = ({
         className={`relative ${onClick ? 'cursor-pointer' : ''} `}
       >
         <img
-          className="rounded-2xl w-[343px] h-[343px] object-cover"
+          className="rounded-2xl w-[343px] h-[343px] object-cover border-[1px] border-solid border-[#ddd] dark:border-[#444]"
           src={dazimImageUrl}
           alt="다짐 사진"
         />
