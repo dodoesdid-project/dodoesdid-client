@@ -11,6 +11,11 @@ import { ReactComponent as XIcon } from '@assets/images/feed/x-icon.svg';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ICommentAndReply } from '../../../../types/feedType';
+import {
+  differenceInHours,
+  differenceInMinutes,
+  differenceInSeconds,
+} from 'date-fns';
 import { useState } from 'react';
 
 const CommentAndReply = ({
@@ -28,6 +33,24 @@ const CommentAndReply = ({
     queryKey: ['user'],
     queryFn: getUser,
   });
+
+  const putUpCommentTime = (past: string) => {
+    const now = new Date();
+    const pastDate = new Date(past);
+    const seconds = differenceInSeconds(now, pastDate);
+    const minutes = differenceInMinutes(now, pastDate);
+    const hours = differenceInHours(now, pastDate);
+
+    if (seconds === 0) {
+      return '방금 전';
+    } else if (seconds < 60) {
+      return `${seconds}초 전`;
+    } else if (minutes < 60) {
+      return `${minutes}분 전`;
+    } else if (hours < 24) {
+      return `${hours}시간 전`;
+    }
+  };
 
   // 댓글 삭제 뮤테이션
   const deleteCommentMutation = useMutation({
@@ -76,7 +99,7 @@ const CommentAndReply = ({
       >
         <section className="flex-shrink-0 w-10 h-10">
           <img
-            className="rounded-full"
+            className="rounded-full border-[1px] border-solid border-[#ddd] dark:border-[#444]"
             src={comment.user?.profile?.thumbnail}
             alt="Profile"
           />
@@ -88,7 +111,7 @@ const CommentAndReply = ({
                 {comment.user?.profile?.nickName}
               </span>
               <time className="pl-2 text-gray-60 text-[11px] dark:text-gray-70">
-                {new Date(comment.updateAt).toLocaleString()}
+                {putUpCommentTime(comment.updateAt)}
               </time>
             </div>
 
