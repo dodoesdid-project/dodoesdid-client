@@ -46,7 +46,7 @@ const FeedCard = ({
           alt="다짐 사진"
         />
         {overlayText && (
-          <span className="text-center bg-black text-white bg-opacity-70 w-[303px] py-[11px] rounded-lg absolute bottom-4 left-1/2 transform -translate-x-1/2 text-[20px] font-semibold whitespace-nowrap ">
+          <span className="overflow-hidden text-ellipsis px-4 text-center bg-black text-white bg-opacity-70 w-[303px] py-[11px] rounded-lg absolute bottom-4 left-1/2 transform -translate-x-1/2 text-[20px] font-semibold whitespace-nowrap">
             {overlayText}
           </span>
         )}
