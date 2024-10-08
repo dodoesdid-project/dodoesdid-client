@@ -85,6 +85,7 @@ const HomeContainer = () => {
         return message.error('오늘 다짐을 등록하셨습니다.');
       }
       message.error(error?.data);
+      console.log(error);
     },
   });
 
@@ -139,6 +140,13 @@ const HomeContainer = () => {
 
   useEffect(() => {
     if (selectedFile && dazims?.data) {
+      const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+      if (selectedFile.size > MAX_FILE_SIZE) {
+        message.error('10MB이하의 사진을 올려주세요.');
+        return;
+      }
+
       if (dazims.data[0].dazim !== null)
         return createDazimImageUploadMutation.mutate({
           photo: selectedFile as File,

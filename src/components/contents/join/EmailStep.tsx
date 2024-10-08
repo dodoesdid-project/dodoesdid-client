@@ -48,8 +48,8 @@ const EmailStep = ({
           disabled={!isValid}
           className={
             isValid
-              ? `h-[52px] my-[48px] bg-primary text-[16px] font-semibold rounded-[8px] px-[16px] py-[12px] text-white`
-              : `h-[52px] my-[48px] bg-gray-30 text-[16px] font-semibold rounded-[8px] px-[16px] py-[12px] text-gray-60 `
+              ? `h-[52px] my-[48px] bg-primary text-[14px] font-semibold rounded-[8px] px-[12px] py-[12px] text-white whitespace-nowrap`
+              : `h-[52px] my-[48px] bg-gray-30 text-[14px] font-semibold rounded-[8px] px-[12px] py-[12px] text-gray-60 whitespace-nowrap`
           }
           onClick={onClickEmailSend}
         >
@@ -60,8 +60,8 @@ const EmailStep = ({
           disabled={!isValid}
           className={
             isValid
-              ? `h-[52px] my-[48px] bg-primary text-[16px] font-semibold rounded-[8px] px-[16px] py-[12px] text-white`
-              : `h-[52px] my-[48px] bg-gray-30 text-[16px] font-semibold rounded-[8px] px-[16px] py-[12px] text-gray-60 `
+              ? `h-[52px] my-[48px] bg-primary text-[14px] font-semibold rounded-[8px] px-[12px] py-[12px] text-white whitespace-nowrap`
+              : `h-[52px] my-[48px] bg-gray-30 text-[14px] font-semibold rounded-[8px] px-[12px] py-[12px] text-gray-60 whitespace-nowrap`
           }
           onClick={onClickDuplicate}
         >
