@@ -19,7 +19,7 @@ const FeedCard = ({
           <img
             src={profileImageUrl}
             alt="프로필 이미지"
-            className="rounded-full w-10 h-10"
+            className="rounded-full border-[1px] border-[#ddd] dark:border-[#444] w-10 h-10"
           />
         </section>
 
@@ -41,7 +41,7 @@ const FeedCard = ({
         className={`relative ${onClick ? 'cursor-pointer' : ''} `}
       >
         <img
-          className="rounded-2xl w-[343px] h-[343px]"
+          className="rounded-2xl w-[343px] h-[343px] object-cover"
           src={dazimImageUrl}
           alt="다짐 사진"
         />
@@ -53,6 +53,7 @@ const FeedCard = ({
       </div>
       {showActionIcons && (
         <ActionIcons
+          onClick={onClick}
           reactionCount={reactionCount}
           commentCount={commentCount}
         />

@@ -98,7 +98,7 @@ const FeedInput = ({
       <div className="flex flex-row items-center">
         <div className="w-14">
           <img
-            className="rounded-full w-10 h-10"
+            className="rounded-full border-[1px] border-solid border-[#ddd] dark:border-[#444] w-10 h-10"
             src={user?.data.profile?.thumbnail}
             alt="프로필 이미지"
           />
