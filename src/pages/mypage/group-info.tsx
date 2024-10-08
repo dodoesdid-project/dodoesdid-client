@@ -113,6 +113,12 @@ const MyGroupInfoPage = () => {
   const onChangeUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
+      const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+      if (file.size > MAX_FILE_SIZE) {
+        message.error('10MB이하의 사진을 올려주세요.');
+        return;
+      }
       updateGroupImageMutation.mutate({
         thumbnail: file as File,
         id: groupDetail.id,
