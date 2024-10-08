@@ -4,10 +4,17 @@
 
 @font-face {
   font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
+  src:
+    url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff2')
+      format('woff2'),
+    url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+      format('woff'),
+    url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.ttf')
+      format('truetype') format('woff');
   font-weight: 400;
   font-style: normal;
+  /* 웹폰트가 준비되기전까지 기본시스템폰트를 사용하고, 준비되면 폰트를 교체해 렌더링 */
+  font-display: swap;
 }
 
 body {
