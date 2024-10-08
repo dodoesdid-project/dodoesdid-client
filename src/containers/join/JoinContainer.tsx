@@ -23,6 +23,7 @@ import SuccessDrawer from '@components/contents/join/SuccessDrawer';
 import { useMutation } from '@tanstack/react-query';
 
 import { message } from 'antd';
+import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
@@ -130,7 +131,7 @@ const JoinContainer = () => {
       email: values.email,
       password: values.password,
       name: values.name,
-      birth: values.date,
+      birth: dayjs(values.date).format('YYYY-MM-DD'),
       phone: values.phone,
     };
 
