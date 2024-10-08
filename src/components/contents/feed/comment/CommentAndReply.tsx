@@ -1,5 +1,6 @@
 import { deleteComment } from '@lib/api/feed';
 import { getUser } from '@lib/api/user';
+import { putUpCommentTime } from '@lib/hooks/useCalendar';
 import useDarkMode from '@lib/hooks/useDarkMode';
 
 import { ReactComponent as EditIcon } from '@assets/images/feed/edit-icon.svg';
@@ -33,24 +34,6 @@ const CommentAndReply = ({
     queryKey: ['user'],
     queryFn: getUser,
   });
-
-  const putUpCommentTime = (past: string) => {
-    const now = new Date();
-    const pastDate = new Date(past);
-    const seconds = differenceInSeconds(now, pastDate);
-    const minutes = differenceInMinutes(now, pastDate);
-    const hours = differenceInHours(now, pastDate);
-
-    if (seconds === 0) {
-      return '방금 전';
-    } else if (seconds < 60) {
-      return `${seconds}초 전`;
-    } else if (minutes < 60) {
-      return `${minutes}분 전`;
-    } else if (hours < 24) {
-      return `${hours}시간 전`;
-    }
-  };
 
   // 댓글 삭제 뮤테이션
   const deleteCommentMutation = useMutation({
