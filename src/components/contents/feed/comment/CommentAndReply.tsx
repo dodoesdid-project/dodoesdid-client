@@ -1,4 +1,5 @@
 import { deleteComment } from '@lib/api/feed';
+import { getUser } from '@lib/api/user';
 import useDarkMode from '@lib/hooks/useDarkMode';
 
 import { ReactComponent as EditIcon } from '@assets/images/feed/edit-icon.svg';
@@ -7,7 +8,7 @@ import { ReactComponent as VerticalEllipsis } from '@assets/images/feed/vertical
 import { ReactComponent as XIconDark } from '@assets/images/feed/x-icon-dark.svg';
 import { ReactComponent as XIcon } from '@assets/images/feed/x-icon.svg';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ICommentAndReply } from '../../../../types/feedType';
 import { useState } from 'react';
@@ -21,6 +22,12 @@ const CommentAndReply = ({
   const queryClient = useQueryClient();
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  // 댓글 수정 삭제 엑세스 제어를 위해 유저 데이터 가져옴
+  const { data: user } = useQuery({
+    queryKey: ['user'],
+    queryFn: getUser,
+  });
 
   // 댓글 삭제 뮤테이션
   const deleteCommentMutation = useMutation({
@@ -67,9 +74,9 @@ const CommentAndReply = ({
       <article
         className={`flex ${isReply ? 'pl-12' : ''} ${isReply ? 'mt-3' : ''}`}
       >
-        <section>
+        <section className="flex-shrink-0 w-10 h-10">
           <img
-            className="rounded-2xl w-10 h-10"
+            className="rounded-full"
             src={comment.user?.profile?.thumbnail}
             alt="Profile"
           />
@@ -81,12 +88,15 @@ const CommentAndReply = ({
                 {comment.user?.profile?.nickName}
               </span>
               <time className="pl-2 text-gray-60 text-[11px] dark:text-gray-70">
-                {comment.updateAt}
+                {new Date(comment.updateAt).toLocaleString()}
               </time>
             </div>
-            <button onClick={openModal}>
-              <VerticalEllipsis />
-            </button>
+
+            {comment.user?.id === user?.data.id && (
+              <button onClick={openModal}>
+                <VerticalEllipsis />
+              </button>
+            )}
           </div>
 
           <div>
@@ -114,20 +124,22 @@ const CommentAndReply = ({
             onClick={closeModal}
           ></div>
           <div className="fixed inset-x-0 bottom-0 z-50 px-4 pb-8 ">
-            <button
-              className="flex justify-center bg-[#E2F8FF] text-primary-700 w-full text-left px-4 py-[12px] font-semibold rounded-lg gap-2 dark:bg-[#1E3060]"
-              onClick={handleEditClick}
-            >
-              <EditIcon />
-              댓글 수정
-            </button>
-            <button
-              className="flex justify-center bg-primary-500 text-white w-full text-left px-4 py-[12px] font-semibold rounded-lg mt-3 gap-2"
-              onClick={openDeleteModal}
-            >
-              <TrashIcon />
-              댓글 삭제
-            </button>
+            <div className=" mx-auto p-4 rounded-lg max-w-md w-full">
+              <button
+                className="flex justify-center bg-[#E2F8FF] text-primary-700 w-full text-left px-4 py-[12px] font-semibold rounded-lg gap-2 dark:bg-[#1E3060]"
+                onClick={handleEditClick}
+              >
+                <EditIcon />
+                댓글 수정
+              </button>
+              <button
+                className="flex justify-center bg-primary-500 text-white w-full text-left px-4 py-[12px] font-semibold rounded-lg mt-3 gap-2"
+                onClick={openDeleteModal}
+              >
+                <TrashIcon />
+                댓글 삭제
+              </button>
+            </div>
           </div>
         </>
       )}
@@ -140,7 +152,7 @@ const CommentAndReply = ({
             onClick={closeDeleteModal}
           ></div>
 
-          <div className="fixed inset-x-0 bottom-0 px-4 rounded-t-xl p-4 bg-white z-50 dark:bg-[#2A2A2A]">
+          <div className="fixed inset-x-0 bottom-0 px-4 rounded-t-xl p-4 z-50 dark:bg-[#2A2A2A] mx-auto max-w-md w-full">
             <div className="flex justify-end">
               <button onClick={closeDeleteModal}>
                 {isDarkMode ? <XIconDark /> : <XIcon />}
