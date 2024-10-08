@@ -101,7 +101,7 @@ const FeedDetailPage = () => {
               feedId={feedId}
             />
           )}
-          <div className="border-t border-gray-30 my-[10px]"></div>
+          <div className="border-t border-gray-30 my-[10px] dark:border-gray-100"></div>
           {/* 댓글, 대댓글 목록 */}
           {comments && (
             <CommentSheet
