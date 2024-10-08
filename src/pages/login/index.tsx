@@ -29,7 +29,7 @@ const LoginPage = () => {
           className="w-full h-[52px] rounded-[8px] bg-white text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[36px]"
         >
           <GoogleIcon />
-          <p>Goole 계정으로 로그인</p>
+          <p>Google 계정으로 로그인</p>
         </a>
         <p className="text-white text-[16px] ">
           <Link to={'/login-email'}>이메일로 로그인</Link> /{' '}
