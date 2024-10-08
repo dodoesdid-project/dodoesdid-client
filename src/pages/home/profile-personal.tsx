@@ -11,6 +11,7 @@ import { ReactComponent as CameraIcon } from '@assets/images/home/camera.svg';
 
 import { useMutation } from '@tanstack/react-query';
 
+import { message } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -43,6 +44,13 @@ const ProfilePersonalPage = () => {
   const previewImage = () => {
     if (imgRef.current && imgRef.current.files) {
       const img = imgRef.current.files[0];
+      const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+      if (img.size > MAX_FILE_SIZE) {
+        message.error('10MB이하의 사진을 올려주세요.');
+        return;
+      }
+
       setInfo((prev) => ({ ...prev, thumbnail: img }));
 
       //이미지 미리보기 기능

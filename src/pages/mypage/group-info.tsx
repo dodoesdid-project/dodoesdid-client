@@ -113,6 +113,12 @@ const MyGroupInfoPage = () => {
   const onChangeUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
+      const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+      if (file.size > MAX_FILE_SIZE) {
+        message.error('10MB이하의 사진을 올려주세요.');
+        return;
+      }
       updateGroupImageMutation.mutate({
         thumbnail: file as File,
         id: groupDetail.id,
@@ -208,7 +214,7 @@ const MyGroupInfoPage = () => {
               )}
             </div>
           </div>
-          <div className="mb-[16px]">
+          <div className="mb-[48px]">
             <p className="text-gray-100 font-semibold text-[16px] mb-[16px] dark:text-gray-30">
               그룹 초대링크
             </p>
@@ -223,12 +229,6 @@ const MyGroupInfoPage = () => {
           <Button
             buttonType="tinted-semibold"
             name="그룹 나가기"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              bottom: '120px',
-            }}
             onClick={toggleExitDrawer}
           />
         </div>

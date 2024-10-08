@@ -19,7 +19,7 @@ const BirthStep = ({ control, isValid, onClick }: BirthStepProps) => {
         rules={{
           required: true,
           pattern: {
-            value: /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,
+            value: /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/,
             message: '형식이 올바르지 않아요. 다시 확인해주세요.',
           },
         }}
@@ -29,7 +29,7 @@ const BirthStep = ({ control, isValid, onClick }: BirthStepProps) => {
             value={field.value || ''}
             onChange={(e) => field.onChange(e.target.value)}
             label="생년월일을 입력해주세요"
-            placeholder="yyyy-mm-dd"
+            placeholder="yyyymmdd"
             errorMessage={
               fieldState.error ? fieldState.error.message : undefined
             }
