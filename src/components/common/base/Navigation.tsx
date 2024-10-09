@@ -15,8 +15,8 @@ const Navigation = () => {
             <div
               className={
                 url === menu.link
-                  ? 'absolute left-[50%] translate-x-[-50%] w-12 h-full bg-primary rounded-t-[47%] cursor-pointer'
-                  : 'absolute left-[50%] translate-x-[-50%] w-12 h-full bg-white rounded-t-[47%] cursor-pointer dark:bg-black'
+                  ? 'absolute left-[50%] translate-x-[-50%] w-12 h-full bg-primary rounded-t-[999px] cursor-pointer'
+                  : 'absolute left-[50%] translate-x-[-50%] w-12 h-full bg-white rounded-t-[999px] cursor-pointer dark:bg-black'
               }
             ></div>
             <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] flex flex-col items-center gap-[8px] cursor-pointer">
@@ -24,8 +24,8 @@ const Navigation = () => {
               <h2
                 className={
                   url === menu.link
-                    ? 'text-[10px] text-white'
-                    : 'text-[10px] text-gray-60'
+                    ? 'text-[10px] text-white font-semibold'
+                    : 'text-[10px] text-gray-60 font-semibold'
                 }
               >
                 {menu.name}
