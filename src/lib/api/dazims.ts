@@ -30,7 +30,7 @@ export const createDazimImageUpload = async (data: {
   const formData = new FormData();
   formData.append('photo', data.photo);
   return await defaultAxios.post(
-    `/api/v1/dazim/${data.dazimId}/complete`,
+    `/api/v1/dazims/${data.dazimId}/complete`,
     formData,
     {
       headers: { 'Content-Type': 'multipart/form-data' },
