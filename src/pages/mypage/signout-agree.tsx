@@ -1,4 +1,4 @@
-import { deleteUser } from '@lib/api/user';
+import { deleteUser, getUser } from '@lib/api/user';
 import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 import useToggle from '@lib/hooks/useToggle';
 import showToast from '@lib/utils/toast';
@@ -10,8 +10,10 @@ import MyPageSignOutDrawer from '@components/contents/mypage/MyPageSignOutDrawer
 import DodosedidImageDark from '@assets/images/home/dodoesdid-disabled-dark.png';
 import DodosedidImage from '@assets/images/home/dodoesdid-disabled.png';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { User } from '../../types/user';
+import { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -21,6 +23,11 @@ const SignOutAgreePage = () => {
   const [isOpenSignOutDrawer, toggleSignOutDrawer] = useToggle();
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const { state } = useLocation();
+
+  const { data: user } = useQuery<AxiosResponse<User>>({
+    queryKey: ['user'],
+    queryFn: getUser,
+  });
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
@@ -47,7 +54,7 @@ const SignOutAgreePage = () => {
           탈퇴하기
         </p>
         <p className="text-gray-70 text-[14px] dark:text-gray-60 mb-[72px]">
-          옐님의 소중한 다짐들이 모두 사라져요.
+          {user?.data.name}님의 소중한 다짐들이 모두 사라져요.
           <br />
           그동안 친구들과 함께 작성하고 인증했던 다짐들을 다시 볼 수 없어요.
         </p>

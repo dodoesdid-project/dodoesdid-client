@@ -3,10 +3,14 @@ import { ReactComponent as SmileIcon } from '@assets/images/feed/feed-smile.svg'
 
 import { IActionIcons } from '../../../../types/feedType';
 
-const ActionIcons = ({ reactionCount, commentCount }: IActionIcons) => {
+const ActionIcons = ({
+  reactionCount,
+  commentCount,
+  onClick,
+}: IActionIcons) => {
   return (
     <>
-      <div className="flex items-center gap-2 my-4 ">
+      <div onClick={onClick} className="flex items-center gap-2 my-4 ">
         <button className="flex items-center justify-center h-[36px] text-base bg-gray-40 font-semibold text-gray-100 gap-[6px] px-3 rounded-full dark:text-gray-30 dark:bg-[#2A2A2A]">
           <SmileIcon />
           <span>{reactionCount}</span>

@@ -61,7 +61,7 @@ const ChangeProfilePage = () => {
         {/* 유저이미지  */}
         <label
           htmlFor="photo"
-          className="w-[120px] h-[120px] rounded-full flex justify-center items-center cursor-pointer mb-[45px] mx-auto relative border-[1px] border-solid border-[#ddd] dark:border-[#444]"
+          className="w-[120px] h-[120px] rounded-full flex justify-center items-center cursor-pointer mb-[45px] mx-auto relative border-[0.6px] border-solid border-gray-40 dark:border-[#444]"
         >
           <div className="w-[32px] h-[32px] rounded-full bg-[rgba(0,0,0,.7)] absolute bottom-[10px] right-0 flex justify-center items-center">
             <CameraIcon />

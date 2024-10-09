@@ -46,7 +46,7 @@ const EmailNumber = ({
       closable={false}
       onClose={onClose}
       open
-      className="dark:bg-[#2a2a2a]"
+      className="dark:bg-[#1a1a1a]"
     >
       <div className="flex flex-col">
         {isDarkMode ? (
@@ -72,7 +72,7 @@ const EmailNumber = ({
             }
           }}
           onChange={onChange}
-          className="p-[10px] mb-[25px] focus:outline-none text-center text-[32px] text-gray-100 font-bold border-b-[1px] dark:bg-[#2a2a2a] dark:focus:ring-white"
+          className="h-[52px] px-[16px] mb-[25px] text-[16px] focus:outline-none text-center text-gray-100 bg-gray-30 rounded-[8px] dark:bg-[#2a2a2a] dark:focus:ring-white dark:text-gray-30"
         />
         <Button
           disabled={authNumber?.length !== 6}

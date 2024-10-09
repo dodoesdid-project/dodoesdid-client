@@ -81,6 +81,7 @@ export interface IEmojiItem {
 export interface IActionIcons {
   reactionCount: number;
   commentCount: number;
+  onClick?: () => void;
 }
 export interface IComment {
   id: string;
