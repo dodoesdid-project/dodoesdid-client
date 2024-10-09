@@ -23,7 +23,7 @@ const Mypage = () => {
       <TopBar title="마이페이지" />
       <div className="px-[16px]">
         <div className="flex gap-[16px] items-center mb-[16px] ">
-          <div className="w-[88px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+          <div className="w-[88px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
             <img
               src={user?.data.profile?.thumbnail}
               alt="유저이미지"

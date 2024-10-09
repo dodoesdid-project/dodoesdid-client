@@ -11,9 +11,14 @@ import React from 'react';
 type LoginSearchPwDrawerProps = {
   email: string;
   onClose: () => void;
+  onClick: () => void;
 };
 
-const LoginSearchPwDrawer = ({ email, onClose }: LoginSearchPwDrawerProps) => {
+const LoginSearchPwDrawer = ({
+  email,
+  onClose,
+  onClick,
+}: LoginSearchPwDrawerProps) => {
   const isDarkMode = useDarkMode();
   return (
     <Drawer
@@ -21,7 +26,7 @@ const LoginSearchPwDrawer = ({ email, onClose }: LoginSearchPwDrawerProps) => {
       closable={false}
       onClose={onClose}
       open
-      className="dark:bg-[#2a2a2a]"
+      className="dark:bg-[#1a1a1a]"
     >
       <div className="flex flex-col">
         {isDarkMode ? (
@@ -40,10 +45,9 @@ const LoginSearchPwDrawer = ({ email, onClose }: LoginSearchPwDrawerProps) => {
         </p>
         <p className="text-gray-100 font-semibold text-[16px] text-center mb-[56px] dark:text-gray-30">
           비밀번호 재설정 메일이 발송되었습니다.
-          <br />
-          메일을 확인해주세요.
+          <br />위 메일에서 비밀번호 재설정을 완료해주세요.
         </p>
-        <Button buttonType="fill-semibold" name="확인" />
+        <Button buttonType="fill-semibold" name="확인" onClick={onClick} />
       </div>
     </Drawer>
   );

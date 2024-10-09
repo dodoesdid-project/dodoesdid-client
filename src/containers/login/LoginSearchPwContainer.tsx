@@ -128,6 +128,10 @@ const LoginSearchPwContainer = () => {
         <LoginSearchPwDrawer
           email={getValues('email')}
           onClose={toggleSearchPwDrawer}
+          onClick={() => {
+            toggleSearchPwDrawer();
+            navigate('/login');
+          }}
         />
       )}
       {isOpenSuccess && <LoginSearchPwSuccessDrawer onClose={toggleSuccess} />}

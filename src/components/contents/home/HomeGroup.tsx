@@ -9,7 +9,7 @@ type Props = {
 const HomeGroup = ({ imagePath, name, onclick }: Props) => {
   return (
     <div className="w-[72px] cursor-pointer" onClick={onclick}>
-      <div className="w-[72px] h-[72px] rounded-full overflow-hidden flex justify-center items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+      <div className="w-[72px] h-[72px] rounded-full overflow-hidden flex justify-center items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
         <img
           src={imagePath}
           alt="그룹이미지"

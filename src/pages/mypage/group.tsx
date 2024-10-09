@@ -78,7 +78,7 @@ const MyGroupPage = () => {
         <img
           src={thumbnail}
           alt="그룹프로필이미지"
-          className="w-[48px] aspect-square rounded-full"
+          className="w-[48px] aspect-square rounded-full border-[0.6px] border-solid border-gray-40"
           onClick={() => onClickGroup(record)}
         />
       ),
