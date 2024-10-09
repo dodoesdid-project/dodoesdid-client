@@ -1,5 +1,6 @@
 import { deleteComment } from '@lib/api/feed';
 import { getUser } from '@lib/api/user';
+import { putUpCommentTime } from '@lib/hooks/useCalendar';
 import useDarkMode from '@lib/hooks/useDarkMode';
 
 import { ReactComponent as EditIcon } from '@assets/images/feed/edit-icon.svg';
@@ -76,7 +77,7 @@ const CommentAndReply = ({
       >
         <section className="flex-shrink-0 w-10 h-10">
           <img
-            className="rounded-full"
+            className="rounded-full border-[1px] border-solid border-[#ddd] dark:border-[#444]"
             src={comment.user?.profile?.thumbnail}
             alt="Profile"
           />
@@ -88,7 +89,7 @@ const CommentAndReply = ({
                 {comment.user?.profile?.nickName}
               </span>
               <time className="pl-2 text-gray-60 text-[11px] dark:text-gray-70">
-                {new Date(comment.updateAt).toLocaleString()}
+                {putUpCommentTime(comment.updateAt)}
               </time>
             </div>
 
