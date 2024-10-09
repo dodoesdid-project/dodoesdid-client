@@ -9,7 +9,11 @@ import { defaultAxios } from './deafultAxios';
 // 피드 목록 조회
 export const getFeeds = async (): Promise<IFeed[]> => {
   try {
-    const res = await defaultAxios.get<IFeed[]>('/api/v1/feeds');
+    const res = await defaultAxios.get<IFeed[]>('/api/v1/dazims', {
+      params: {
+        isSuccess: true,
+      },
+    });
     return res.data;
   } catch (err) {
     console.error('err feed', err);
@@ -20,7 +24,7 @@ export const getFeeds = async (): Promise<IFeed[]> => {
 // 피드 상세 데이터 조회
 export const getFeedDetail = async (feedId: string): Promise<IFeed> => {
   try {
-    const res = await defaultAxios.get<IFeed>(`/api/v1/feed/${feedId}`);
+    const res = await defaultAxios.get<IFeed>(`/api/v1/dazims/${feedId}`);
     return res.data;
   } catch (err) {
     console.error('err feed detail', err);
@@ -35,7 +39,7 @@ export const updateReaction = async (
 ) => {
   try {
     const response = await defaultAxios.post(
-      `/api/v1/feed/${feedId}/reaction-toggle`,
+      `/api/v1/dazims/${feedId}/reaction-toggle`,
       {
         reactionType,
       },
@@ -51,7 +55,7 @@ export const updateReaction = async (
 export const getFeedComments = async (feedId: string): Promise<IComment[]> => {
   try {
     const res = await defaultAxios.get<IComment[]>(
-      `/api/v1/feed/${feedId}/comment`,
+      `/api/v1/dazims/${feedId}/comment`,
     );
     return res.data;
   } catch (err) {
@@ -67,7 +71,7 @@ export const addFeedComment = async (
 ): Promise<IMessageResponse> => {
   try {
     const res = await defaultAxios.post<IMessageResponse>(
-      `/api/v1/feed/${feedId}/comment`,
+      `/api/v1/dazims/${feedId}/comment`,
       { content },
       {
         headers: {
@@ -89,7 +93,7 @@ export const addCommentReply = async (
 ): Promise<IMessageResponse> => {
   try {
     const res = await defaultAxios.post<IMessageResponse>(
-      `/api/v1/comment/${commentId}/reply`,
+      `/api/v1/comments/${commentId}/reply`,
       { content },
       {
         headers: {
@@ -111,7 +115,7 @@ export const editComment = async (
 ): Promise<IMessageResponse> => {
   try {
     const res = await defaultAxios.put<IMessageResponse>(
-      `/api/v1/comment/${commentId}`,
+      `/api/v1/comments/${commentId}`,
       { content },
       {
         headers: {
@@ -132,7 +136,7 @@ export const deleteComment = async (
 ): Promise<IMessageResponse> => {
   try {
     const res = await defaultAxios.delete<IMessageResponse>(
-      `/api/v1/comment/${commentId}`,
+      `/api/v1/comments/${commentId}`,
     );
     return res.data;
   } catch (err) {

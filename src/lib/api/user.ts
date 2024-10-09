@@ -52,17 +52,17 @@ export const createUser = async (data: {
   birth: string;
   phone: string;
 }) => {
-  await defaultAxios.post(`/api/v1/user/sign-up`, data);
+  await defaultAxios.post(`/api/v1/users/sign-up`, data);
 };
 
 // 이메일 중복검사
 export const emailDuplicate = async (data: { email: string }) => {
-  await defaultAxios.post(`/api/v1/user/email-duplicate-check`, data);
+  await defaultAxios.post(`/api/v1/users/email-duplicate-check`, data);
 };
 
 // 휴대폰 중복검사
 export const phoneDuplicate = async (data: { phone: string }) => {
-  await defaultAxios.post(`/api/v1/user/phone-duplicate-check`, data);
+  await defaultAxios.post(`/api/v1/users/phone-duplicate-check`, data);
 };
 
 // 비밀번호변경
@@ -72,7 +72,7 @@ export const userPasswordReset = async (data: { password: string }) => {
 
 // 내정보조회
 export const getUser = async (): Promise<AxiosResponse<User>> => {
-  return await defaultAxios.get(`/api/v1/user/me`);
+  return await defaultAxios.get(`/api/v1/users/me`);
 };
 
 // 내프로필등록
@@ -86,30 +86,30 @@ export const profile = async ({
   const formData = new FormData();
   formData.append('nickName', nickname);
   formData.append('thumbnail', thumbnail);
-  return await defaultAxios.post(`/api/v1/user/me/profile`, formData, {
+  return await defaultAxios.post(`/api/v1/users/me/profile`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
 
 // 닉네임변경
 export const updateUserNickname = async (nickName: string) => {
-  await defaultAxios.patch(`/api/v1/user/me/nickname`, { nickName });
+  await defaultAxios.patch(`/api/v1/users/me/nickname`, { nickName });
 };
 
 // 패스워드검증
 export const verifyPassword = async (password: string) => {
-  await defaultAxios.post(`/api/v1/user/me/password-verify`, { password });
+  await defaultAxios.post(`/api/v1/users/me/password-verify`, { password });
 };
 
 // 패스워드변경
 export const updatePassword = async (password: string) => {
-  await defaultAxios.patch(`/api/v1/user/me/password`, { password });
+  await defaultAxios.patch(`/api/v1/users/me/password`, { password });
 };
 
 // 회원탈퇴
 export const deleteUser = async (withdrawalReason: string) => {
-  await defaultAxios.delete(`/api/v1/user/me/withdrawal`, {
-    data: { withdrawalReason },
+  await defaultAxios.post(`/api/v1/users/me/withdrawal`, {
+    withdrawalReason,
   });
 };
 
