@@ -19,20 +19,20 @@ export const createGroup = async ({
   const formData = new FormData();
   formData.append('thumbnail', thumbnail);
   formData.append('name', name);
-  return await defaultAxios.post(`/api/v1/group`, formData, {
+  return await defaultAxios.post(`/api/v1/groups`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
 
 // 그룹 상세 조회
 export const getGroupDetail = async (id: string) => {
-  const { data } = await defaultAxios.get(`/api/v1/group/${id}`);
+  const { data } = await defaultAxios.get(`/api/v1/groups/${id}`);
   return data;
 };
 
 // 그룹 입장
 export const enterGroup = async (inviteCode: string) => {
-  return await defaultAxios.post(`/api/v1/group/enter`, { inviteCode });
+  return await defaultAxios.post(`/api/v1/groups/enter`, { inviteCode });
 };
 
 // 그룹 순서 변경
@@ -48,7 +48,7 @@ export const updateGroupName = async ({
   id: string;
   name: string;
 }) => {
-  return await defaultAxios.patch(`/api/v1/group/${id}/name`, {
+  return await defaultAxios.patch(`/api/v1/groups/${id}/name`, {
     name,
   });
 };
@@ -63,7 +63,7 @@ export const updateGroupImage = async ({
 }) => {
   const formData = new FormData();
   formData.append('thumbnail', thumbnail);
-  return await defaultAxios.patch(`/api/v1/group/${id}/thumbnail`, formData, {
+  return await defaultAxios.patch(`/api/v1/groups/${id}/thumbnail`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
@@ -76,10 +76,10 @@ export const updateGroupNotice = async ({
   id: string;
   notice: string;
 }) => {
-  return await defaultAxios.patch(`/api/v1/group/${id}/notice`, { notice });
+  return await defaultAxios.patch(`/api/v1/groups/${id}/notice`, { notice });
 };
 
 // 그룹 나가기
 export const deleteGroup = async (id: string) => {
-  return await defaultAxios.delete(`/api/v1/group/${id}/leave`);
+  return await defaultAxios.delete(`/api/v1/groups/${id}/leave`);
 };
