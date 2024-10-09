@@ -1,10 +1,15 @@
+import { getUser } from '@lib/api/user';
 import useInput from '@lib/hooks/useInput';
 
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import TopBar from '@components/common/TopBar';
 
+import { useQuery } from '@tanstack/react-query';
+
+import { User } from '../../types/user';
 import { Radio, RadioChangeEvent } from 'antd';
+import { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +17,11 @@ const SignOutPage = () => {
   const navigate = useNavigate();
   const [reason, setReason] = useState<string>('');
   const [text, onChangeText] = useInput('');
+
+  const { data: user } = useQuery<AxiosResponse<User>>({
+    queryKey: ['user'],
+    queryFn: getUser,
+  });
 
   const onChange = (e: RadioChangeEvent) => {
     setReason(e.target.value);
@@ -27,16 +37,16 @@ const SignOutPage = () => {
       <TopBar title="회원탈퇴" onClickBack={() => navigate(-1)} />
       <div className="px-[16px]">
         <p className="text-gray-100 text-[20px] font-semibold mb-[16px] dark:text-gray-30">
-          옐님,
+          {user?.data.name}님,
           <br />
           탈퇴하시는 이유가 궁금해요!
         </p>
         <p className="text-gray-70 text-[14px] mb-[24px] dark:text-gray-60">
           그동안 두더지 서비스를 이용해주셔서 감사해요.
           <br />
-          옐님이 두더지를 사용하시면서 느꼈던 점을
+          {user?.data.name}님이 두더지를 사용하시면서 느꼈던 점을
           <br />
-          공유해주시면 옐님의 소중한 의견 바탕으로
+          공유해주시면 {user?.data.name}님의 소중한 의견 바탕으로
           <br />더 나은 두더지가 될게요.
         </p>
         <Radio.Group
