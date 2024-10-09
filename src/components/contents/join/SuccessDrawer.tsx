@@ -15,7 +15,7 @@ const SuccessDrawer = ({ onClose }: SuccessDrawerProps) => {
       closable={false}
       onClose={onClose}
       open
-      className="dark:bg-[#2a2a2a]"
+      className="dark:bg-[#1a1a1a]"
     >
       <div className="flex flex-col mt-[50px]">
         <p className="mb-[54px] text-center text-gray-100 font-semibold text-[16px] dark:text-gray-30 ">

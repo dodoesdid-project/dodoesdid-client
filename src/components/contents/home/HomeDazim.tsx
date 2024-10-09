@@ -19,7 +19,6 @@ type Props = {
 };
 
 const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
-  // console.log(user);
   return (
     <>
       {groups?.length === 0 ? (
@@ -28,7 +27,7 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
           onClick={() => showToast('그룹을 먼저 등록하세요.')}
         >
           <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
-            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
               <img
                 src={user.profile?.thumbnail}
                 alt="유저이미지"
@@ -63,10 +62,10 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
             )
           }
           color="#3F73F7"
-          overlayInnerStyle={{ padding: '12px' }}
+          overlayInnerStyle={{ padding: '12px', borderRadius: '12px' }}
         >
           <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
-            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
               <img
                 src={user.profile?.thumbnail}
                 alt="유저이미지"
@@ -102,7 +101,7 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
 
             {/* 글 */}
             {user?.dazim?.content && (
-              <p className="w-[136px] py-[4px] text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
+              <p className="w-[136px] py-[4px] px-[8px] truncate text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
                 {user?.dazim?.content}
               </p>
             )}
@@ -111,7 +110,7 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
       ) : (
         <>
           <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
-            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
               <img
                 src={user.profile?.thumbnail}
                 alt="유저이미지"
@@ -141,7 +140,7 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
             )}
             {/* 글 */}
             {user?.dazim?.content && (
-              <p className="w-[136px] py-[4px] text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
+              <p className="w-[136px] py-[4px] px-[8px] truncate text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
                 {user?.dazim?.content}
               </p>
             )}

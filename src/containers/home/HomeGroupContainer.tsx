@@ -21,7 +21,7 @@ const HomeGroupContainer = ({ groups, onClickGroup }: Props) => {
     <>
       <Swiper className="px-[16px!important] my-[8px]" slidesPerView={4.2}>
         <SwiperSlide>
-          {groups ? (
+          {groups?.length > 0 ? (
             <div
               onClick={() => navigate('/home/profile-group')}
               className="w-[72px] h-[72px] rounded-full flex justify-center items-center bg-gray-30 cursor-pointer dark:bg-[#2a2a2a]"

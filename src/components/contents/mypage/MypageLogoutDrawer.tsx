@@ -19,7 +19,7 @@ const MypageLogoutDrawer = ({ onClose, onClick }: Props) => {
       closable={false}
       onClose={onClose}
       open
-      className="dark:bg-[#2a2a2a]"
+      className="dark:bg-[#1a1a1a]"
     >
       <div className="flex flex-col">
         {isDarkMode ? (

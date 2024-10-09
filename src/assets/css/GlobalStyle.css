@@ -57,3 +57,23 @@ thead {
 .Toastify__close-button {
   display: none;
 }
+
+/* tooltip */
+.ant-tooltip-arrow {
+  width: 12px !important;
+  height: 12px !important;
+  background: #3f73f7 !important;
+  transform: rotate(45deg) !important;
+  border-radius: 30%;
+  left: -4px !important;
+  top: 30px !important;
+}
+
+.ant-tooltip-arrow::before {
+  content: '' !important;
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: inherit !important;
+  border-radius: 2px !important;
+}
