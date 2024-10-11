@@ -22,7 +22,7 @@ const LoginPage = () => {
           className="w-full h-[52px] rounded-[8px] bg-[#fee500] text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[12px]"
         >
           <KakaoIcon />
-          <p>카카오 계정으로 로그인</p>
+          <p>카카오계정으로 로그인</p>
         </a>
         <a
           href={`${process.env.REACT_APP_SERVER_URL}/api/v1/auth/google-sign-in`}
