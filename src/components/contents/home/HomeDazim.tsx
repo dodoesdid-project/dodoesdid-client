@@ -15,10 +15,11 @@ type Props = {
   user: User | any;
   isMe?: boolean;
   groups?: Groups;
+  isTooltip?: boolean;
   onClick?: () => void;
 };
 
-const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
+const HomeDazim = ({ user, isMe, groups, isTooltip, onClick }: Props) => {
   return (
     <>
       {groups?.length === 0 ? (
@@ -42,7 +43,7 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
             <PlusIcon />
           </div>
         </div>
-      ) : isMe ? (
+      ) : isTooltip ? (
         <Tooltip
           open={!user?.dazim?.isSuccess}
           placement="right"
@@ -62,7 +63,11 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
             )
           }
           color="#3F73F7"
-          overlayInnerStyle={{ padding: '12px', borderRadius: '12px' }}
+          overlayInnerStyle={{
+            padding: '12px',
+            borderRadius: '12px',
+            fontSize: '11px',
+          }}
         >
           <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
             <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
@@ -107,6 +112,49 @@ const HomeDazim = ({ user, isMe, groups, onClick }: Props) => {
             )}
           </div>
         </Tooltip>
+      ) : isMe ? (
+        <>
+          <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
+            <div className="w-[36px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
+              <img
+                src={user.profile?.thumbnail}
+                alt="유저이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            </div>
+            <p className="text-gray-100 text-[16px] dark:text-gray-30">
+              {user.profile?.nickName}
+            </p>
+          </div>
+          <div
+            className="w-full aspect-square rounded-[16px] flex justify-center overflow-hidden items-center bg-gray-30 cursor-pointer relative dark:bg-[#2a2a2a] border-[1px] border-solid border-[#ddd] dark:border-[#444]"
+            onClick={onClick}
+          >
+            {/* 사진 */}
+            {user?.dazim?.photo && (
+              <img
+                src={user?.dazim?.photo}
+                alt="다짐이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            )}
+            {/* 두더지 */}
+            {!user?.dazim ? (
+              <DodoesdidHide className="absolute bottom-[44px] right-[10px]" />
+            ) : !user?.dazim?.isSuccess ? (
+              <DodoesdidHalf className="absolute bottom-[44px] right-[10px]" />
+            ) : (
+              <DodoesdidFull className="absolute bottom-[44px] right-[10px]" />
+            )}
+
+            {/* 글 */}
+            {user?.dazim?.content && (
+              <p className="w-[136px] py-[4px] px-[8px] truncate text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
+                {user?.dazim?.content}
+              </p>
+            )}
+          </div>
+        </>
       ) : (
         <>
           <div className="mx-[4px] my-[8px] flex gap-[8px] items-center">
