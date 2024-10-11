@@ -8,7 +8,7 @@ export const getDazims = async (
   date: string,
 ): Promise<AxiosResponse<Dazims>> => {
   return await defaultAxios.get(
-    `/api/v1/groups/${groupId}/users?dazimCreateAt=${date}`,
+    `/api/v1/groups/${groupId}/users?dazimCreateDate=${date}`,
   );
 };
 

@@ -99,13 +99,13 @@ const HomeContainer = () => {
     if (searchDate < today) {
       return message.error('오늘의 다짐을 작성해주세요!');
     }
-    if (dazims?.data[0].dazim?.isSuccess) {
+    if (dazims.data.users[0].dazim?.isSuccess) {
       return message.error('오늘 다짐을 등록하셨습니다.');
     }
-    if (!dazims?.data[0].dazim) {
+    if (!dazims.data.users[0].dazim) {
       return toggleTitleDrawer();
     }
-    if (!dazims?.data[0].dazim.photo) {
+    if (!dazims.data.users[0].dazim.photo) {
       return toggleUploadDrawer();
     }
   };
@@ -147,10 +147,10 @@ const HomeContainer = () => {
         return;
       }
 
-      if (dazims.data[0].dazim !== null)
+      if (dazims.data.users[0].dazim !== null)
         return createDazimImageUploadMutation.mutate({
           photo: selectedFile as File,
-          dazimId: dazims?.data[0].dazim.id,
+          dazimId: dazims.data.users[0].dazim.id,
         });
     }
   }, [selectedFile]);
@@ -194,11 +194,16 @@ const HomeContainer = () => {
               {/* 타이머 */}
               <HomeTimer />
               {/* 다짐 */}
-              {groups && (
+              {groups && dazims && (
                 <HomeDazimContainer
                   groups={groups.data}
                   user={user.data}
-                  dazims={dazims}
+                  dazims={dazims.data}
+                  isTooltip={
+                    dazims.data.users[0].isMe &&
+                    searchDate === today &&
+                    dazims.data.myDazimCount === 0
+                  }
                   onClickDazim={onClickDazim}
                 />
               )}
