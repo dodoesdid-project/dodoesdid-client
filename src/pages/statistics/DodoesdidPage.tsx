@@ -1,7 +1,8 @@
 import TopBar from '@components/common/TopBar';
 import DateNavigator from '@components/contents/statistics/DateNavigator';
-import Tab from '@components/contents/statistics/Tap';
-import GroupCardsContainer from '@components/contents/statistics/month/GroupCardsContainer';
+import RecordTap from '@components/contents/statistics/RecordTap';
+import TimeTap from '@components/contents/statistics/TiimeTap';
+import MonthlyCardsContainer from '@components/contents/statistics/month/MonthlyCardsContainer';
 import WeeklyCalendar from '@components/contents/statistics/week/WeeklyCalendar';
 
 import { startOfMonth, startOfWeek } from 'date-fns';
@@ -14,43 +15,53 @@ const DodoesdidPage: React.FC = () => {
   const [weekDate, setWeekDate] = useState(startWeek);
   const [monthDate, setMonthDate] = useState(startMonth);
 
-  const handleTabClick = (isMonthly: boolean) => {
+  const [isRecordView, setIsRecordView] = useState(false);
+
+  const handleTimeClick = (isMonthly: boolean) => {
     setIsMonthlyView(isMonthly);
+  };
+
+  const handleRecordClick = (isRecordView: boolean) => {
+    // 클릭된 탭에 따라 상태 변경
+    setIsRecordView(isRecordView);
   };
 
   return (
     <>
       <TopBar backLink="" title="두더지" close={false} />
 
-      <article className="bg-gray-30">
+      <article className="bg-white mx-auto my-0 w-full h-full">
         {/* 주간 달성도 월간 달성도 */}
         <section className="text-center bg-white">
-          <div className="flex justify-center space-x-4">
-            <Tab
+          <div className="flex justify-center border-b-gray-70">
+            <TimeTap
               title="주간 달성도"
               isActive={!isMonthlyView}
-              onClick={() => handleTabClick(false)}
+              onClick={() => handleTimeClick(false)}
             />
-            <Tab
+            <TimeTap
               title="월간 달성도"
               isActive={isMonthlyView}
-              onClick={() => handleTabClick(true)}
+              onClick={() => handleTimeClick(true)}
             />
           </div>
         </section>
 
         {/* 개인 기록, 그룹 기록 */}
-        <div className="px-4 pt-6 pb-2">
-          <div className="flex justify-center gap-[15px] text-base">
-            <button className="py-3 px-[52px] rounded-lg border border-primary-600 text-primary-700 font-semibold">
-              개인 기록
-            </button>
-            <button className="py-3 px-[50px] rounded-lg border border-sub-500 text-sub-400 font-semibold">
-              그룹 기록
-            </button>
+        <div className="bg-white pt-[18px]">
+          <div className="flex mx-4 p-1 bg-gray-30 rounded-lg">
+            <RecordTap
+              title="개인 기록"
+              isActive={!isRecordView}
+              onClick={() => handleRecordClick(false)}
+            />
+            <RecordTap
+              title="그룹 기록"
+              isActive={isRecordView}
+              onClick={() => handleRecordClick(true)}
+            />
           </div>
         </div>
-
         {/* 날짜 네비게이션 */}
         <DateNavigator
           isMonthlyView={isMonthlyView}
@@ -60,10 +71,11 @@ const DodoesdidPage: React.FC = () => {
 
         {/* 캘린더 렌더링 */}
         {isMonthlyView ? (
-          <GroupCardsContainer now={monthDate} />
+          <MonthlyCardsContainer now={monthDate} />
         ) : (
           <WeeklyCalendar now={weekDate} />
         )}
+        {/* 개인, 그룹일 때 상태관리해서 클릭 시 isActive 변경 */}
       </article>
     </>
   );

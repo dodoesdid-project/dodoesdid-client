@@ -43,7 +43,7 @@ const DateNavigator = ({ isMonthlyView, now, setNow }: IDateNavigator) => {
     : !isSameWeek(now, today, { weekStartsOn: 1 }); // weekStartsOn: 1 월요일 세팅
 
   return (
-    <section className="flex items-center justify-center gap-[10px] px-5 pt-4 pb-[18px]">
+    <section className="flex items-center justify-center gap-[10px] px-5 pt-4 pb-[18px] bg-white">
       <button onClick={handlePreviousClick}>
         <LeftArrow />
       </button>
