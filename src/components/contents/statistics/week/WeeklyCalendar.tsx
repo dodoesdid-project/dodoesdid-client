@@ -3,8 +3,6 @@ import useCalendar from '@lib/hooks/useCalendar';
 import { ReactComponent as Failed } from '@assets/images/statistics/failed.svg';
 import { ReactComponent as SuccessIndi } from '@assets/images/statistics/success-indi.svg';
 
-import React from 'react';
-
 interface IWeeklyCalendar {
   now: Date;
 }
@@ -16,7 +14,7 @@ const WeeklyCalendar = ({ now }: IWeeklyCalendar) => {
   return (
     <div className="w-full text-center bg-white rounded-2xl h-full">
       <section className="pt-8 px-4">
-        <span className="font-semibold text-gray-90">
+        <span className="font-semibold text-gray-100">
           한 주 동안 <span className="text-primary-500">내</span>가
           <br /> 다짐을 달성한 날이 표시돼요.
         </span>
