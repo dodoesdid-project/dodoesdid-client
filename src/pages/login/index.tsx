@@ -22,14 +22,14 @@ const LoginPage = () => {
           className="w-full h-[52px] rounded-[8px] bg-[#fee500] text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[12px]"
         >
           <KakaoIcon />
-          <p>카카오계정으로 로그인</p>
+          <p>카카오로 시작하기</p>
         </a>
         <a
           href={`${process.env.REACT_APP_SERVER_URL}/api/v1/auth/google-sign-in`}
           className="w-full h-[52px] rounded-[8px] bg-white text-black text-[16px] font-semibold flex items-center justify-center gap-[8px] mb-[36px]"
         >
           <GoogleIcon />
-          <p>Goole 계정으로 로그인</p>
+          <p>Google로 시작하기</p>
         </a>
         <p className="text-white text-[16px] ">
           <Link to={'/login-email'}>이메일로 로그인</Link> /{' '}
