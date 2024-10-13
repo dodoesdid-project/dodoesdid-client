@@ -1,14 +1,11 @@
 import useCalendar from '@lib/hooks/useCalendar';
 
-import { ReactComponent as Failed } from '@assets/images/statistics/failed.svg';
-import { ReactComponent as SuccessIndi } from '@assets/images/statistics/success-indi.svg';
+import WeeklyGroupUnit from './WeeklyGroupUnit';
 
 interface IWeeklyCalendar {
   now: Date;
 }
-
 const WeeklyCalendar = ({ now }: IWeeklyCalendar) => {
-  const week = useCalendar(now).getWeekCalendar();
   const dayOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
 
   return (
@@ -31,24 +28,8 @@ const WeeklyCalendar = ({ now }: IWeeklyCalendar) => {
         ))}
       </section>
 
-      <section className="px-6 text-center">
-        {/* 날짜 표시 */}
-        <div className="flex items-center">
-          <div className="py-[7px] text-gray-100 font-semibold w-[143px] text-left ">
-            <span>1일 1다짐</span>
-          </div>
-
-          {week.map((day, index) => (
-            <div key={index} className="py-2 px-[3px]">
-              <div className={`flex justify-center items-center`}>
-                {day === 3 ? <SuccessIndi /> : <Failed />}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 추가 정보 */}
+      {/* 유닛 단위 그룹 */}
+      <WeeklyGroupUnit now={now} />
     </div>
   );
 };
