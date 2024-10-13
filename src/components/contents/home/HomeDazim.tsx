@@ -131,12 +131,14 @@ const HomeDazim = ({ user, isMe, groups, isTooltip, onClick }: Props) => {
             onClick={onClick}
           >
             {/* 사진 */}
-            {user?.dazim?.photo && (
+            {user?.dazim?.photo ? (
               <img
                 src={user?.dazim?.photo}
                 alt="다짐이미지"
                 className="w-[100%] h-[100%] object-cover"
               />
+            ) : (
+              <PlusIcon />
             )}
             {/* 두더지 */}
             {!user?.dazim ? (

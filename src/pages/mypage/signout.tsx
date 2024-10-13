@@ -101,10 +101,7 @@ const SignOutPage = () => {
           }
           name="다음"
           style={{
-            position: 'absolute',
-            left: '50%',
-            bottom: '50px',
-            transform: 'translateX(-50%)',
+            marginTop: '40px',
           }}
           onClick={handleSubmit}
         />
