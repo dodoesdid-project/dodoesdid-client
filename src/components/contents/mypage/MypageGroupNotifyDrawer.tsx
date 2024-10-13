@@ -66,7 +66,7 @@ const MypageGroupNotifyDrawer = ({
           value={value}
           ref={inputRef}
           onChange={onChange}
-          className="h-[52px] px-[16px] mb-[25px] text-[16px] focus:outline-none text-center text-gray-100 bg-gray-30 rounded-[8px] dark:bg-[#2a2a2a] dark:focus:ring-white dark:text-gray-30"
+          className="h-[52px] px-[16px] mb-[25px] text-[16px] font-semibold focus:outline-none text-center text-gray-100 bg-gray-30 rounded-[8px] dark:bg-[#2a2a2a] dark:focus:ring-white dark:text-gray-30"
         />
         <Button buttonType="fill-semibold" name="확인" onClick={onClick} />
       </div>
