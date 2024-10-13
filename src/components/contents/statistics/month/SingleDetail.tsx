@@ -4,32 +4,33 @@ import { ReactComponent as Failed } from '@assets/images/statistics/failed-big.s
 import { ReactComponent as SuccessGroup } from '@assets/images/statistics/success-group-big.svg';
 
 import { format } from 'date-fns';
+import { twMerge } from 'tailwind-merge';
 
 interface IGroupDetail {
   now: Date;
   cardId: number;
+  className: string;
 }
-
-const MonthlyDetail = ({ now }: IGroupDetail) => {
+const SingleDetail = ({ now, cardId, className }: IGroupDetail) => {
   const calendar = useCalendar(now);
   const monthCalendar = calendar.getMonthCalendar();
   const week = ['월', '화', '수', '목', '금', '토', '일'];
 
-  const successData: { [key: string]: number } = {
-    '2024-10-01': 1,
-    '2024-10-02': 0,
-    '2024-10-03': 1,
-  };
+  const successData: { [key: string]: number } =
+    cardId === 1
+      ? {
+          '2024-10-01': 1,
+          '2024-10-02': 0,
+          '2024-10-03': 1,
+        }
+      : {
+          '2024-10-01': 0,
+          '2024-10-02': 1,
+          '2024-10-03': 0,
+        };
 
   return (
-    <div className="w-full text-center rounded-t-2xl bg-gray-30 ">
-      <section className="pt-2 pb-3 px-4 bg-white ">
-        <span className="font-semibold text-gray-90">
-          한 주 동안 <span className="text-primary-500">내</span>
-          <br /> 다짐을 달성한 날이 표시돼요.
-        </span>
-      </section>
-
+    <>
       {/* 월 ~ 일 뿌려주기*/}
       <div className="bg-white my-3 mx-4 rounded-2xl px-[21px] py-5">
         <section>
@@ -59,10 +60,15 @@ const MonthlyDetail = ({ now }: IGroupDetail) => {
                     >
                       {nowMonth ? (
                         <>
-                          <div className="text-gray-900 text-[11px] font-semibold">
+                          <div
+                            className={twMerge(
+                              `text-gray-900 font-semibold`,
+                              className,
+                            )}
+                          >
                             {date.getDate()}
                           </div>
-                          <div className="pb-[18px]">
+                          <div className={twMerge(`pb-[18px]`, className)}>
                             {/* 일단 표시용 */}
                             {successData[dateData] === 1 ? (
                               <SuccessGroup />
@@ -81,8 +87,7 @@ const MonthlyDetail = ({ now }: IGroupDetail) => {
           ))}
         </section>
       </div>
-    </div>
+    </>
   );
 };
-
-export default MonthlyDetail;
+export default SingleDetail;

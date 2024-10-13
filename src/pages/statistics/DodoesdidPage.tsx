@@ -2,7 +2,8 @@ import TopBar from '@components/common/TopBar';
 import DateNavigator from '@components/contents/statistics/DateNavigator';
 import RecordTap from '@components/contents/statistics/RecordTap';
 import TimeTap from '@components/contents/statistics/TiimeTap';
-import MonthlyCardsContainer from '@components/contents/statistics/month/MonthlyCardsContainer';
+import MultiGroup from '@components/contents/statistics/month/MultiGroup';
+import SingleGroup from '@components/contents/statistics/month/SingleGroup';
 import WeeklyCalendar from '@components/contents/statistics/week/WeeklyCalendar';
 
 import { startOfMonth, startOfWeek } from 'date-fns';
@@ -22,7 +23,6 @@ const DodoesdidPage: React.FC = () => {
   };
 
   const handleRecordClick = (isRecordView: boolean) => {
-    // 클릭된 탭에 따라 상태 변경
     setIsRecordView(isRecordView);
   };
 
@@ -71,7 +71,8 @@ const DodoesdidPage: React.FC = () => {
 
         {/* 캘린더 렌더링 */}
         {isMonthlyView ? (
-          <MonthlyCardsContainer now={monthDate} />
+          // <SingleGroup now={monthDate} cardId={0} />
+          <MultiGroup now={monthDate} />
         ) : (
           <WeeklyCalendar now={weekDate} />
         )}
