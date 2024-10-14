@@ -22,12 +22,14 @@ import ChangePhonePage from '@pages/mypage/phone';
 import ChangeProfilePage from '@pages/mypage/profile';
 import SignOutPage from '@pages/mypage/signout';
 import SignOutAgreePage from '@pages/mypage/signout-agree';
+import OnBoardingPage from '@pages/onboarding';
 import DodoesdidPage from '@pages/statistics/DodoesdidPage';
 
 import DefaultLayout from '@components/common/base/DefaultLayout';
 import NoNavLayout from '@components/common/base/NoNavLayout';
 
 import PrivateRoute from './PrivateRoute';
+import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -77,6 +79,7 @@ const router = createBrowserRouter([
   {
     element: <NoNavLayout />,
     children: [
+      { path: '/onboarding', element: <OnBoardingPage /> },
       { path: '/join', element: <JoinPage /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/login-email', element: <LoginEmailPage /> },
