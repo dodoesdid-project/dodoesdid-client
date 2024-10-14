@@ -10,6 +10,7 @@ type Props = {
   user: User;
   dazims: Dazims;
   isTooltip: boolean;
+  isPlus: boolean;
   onClickDazim: () => void;
 };
 
@@ -18,6 +19,7 @@ const HomeDazimContainer = ({
   user,
   dazims,
   isTooltip,
+  isPlus,
   onClickDazim,
 }: Props) => {
   return (
@@ -30,6 +32,7 @@ const HomeDazimContainer = ({
               user={user}
               isMe={user.isMe}
               isTooltip={isTooltip}
+              isPlus={isPlus}
               onClick={onClickDazim}
             />
           </div>

@@ -5,10 +5,12 @@ import { ReactComponent as DodoesdidHalf } from '@assets/images/common/dodoesdid
 import { ReactComponent as DodoesdidHide } from '@assets/images/common/dodoesdid-hide.svg';
 import { ReactComponent as PlusIcon } from '@assets/images/home/plus.svg';
 
+import { DazimUser } from '../../../types/dazims';
 import { Groups } from '../../../types/groups';
 import { User } from '../../../types/user';
 import { Tooltip } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,10 +18,26 @@ type Props = {
   isMe?: boolean;
   groups?: Groups;
   isTooltip?: boolean;
+  isPlus?: boolean;
   onClick?: () => void;
 };
 
-const HomeDazim = ({ user, isMe, groups, isTooltip, onClick }: Props) => {
+const HomeDazim = ({
+  user,
+  isMe,
+  groups,
+  isTooltip,
+  isPlus,
+  onClick,
+}: Props) => {
+  const navigate = useNavigate();
+
+  const onClickUserDazim = (user: DazimUser) => {
+    if (user.dazim?.isSuccess) {
+      navigate(`/feed/${user.dazim.id}`);
+    }
+  };
+
   return (
     <>
       {groups?.length === 0 ? (
@@ -137,8 +155,10 @@ const HomeDazim = ({ user, isMe, groups, isTooltip, onClick }: Props) => {
                 alt="다짐이미지"
                 className="w-[100%] h-[100%] object-cover"
               />
-            ) : (
+            ) : isPlus ? (
               <PlusIcon />
+            ) : (
+              ''
             )}
             {/* 두더지 */}
             {!user?.dazim ? (
@@ -171,7 +191,10 @@ const HomeDazim = ({ user, isMe, groups, isTooltip, onClick }: Props) => {
               {user.profile?.nickName}
             </p>
           </div>
-          <div className="w-full aspect-square rounded-[16px] flex justify-center overflow-hidden items-center bg-gray-30 cursor-pointer relative dark:bg-[#2a2a2a] border-[1px] border-solid border-[#ddd] dark:border-[#444]">
+          <div
+            className="w-full aspect-square rounded-[16px] flex justify-center overflow-hidden items-center bg-gray-30 cursor-pointer relative dark:bg-[#2a2a2a] border-[1px] border-solid border-[#ddd] dark:border-[#444]"
+            onClick={() => onClickUserDazim(user)}
+          >
             {/* 사진 */}
             {user?.dazim?.photo && (
               <img
