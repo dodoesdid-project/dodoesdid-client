@@ -29,6 +29,7 @@ import { message } from 'antd';
 import { AxiosResponse } from 'axios';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeContainer = () => {
   const [groupId, setGroupId] = useState<string>('');
@@ -37,6 +38,7 @@ const HomeContainer = () => {
   const [searchDate, setSearchDate] = useState<string>(today);
   const [notice, setNotice] = useState<string | null>(null);
   const [titleInput, onChangeTitleInput] = useInput('');
+  const navigate = useNavigate();
 
   const [isOpenTitleDrawer, toggleTitleDrawer] = useToggle();
   const [isOpenUploadDrawer, toggleUploadDrawer] = useToggle();
@@ -173,9 +175,15 @@ const HomeContainer = () => {
             {/* 공지사항 */}
             <div className="px-[16px] py-[12px] bg-[#E2F8FF] mb-[12px] flex items-center gap-[12px] dark:bg-[#1e3060]">
               <Notice />
-              <p className="text-primary text-[12px] font-semibold">
+              <p className="text-primary text-[12px] font-semibold flex-grow">
                 {notice ? notice : '그룹 공지사항을 입력해보세요.'}
               </p>
+              <button
+                className="border-solid border-[1px] border-primary text-[12px] text-primary px-[8px] py-[4px] font-semibold rounded-[8px]"
+                onClick={() => navigate(`/mypage/group/info?id=${groupId}`)}
+              >
+                그룹설정
+              </button>
             </div>
             <div className="px-[16px]">
               {/* 시간 */}
@@ -204,6 +212,7 @@ const HomeContainer = () => {
                     searchDate === today &&
                     dazims.data.myDazimCount === 0
                   }
+                  isPlus={searchDate === today}
                   onClickDazim={onClickDazim}
                 />
               )}

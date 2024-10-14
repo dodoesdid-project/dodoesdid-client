@@ -77,3 +77,21 @@ thead {
   background: inherit !important;
   border-radius: 2px !important;
 }
+
+/* swiper */
+.onBoardingSwiper {
+  position: relative;
+  height: 100%;
+}
+.onBoardingSwiper .swiper-pagination {
+  bottom: 170px !important;
+  height: 10px;
+}
+.onBoardingSwiper .swiper-pagination-bullet {
+  background-color: #3f73f7;
+  margin: 0 5px;
+}
+.onBoardingSwiper .swiper-pagination-bullet-active {
+  padding: 0 12px;
+  border-radius: 8px;
+}

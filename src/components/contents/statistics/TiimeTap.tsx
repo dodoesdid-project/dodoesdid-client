@@ -1,12 +1,10 @@
-import React from 'react';
-
-interface ITabProps {
+interface ITap {
   title: string;
   isActive: boolean;
   onClick: () => void;
 }
 
-const Tab = ({ title, isActive, onClick }: ITabProps) => {
+const TimeTap = ({ title, isActive, onClick }: ITap) => {
   return (
     <div
       className={`cursor-pointer font-semibold px-12 pb-[10px] ${isActive ? 'text-gray-100 border-b-2 border-black' : 'text-gray-70'}`}
@@ -17,4 +15,4 @@ const Tab = ({ title, isActive, onClick }: ITabProps) => {
   );
 };
 
-export default Tab;
+export default TimeTap;
