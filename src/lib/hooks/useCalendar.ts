@@ -15,7 +15,7 @@ const useCalendar = (now: Date) => {
 
     return Array.from({ length: DAY_OF_WEEK }).map((_, index) => {
       const date = addDays(weekStart, index);
-      return date.getDate();
+      return date;
     });
   };
 
