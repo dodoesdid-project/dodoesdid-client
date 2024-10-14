@@ -2,32 +2,21 @@ import useCalendar from '@lib/hooks/useCalendar';
 
 import { ReactComponent as Failed } from '@assets/images/statistics/failed-big.svg';
 import { ReactComponent as SuccessGroup } from '@assets/images/statistics/success-group-big.svg';
+import { ReactComponent as SuccessIndi } from '@assets/images/statistics/success-indi-big.svg';
 
+import { ISingleDetail } from '../../../../types/statisticsType';
 import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 
-interface IGroupDetail {
-  now: Date;
-  cardId: number;
-  className: string;
-}
-const SingleDetail = ({ now, cardId, className }: IGroupDetail) => {
+const SingleDetail = ({
+  now,
+  successDates,
+  isRecordView,
+  className,
+}: ISingleDetail) => {
   const calendar = useCalendar(now);
   const monthCalendar = calendar.getMonthCalendar();
   const week = ['월', '화', '수', '목', '금', '토', '일'];
-
-  const successData: { [key: string]: number } =
-    cardId === 1
-      ? {
-          '2024-10-01': 1,
-          '2024-10-02': 0,
-          '2024-10-03': 1,
-        }
-      : {
-          '2024-10-01': 0,
-          '2024-10-02': 1,
-          '2024-10-03': 0,
-        };
 
   return (
     <>
@@ -52,11 +41,14 @@ const SingleDetail = ({ now, cardId, className }: IGroupDetail) => {
                 .map((date, dayIndex) => {
                   const dateData = format(date, 'yyyy-MM-dd');
                   const nowMonth = date.getMonth() === now.getMonth();
+                  const dazimSuccess = successDates.includes(dateData);
 
                   return (
                     <div
                       key={`${weekIndex}-${dayIndex}`}
-                      className={`flex-1 flex flex-col items-center justify-center ${!nowMonth ? 'invisible' : ''}`}
+                      className={`flex-1 flex flex-col items-center justify-center ${
+                        !nowMonth ? 'invisible' : ''
+                      }`}
                     >
                       {nowMonth ? (
                         <>
@@ -69,9 +61,12 @@ const SingleDetail = ({ now, cardId, className }: IGroupDetail) => {
                             {date.getDate()}
                           </div>
                           <div className={twMerge(`pb-[18px]`, className)}>
-                            {/* 일단 표시용 */}
-                            {successData[dateData] === 1 ? (
-                              <SuccessGroup />
+                            {dazimSuccess ? (
+                              isRecordView ? (
+                                <SuccessGroup />
+                              ) : (
+                                <SuccessIndi />
+                              )
                             ) : (
                               <Failed />
                             )}
