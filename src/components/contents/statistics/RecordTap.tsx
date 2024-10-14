@@ -1,8 +1,4 @@
-interface ITap {
-  title: string;
-  isActive: boolean;
-  onClick: () => void;
-}
+import { ITap } from '../../../types/statisticsType';
 
 const RecordTap = ({ title, isActive, onClick }: ITap) => {
   return (

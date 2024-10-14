@@ -1,19 +1,14 @@
+import { IGroupSuccessParams } from '../../types/statisticsType';
 import { defaultAxios } from './deafultAxios';
 
-interface IGroupSuccessParams {
-  startDate: string;
-  endDate: string;
-  successType: 'PERSONAL' | 'GROUP';
-}
-
 export const dazimSuccessDates = async (params: IGroupSuccessParams) => {
-  const { startDate, endDate, successType } = params;
+  const { successType, dazimStartDate, dazimEndDate } = params;
   try {
     const res = await defaultAxios.get('/api/v1/groups/dazim-success-dates', {
       params: {
-        dazimStartDate: startDate,
-        dazimEndDate: endDate,
         dazimSuccessType: successType,
+        dazimStartDate,
+        dazimEndDate,
       },
     });
     return res.data;

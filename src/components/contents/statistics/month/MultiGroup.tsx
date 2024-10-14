@@ -1,57 +1,62 @@
+import { IDazimData, IGroupDetail } from '../../../../types/statisticsType';
 import MonthlyCard from './MonthlyCard';
 import MultiModal from './MultiModal';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-interface IGroupDetail {
-  now: Date;
-}
+const MultiGroup = ({ now, data, isRecordView }: IGroupDetail) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<IDazimData | null>(null);
 
-const MultiGroup = ({ now }: IGroupDetail) => {
-  const dummy = [1, 2, 3]; // 예시 데이터 (그룹 목록)
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태 관리
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(null); // 선택된 카드 ID
-
-  // 카드 클릭 시 모달 열기
-  const handleCardClick = (id: number) => {
-    setSelectedCardId(id); // 클릭된 카드 ID 설정
-    setIsModalOpen(true); // 모달 열기
+  const handleCardClick = (group: IDazimData) => {
+    setSelectedGroup(group);
+    setIsModalOpen(true);
   };
 
-  // 모달 닫기 핸들러
   const closeModal = () => {
-    setIsModalOpen(false); // 모달 닫기
-    setSelectedCardId(null); // 카드 선택 해제
+    setIsModalOpen(false);
+    setSelectedGroup(null);
   };
 
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center bg-gray-30 h-[calc(100vh-340px)]">
         <section className="py-3 px-4 text-center bg-white w-full">
           <span className="font-semibold text-gray-100 ">
-            한 주 동안 <span className="text-sub-400">그룹원 모두</span>
+            한 달 동안
+            <span
+              className={isRecordView ? 'text-sub-400' : 'text-primary-500'}
+            >
+              {isRecordView ? ' 그룹 구성원 모두' : ' 내'}
+            </span>
+            <span className="text-gray-90">
+              {isRecordView ? (data.length === 1 ? '이' : '가') : '가'}
+            </span>
             <br /> 다짐을 달성한 날이 표시돼요.
           </span>
         </section>
 
         {/* 그룹 카드 목록 */}
-        <div className={`flex flex-wrap gap-4 bg-gray-30 pl-3 py-4`}>
-          {dummy.map((index) => (
-            <div key={index} onClick={() => handleCardClick(index)}>
-              <MonthlyCard now={now} />
+        <div className={`flex flex-wrap gap-4 pl-3 py-4`}>
+          {data?.map((group) => (
+            <div key={group.id} onClick={() => handleCardClick(group)}>
+              <MonthlyCard
+                now={now}
+                group={group}
+                isRecordView={isRecordView}
+              />
             </div>
           ))}
         </div>
       </div>
 
       {/* 클릭 시 모달 열기 */}
-      {isModalOpen && selectedCardId !== null && (
-        <div className="">
-          <MultiModal
-            onClose={closeModal}
-            now={now}
-            cardId={selectedCardId} // 선택된 카드 ID 전달
-          />
-        </div>
+      {isModalOpen && selectedGroup !== null && (
+        <MultiModal
+          onClose={closeModal}
+          now={now}
+          group={selectedGroup}
+          isRecordView={isRecordView}
+        />
       )}
     </>
   );

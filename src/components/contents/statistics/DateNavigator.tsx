@@ -1,6 +1,7 @@
 import { ReactComponent as LeftArrow } from '@assets/images/statistics/statistics-left.svg';
 import { ReactComponent as RightArrow } from '@assets/images/statistics/statistics-right.svg';
 
+import { IDateNavigator } from '../../../types/statisticsType';
 import {
   addDays,
   addMonths,
@@ -11,13 +12,6 @@ import {
   subMonths,
   subWeeks,
 } from 'date-fns';
-import React from 'react';
-
-interface IDateNavigator {
-  isMonthlyView: boolean;
-  now: Date;
-  setNow: React.Dispatch<React.SetStateAction<Date>>;
-}
 
 const DateNavigator = ({ isMonthlyView, now, setNow }: IDateNavigator) => {
   const today = new Date();
