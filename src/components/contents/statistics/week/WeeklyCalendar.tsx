@@ -1,18 +1,23 @@
-import useCalendar from '@lib/hooks/useCalendar';
-
+import { IWeeklyCalendar } from '../../../../types/statisticsType';
 import WeeklyGroupUnit from './WeeklyGroupUnit';
 
-interface IWeeklyCalendar {
-  now: Date;
-}
-const WeeklyCalendar = ({ now }: IWeeklyCalendar) => {
+const WeeklyCalendar = ({ now, isRecordView, data }: IWeeklyCalendar) => {
   const dayOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
+
+  const textDevision = (isRecordView: boolean) => {
+    return isRecordView ? (
+      <span className="text-sub-500"> 그룹 구성원 모두</span>
+    ) : (
+      <span className="text-primary-500"> 내</span>
+    );
+  };
 
   return (
     <div className="w-full text-center bg-white rounded-2xl h-full">
       <section className="pt-8 px-4">
         <span className="font-semibold text-gray-100">
-          한 주 동안 <span className="text-primary-500">내</span>가
+          한 주 동안
+          <span className="font-semibold">{textDevision(isRecordView)}</span>가
           <br /> 다짐을 달성한 날이 표시돼요.
         </span>
       </section>
@@ -29,7 +34,14 @@ const WeeklyCalendar = ({ now }: IWeeklyCalendar) => {
       </section>
 
       {/* 유닛 단위 그룹 */}
-      <WeeklyGroupUnit now={now} />
+      {data?.map((group) => (
+        <WeeklyGroupUnit
+          key={group.id}
+          now={now}
+          group={group}
+          isRecordView={isRecordView}
+        />
+      ))}
     </div>
   );
 };
