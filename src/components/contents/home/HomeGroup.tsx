@@ -16,7 +16,7 @@ const HomeGroup = ({ imagePath, name, onclick }: Props) => {
           className="w-[100%] h-[100%] object-cover"
         />
       </div>
-      <p className="text-gray-100 text-[11px] text-center dark:text-gray-30">
+      <p className="text-gray-100 text-[11px] text-center overflow-hidden whitespace-nowrap overflow-ellipsis dark:text-gray-30">
         {name}
       </p>
     </div>

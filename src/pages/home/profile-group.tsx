@@ -1,6 +1,5 @@
 import { createGroup } from '@lib/api/groups';
 import useDarkMode from '@lib/hooks/useDarkMode';
-import useInput from '@lib/hooks/useInput';
 
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
@@ -20,7 +19,7 @@ import { Link } from 'react-router-dom';
 const ProfileGroupPage = () => {
   const navigate = useNavigate();
   const isDarkMode = useDarkMode();
-  const [nickname, onChangeNickname] = useInput('');
+  const [nickname, setNickname] = useState('');
   const imgRef = useRef<HTMLInputElement>(null);
   const [previewImgPath, setPreviewImgPath] = useState<null | string>(null);
   const [info, setInfo] = useState<{
@@ -47,6 +46,13 @@ const ProfileGroupPage = () => {
       thumbnail: info.image,
       name: info.nickname,
     } as { thumbnail: File; name: string });
+  };
+
+  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.length <= 15) {
+      setNickname(value);
+    }
   };
 
   const previewImage = () => {
