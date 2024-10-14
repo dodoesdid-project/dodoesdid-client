@@ -1,7 +1,7 @@
 import { IDazimData, IGroupDetail } from '../../../../types/statisticsType';
 import MonthlyCard from './MonthlyCard';
 import MultiModal from './MultiModal';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const MultiGroup = ({ now, data, isRecordView }: IGroupDetail) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +19,7 @@ const MultiGroup = ({ now, data, isRecordView }: IGroupDetail) => {
 
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center bg-gray-30 h-[calc(100vh-340px)]">
         <section className="py-3 px-4 text-center bg-white w-full">
           <span className="font-semibold text-gray-100 ">
             한 달 동안
@@ -36,7 +36,7 @@ const MultiGroup = ({ now, data, isRecordView }: IGroupDetail) => {
         </section>
 
         {/* 그룹 카드 목록 */}
-        <div className={`flex flex-wrap gap-4 bg-gray-30 pl-3 py-4`}>
+        <div className={`flex flex-wrap gap-4 pl-3 py-4`}>
           {data?.map((group) => (
             <div key={group.id} onClick={() => handleCardClick(group)}>
               <MonthlyCard
@@ -51,14 +51,12 @@ const MultiGroup = ({ now, data, isRecordView }: IGroupDetail) => {
 
       {/* 클릭 시 모달 열기 */}
       {isModalOpen && selectedGroup !== null && (
-        <div className="">
-          <MultiModal
-            onClose={closeModal}
-            now={now}
-            group={selectedGroup}
-            isRecordView={isRecordView}
-          />
-        </div>
+        <MultiModal
+          onClose={closeModal}
+          now={now}
+          group={selectedGroup}
+          isRecordView={isRecordView}
+        />
       )}
     </>
   );
