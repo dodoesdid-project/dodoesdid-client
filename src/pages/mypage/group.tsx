@@ -88,7 +88,7 @@ const MyGroupPage = () => {
       dataIndex: 'name',
       render: (name, record) => (
         <p
-          className="text-gray-100 text-[16px] font-semibold dark:text-gray-30"
+          className="text-gray-100 text-[16px] font-semibold w-[180px] overflow-hidden whitespace-nowrap overflow-ellipsis dark:text-gray-30"
           onClick={() => onClickGroup(record)}
         >
           {name}
