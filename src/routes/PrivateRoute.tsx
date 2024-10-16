@@ -19,7 +19,7 @@ const PrivateRoute = () => {
     const hasVisited = Cookies.get('hasVisited');
     if (hasVisited) return;
 
-    // 처음 방문시, 스플래시화면보이도록설정 + 쿠키심기
+    // 처음방문시, 스플래시화면보이도록설정 + 쿠키심기
     if (!hasVisited) {
       setIsSplash(true);
       Cookies.set('hasVisited', 'true');
