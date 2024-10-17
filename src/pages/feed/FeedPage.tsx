@@ -6,6 +6,7 @@ import FeedCard from '@components/contents/feed/feedCard/FeedCard';
 import { useQuery } from '@tanstack/react-query';
 
 import { IFeed } from '../../types/feedType';
+import FeedNotFound from './FeedNotFound';
 import { useNavigate } from 'react-router-dom';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
@@ -17,6 +18,12 @@ const FeedPage = () => {
     queryFn: getFeeds,
     refetchOnWindowFocus: false,
   });
+
+  console.log(feeds);
+
+  if (!feeds || feeds.length === 0) {
+    return <FeedNotFound />;
+  }
 
   const feedRefresh = (): Promise<void> => {
     return new Promise((res) => {
