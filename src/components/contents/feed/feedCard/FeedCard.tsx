@@ -17,11 +17,11 @@ const FeedCard = ({
   return (
     <article>
       <header className="flex items-center mb-4">
-        <section>
+        <section className="w-10 h-10">
           <img
             src={profileImageUrl}
             alt="프로필 이미지"
-            className="rounded-full border-[1px] border-[#ddd] dark:border-[#444] w-10 h-10"
+            className="rounded-full border-[0.5px] border-[#ddd] dark:border-[#444] w-10 h-10"
           />
         </section>
 

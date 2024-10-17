@@ -1,7 +1,7 @@
 import { deleteComment } from '@lib/api/feed';
 import { getUser } from '@lib/api/user';
 import { putUpCommentTime } from '@lib/hooks/useCalendar';
-import useDarkMode from '@lib/hooks/useDarkMode';
+import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 
 import { ReactComponent as EditIcon } from '@assets/images/feed/edit-icon.svg';
 import { ReactComponent as TrashIcon } from '@assets/images/feed/trash-icon.svg';
@@ -68,7 +68,7 @@ const CommentAndReply = ({
     setDeleteModalOpen(false);
   };
 
-  const isDarkMode = useDarkMode();
+  const isDarkMode = useIsDarkMode();
 
   return (
     <>
@@ -77,7 +77,7 @@ const CommentAndReply = ({
       >
         <section className="flex-shrink-0 w-10 h-10">
           <img
-            className="rounded-full border-[1px] border-solid border-[#ddd] dark:border-[#444]"
+            className="rounded-full w-10 h-10 border-[0.5px] border-solid border-[#ddd] dark:border-[#444]"
             src={comment.user?.profile?.thumbnail}
             alt="Profile"
           />
@@ -153,7 +153,7 @@ const CommentAndReply = ({
             onClick={closeDeleteModal}
           ></div>
 
-          <div className="fixed inset-x-0 bottom-0 px-4 rounded-t-xl p-4 z-50 dark:bg-[#2A2A2A] mx-auto max-w-md w-full">
+          <div className="fixed inset-x-0 bottom-0 px-4 rounded-t-xl p-4 z-50 bg-white dark:bg-[#2A2A2A] mx-auto max-w-md w-full">
             <div className="flex justify-end">
               <button onClick={closeDeleteModal}>
                 {isDarkMode ? <XIconDark /> : <XIcon />}
