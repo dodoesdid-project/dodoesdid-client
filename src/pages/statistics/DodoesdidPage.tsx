@@ -11,6 +11,7 @@ import WeeklyCalendar from '@components/contents/statistics/week/WeeklyCalendar'
 import { useQuery } from '@tanstack/react-query';
 
 import { IDazimData } from '../../types/statisticsType';
+import DodoesdidNotFound from './DodoesdidNotFound';
 import {
   endOfMonth,
   endOfWeek,
@@ -18,7 +19,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const DodoesdidPage = () => {
   const [isMonthlyView, setIsMonthlyView] = useState(false);
@@ -58,7 +59,7 @@ const DodoesdidPage = () => {
     ? dateData(endOfMonth(monthDate))
     : dateData(endOfWeek(weekDate, { weekStartsOn: 1 }));
 
-  const { data } = useQuery<IDazimData[]>({
+  const { data, isLoading, isFetching } = useQuery<IDazimData[]>({
     queryKey: ['dazimData', isRecordView, isMonthlyView, weekDate, monthDate],
     queryFn: () =>
       dazimSuccessDates({
@@ -68,13 +69,21 @@ const DodoesdidPage = () => {
       }),
   });
 
+  if (isLoading || isFetching) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (!data || data.length === 0) {
+    return <DodoesdidNotFound />;
+  }
+
   return (
     <>
       <TopBar backLink="" title="두더지" close={false} />
 
-      <article className="bg-white mx-auto my-0 w-full h-full">
+      <article className="bg-white mx-auto my-0 w-full h-full dark:bg-black">
         {/* 주간 달성도 월간 달성도 */}
-        <section className="text-center bg-white">
+        <section className="text-center bg-white dark:bg-black">
           <div className="flex justify-center border-b-gray-70">
             <TimeTap
               title="주간 달성도"
@@ -90,8 +99,8 @@ const DodoesdidPage = () => {
         </section>
 
         {/* 개인 기록, 그룹 기록 */}
-        <div className="bg-white pt-[18px]">
-          <div className="flex mx-4 p-1 bg-gray-30 rounded-lg">
+        <div className="bg-white pt-[18px] dark:bg-black">
+          <div className="flex mx-4 p-1 bg-gray-30 rounded-lg dark:bg-[#2A2A2A]">
             <RecordTap
               title="개인 기록"
               isActive={!isRecordView}
