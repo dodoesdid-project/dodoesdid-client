@@ -92,13 +92,13 @@ const FeedInput = ({
 
   return (
     <form
-      className="fixed bottom-0 left-[50%] translate-x-[-50%] py-2 px-4 w-full border-t border-t-gray-40 bg-white desktop:w-[375px] dark:bg-black dark:border-t-[#2A2A2A]"
+      className="fixed bottom-0 left-[50%] translate-x-[-50%] py-2 px-4 w-full border-t border-gray-40 bg-white desktop:w-[372px] dark:bg-black dark:border-t-[#2A2A2A]"
       onSubmit={handleSubmit}
     >
       <div className="flex flex-row items-center">
-        <div className="w-14">
+        <div className="w-12 h-10 ">
           <img
-            className="rounded-full border-[1px] border-solid border-[#ddd] dark:border-[#444] w-10 h-10"
+            className="rounded-full border-[0.5px] border-solid border-[#ddd] dark:border-[#444] w-10 h-10"
             src={user?.data.profile?.thumbnail}
             alt="프로필 이미지"
           />
@@ -107,9 +107,9 @@ const FeedInput = ({
         <div className="relative flex flex-row w-full">
           <input
             ref={inputRef}
-            className="w-full py-[11px] text-base rounded-lg px-4 placeholder:text-gray-70 bg-gray-30 dark:bg-[#2A2A2A]  dark:placeholder:text-gray-60 dark:text-gray-30"
+            className="ml-2 w-full py-[11px] text-base rounded-lg px-2 placeholder:text-gray-70 bg-gray-30 dark:bg-[#2A2A2A]  dark:placeholder:text-gray-60 dark:text-gray-30"
             type="text"
-            placeholder={'댓글 달기'}
+            placeholder={'댓글달기'}
             value={input}
             onChange={handleInputChange}
           />

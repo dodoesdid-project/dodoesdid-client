@@ -1,7 +1,7 @@
 import { IDazimData, IGroupDetail } from '../../../../types/statisticsType';
 import MonthlyCard from './MonthlyCard';
 import MultiModal from './MultiModal';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const MultiGroup = ({ now, data, isRecordView }: IGroupDetail) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,16 +19,16 @@ const MultiGroup = ({ now, data, isRecordView }: IGroupDetail) => {
 
   return (
     <>
-      <div className="flex flex-col items-center bg-gray-30 h-[calc(100vh-340px)]">
-        <section className="py-3 px-4 text-center bg-white w-full">
-          <span className="font-semibold text-gray-100 ">
+      <div className="flex flex-col items-center bg-gray-30 h-[calc(100vh-340px)] dark:bg-[#2A2A2A]">
+        <section className="py-3 px-4 text-center bg-white w-full dark:bg-black">
+          <span className="font-semibold text-gray-100 dark:text-gray-30">
             한 달 동안
             <span
               className={isRecordView ? 'text-sub-400' : 'text-primary-500'}
             >
               {isRecordView ? ' 그룹 구성원 모두' : ' 내'}
             </span>
-            <span className="text-gray-90">
+            <span className="text-gray-100 dark:text-gray-30">
               {isRecordView ? (data.length === 1 ? '이' : '가') : '가'}
             </span>
             <br /> 다짐을 달성한 날이 표시돼요.
