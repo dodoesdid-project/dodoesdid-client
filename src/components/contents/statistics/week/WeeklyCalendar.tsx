@@ -1,5 +1,6 @@
 import { IWeeklyCalendar } from '../../../../types/statisticsType';
 import WeeklyGroupUnit from './WeeklyGroupUnit';
+import React from 'react';
 
 const WeeklyCalendar = ({ now, isRecordView, data }: IWeeklyCalendar) => {
   const dayOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
@@ -22,7 +23,7 @@ const WeeklyCalendar = ({ now, isRecordView, data }: IWeeklyCalendar) => {
         </span>
       </section>
 
-      <div className="border-t border-gray-30 my-5 mx-4"></div>
+      <div className="border-t border-gray-30 my-5 mx-4 dark:border-[#202020]"></div>
 
       {/* 요일 헤더 */}
       <section className="flex justify-end px-6">

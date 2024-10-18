@@ -1,4 +1,4 @@
-import useDarkMode from '@lib/hooks/useDarkMode';
+import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 
 import { ReactComponent as RightArrowDark } from '@assets/images/statistics/right-arrow-dark.svg';
 import { ReactComponent as RightArrow } from '@assets/images/statistics/right-arrow.svg';
@@ -8,7 +8,7 @@ import { addDays, format, startOfMonth } from 'date-fns';
 import React from 'react';
 
 const MonthlyCard = ({ now, group, isRecordView }: IMonthlyCard) => {
-  const isDarkMode = useDarkMode();
+  const isDarkMode = useIsDarkMode();
   return (
     <div className="flex flex-col items-center justify-center rounded-2xl bg-white border-[0.5px] border-gray-40 px-3 cursor-pointer dark:bg-black dark:border-gray-90">
       <section className="w-full">

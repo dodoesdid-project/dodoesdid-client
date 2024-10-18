@@ -5,10 +5,10 @@ import Dodoesdid from '@assets/images/onboarding/dodoesdid.png';
 import EmojiFestival from '@assets/images/onboarding/emoji-festival.png';
 import EmojiFire from '@assets/images/onboarding/emoji-fire.png';
 import EmojiStar from '@assets/images/onboarding/emoji-star.png';
-import Step1 from '@assets/images/onboarding/onboarding1.png';
-import Step2 from '@assets/images/onboarding/onboarding2.png';
-import Step3 from '@assets/images/onboarding/onboarding3.png';
-import Step4 from '@assets/images/onboarding/onboarding4.png';
+import { ReactComponent as Onboarding1 } from '@assets/images/onboarding/onboarding1.svg';
+import { ReactComponent as Onboarding2 } from '@assets/images/onboarding/onboarding2.svg';
+import { ReactComponent as Onboarding3 } from '@assets/images/onboarding/onboarding3.svg';
+import { ReactComponent as Onboarding4 } from '@assets/images/onboarding/onboarding4.svg';
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -41,10 +41,7 @@ const OnBoardingPage = () => {
           }}
         >
           <SwiperSlide>
-            <img
-              src={Step1}
-              className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]"
-            />
+            <Onboarding1 className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]" />
             <div className="absolute bottom-0 bg-white h-[200px] w-full flex flex-col items-center desktop:w-[375px]">
               <span className="text-primary font-semibold text-[11px] border-[1px] border-solid border-primary-500 px-[8px] py-[4px] rounded-[32px] mt-[56px] mb-[16px]">
                 그룹 생성
@@ -60,10 +57,7 @@ const OnBoardingPage = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <img
-              src={Step2}
-              className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]"
-            />
+            <Onboarding2 className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]" />
             <img
               src={Dodoesdid}
               className="absolute top-[51%] translate-y-[-51%] right-[15%] animate-bounce"
@@ -87,10 +81,7 @@ const OnBoardingPage = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <img
-              src={Step3}
-              className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]"
-            />
+            <Onboarding3 className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]" />
             <img
               src={EmojiFire}
               className="absolute top-[34%] translate-y-[-34%] left-6 animate-bounce"
@@ -118,10 +109,7 @@ const OnBoardingPage = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <img
-              src={Step4}
-              className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]"
-            />
+            <Onboarding4 className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]" />
             <div className="absolute bottom-0 bg-white h-[200px] w-full flex flex-col items-center desktop:w-[375px]">
               <span className="text-primary font-semibold text-[11px] border-[1px] border-solid border-primary-500 px-[8px] py-[4px] rounded-[32px] mt-[56px] mb-[16px]">
                 두더지

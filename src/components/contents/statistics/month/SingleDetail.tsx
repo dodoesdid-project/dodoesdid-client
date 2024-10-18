@@ -8,6 +8,7 @@ import { ReactComponent as SuccessIndi } from '@assets/images/statistics/success
 
 import { ISingleDetail } from '../../../../types/statisticsType';
 import { format } from 'date-fns';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 const SingleDetail = ({

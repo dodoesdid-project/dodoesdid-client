@@ -1,5 +1,5 @@
 import { ReactComponent as Logo } from '@assets/images/common/logo.svg';
-import DodosedidImage from '@assets/images/login/dodoesdid-login.png';
+import { ReactComponent as DodosedidImage } from '@assets/images/login/dodoesdid-login.svg';
 
 import React from 'react';
 
@@ -12,7 +12,7 @@ const SplashScreen = () => {
             친구들과 함께 하는 1일 1다짐
           </p>
           <Logo className="mb-[16px]" />
-          <img src={DodosedidImage} alt="두더지이미지" />
+          <DodosedidImage />
         </div>
       </div>
     </div>

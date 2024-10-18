@@ -1,8 +1,9 @@
 import { ITap } from '../../../types/statisticsType';
+import React from 'react';
 
 const RecordTap = ({ title, isActive, onClick }: ITap) => {
   return (
-    <div className="w-full bg-gray-30 rounded-lg">
+    <div className="w-full bg-gray-30 rounded-lg dark:bg-[transparent]">
       <div className="flex justify-center text-center rounded-lg ">
         <button
           onClick={onClick}
