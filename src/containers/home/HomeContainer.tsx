@@ -173,18 +173,22 @@ const HomeContainer = () => {
               />
             )}
             {/* 공지사항 */}
-            <div className="px-[16px] py-[12px] bg-[#E2F8FF] mb-[12px] flex items-center gap-[12px] dark:bg-[#1e3060]">
-              <Notice />
-              <p className="text-primary text-[12px] font-semibold flex-grow">
-                {notice ? notice : '그룹 공지사항을 입력해보세요.'}
-              </p>
-              <button
-                className="border-solid border-[1px] border-primary text-[12px] text-primary px-[8px] py-[4px] font-semibold rounded-[8px]"
-                onClick={() => navigate(`/mypage/group/info?id=${groupId}`)}
-              >
-                그룹설정
-              </button>
-            </div>
+            {groups?.data && groups.data.length > 0 ? (
+              <div className="px-[16px] py-[12px] bg-[#E2F8FF] mb-[12px] flex items-center gap-[12px] dark:bg-[#1e3060]">
+                <Notice />
+                <p className="text-primary text-[12px] font-semibold flex-grow dark:text-[#D5EBFF]">
+                  {notice ? notice : '그룹 공지사항을 입력해보세요.'}
+                </p>
+                <button
+                  className="border-solid border-[1px] border-primary text-[10px] text-primary px-[8px] py-[4px] font-semibold rounded-[999px] dark:text-[#D5EBFF] dark:border-[#D5EBFF]"
+                  onClick={() => navigate(`/mypage/group/info?id=${groupId}`)}
+                >
+                  그룹설정
+                </button>
+              </div>
+            ) : (
+              <div className="h-[49px] mb-[12px]"></div>
+            )}
             <div className="px-[16px]">
               {/* 시간 */}
               <div className="mb-[8px] h-[30px] relative">
@@ -202,15 +206,15 @@ const HomeContainer = () => {
               {/* 타이머 */}
               <HomeTimer />
               {/* 다짐 */}
-              {groups && dazims && (
+              {groups && (
                 <HomeDazimContainer
                   groups={groups.data}
                   user={user.data}
-                  dazims={dazims.data}
+                  dazims={dazims?.data}
                   isTooltip={
-                    dazims.data.users[0].isMe &&
+                    dazims?.data.users[0].isMe &&
                     searchDate === today &&
-                    dazims.data.myDazimCount === 0
+                    dazims?.data.myDazimCount === 0
                   }
                   isPlus={searchDate === today}
                   onClickDazim={onClickDazim}

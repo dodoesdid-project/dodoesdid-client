@@ -19,8 +19,6 @@ const FeedPage = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log(feeds);
-
   if (!feeds || feeds.length === 0) {
     return <FeedNotFound />;
   }

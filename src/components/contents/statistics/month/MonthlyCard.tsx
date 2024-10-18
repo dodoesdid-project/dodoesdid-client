@@ -5,6 +5,7 @@ import { ReactComponent as RightArrow } from '@assets/images/statistics/right-ar
 
 import { IMonthlyCard } from '../../../../types/statisticsType';
 import { addDays, format, startOfMonth } from 'date-fns';
+import React from 'react';
 
 const MonthlyCard = ({ now, group, isRecordView }: IMonthlyCard) => {
   const isDarkMode = useDarkMode();
@@ -37,7 +38,7 @@ const MonthlyCard = ({ now, group, isRecordView }: IMonthlyCard) => {
                   <div key={`${weekIndex}-${dayIndex}`}>
                     {thisMonth ? (
                       <div
-                        className={`text-white text-[11px] font-semibold rounded-[4px] w-[18px] h-[18px] flex items-center justify-center m-[1px] pt-[3px] ${
+                        className={`text-white text-[11px] font-semibold rounded-[4px] w-[18px] h-[18px] flex items-center justify-center m-[1px] ${
                           group.dazimSuccessDates.includes(dateData)
                             ? isRecordView
                               ? 'bg-sub-400'

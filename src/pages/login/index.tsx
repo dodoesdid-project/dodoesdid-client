@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom';
 const LoginPage = () => {
   return (
     <div className="bg-primary h-lvh flex flex-col justify-between">
-      <div className="pt-[126px] flex flex-col items-center gap-[12px]">
-        <p className="text-white font-semibold text-[17px]">
+      <div className="pt-[182px] flex flex-col items-center">
+        <p className="text-white font-semibold text-[14px] mb-[12px]">
           친구들과 함께 하는 1일 1다짐
         </p>
-        <Logo />
+        <Logo className="mb-[16px]" />
         <img src={DodosedidImage} alt="두더지이미지" />
       </div>
       <div className="pb-[50px] flex flex-col items-center px-[16px]">

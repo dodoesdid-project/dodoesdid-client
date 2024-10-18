@@ -19,7 +19,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const DodoesdidPage = () => {
   const [isMonthlyView, setIsMonthlyView] = useState(false);
@@ -70,7 +70,7 @@ const DodoesdidPage = () => {
   });
 
   if (isLoading || isFetching) {
-    return <div>로딩 중...</div>;
+    return null;
   }
 
   if (!data || data.length === 0) {

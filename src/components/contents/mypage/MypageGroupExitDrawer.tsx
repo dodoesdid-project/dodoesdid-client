@@ -8,9 +8,19 @@ import { ReactComponent as CloseButton } from '@assets/images/common/close.svg';
 import { Drawer } from 'antd';
 import React, { useEffect, useRef } from 'react';
 
-type Props = { isOpen: boolean; onClose: () => void; onClick: () => void };
+type Props = {
+  groupName: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onClick: () => void;
+};
 
-const MypageGroupExitDrawer = ({ isOpen, onClose, onClick }: Props) => {
+const MypageGroupExitDrawer = ({
+  groupName,
+  isOpen,
+  onClose,
+  onClick,
+}: Props) => {
   const isDarkMode = useDarkMode();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -47,7 +57,7 @@ const MypageGroupExitDrawer = ({ isOpen, onClose, onClick }: Props) => {
           />
         )}
         <p className="text-primary font-semibold text-[16px] mb-[19px] text-center">
-          1일 1다짐
+          {groupName}
         </p>
         <p className="text-gray-100 font-semibold text-[16px] mb-[42px] text-center dark:text-gray-30">
           그룹을 나가시겠어요?

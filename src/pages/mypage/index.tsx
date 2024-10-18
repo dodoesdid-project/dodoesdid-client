@@ -1,8 +1,12 @@
 import { getUser } from '@lib/api/user';
+import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 
 import Button from '@components/common/Button';
 import Divider from '@components/common/Divider';
 import TopBar from '@components/common/TopBar';
+
+import DodosedidImageDark from '@assets/images/home/dodoesdid-disabled-dark.png';
+import DodosedidImage from '@assets/images/home/dodoesdid-disabled.png';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -13,6 +17,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Mypage = () => {
   const navigate = useNavigate();
+  const isDarkMode = useIsDarkMode();
+
   const { data: user } = useQuery<AxiosResponse<User>>({
     queryKey: ['user'],
     queryFn: getUser,
@@ -24,11 +30,19 @@ const Mypage = () => {
       <div className="px-[16px]">
         <div className="flex gap-[16px] items-center mb-[16px] ">
           <div className="w-[88px] aspect-square rounded-full flex justify-center overflow-hidden items-center border-[0.6px] border-solid border-gray-40 dark:border-[#444]">
-            <img
-              src={user?.data.profile?.thumbnail}
-              alt="유저이미지"
-              className="w-[100%] h-[100%] object-cover"
-            />
+            {user?.data.profile ? (
+              <img
+                src={user?.data.profile?.thumbnail}
+                alt="유저이미지"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            ) : (
+              <img
+                src={isDarkMode ? DodosedidImageDark : DodosedidImage}
+                alt="두더지"
+                className="w-[80%]"
+              />
+            )}
           </div>
           <div>
             <p className="text-black text-[20px] font-semibold mb-[12px] dark:text-gray-30">
