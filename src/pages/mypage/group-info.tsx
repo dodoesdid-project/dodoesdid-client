@@ -244,6 +244,7 @@ const MyGroupInfoPage = () => {
       )}
       {isOpenExitDrawer && (
         <MypageGroupExitDrawer
+          groupName={groupDetail.name}
           isOpen={isOpenExitDrawer}
           onClose={toggleExitDrawer}
           onClick={onClickExitSubmit}

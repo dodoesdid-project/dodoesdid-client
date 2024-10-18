@@ -8,8 +8,8 @@ import React from 'react';
 type Props = {
   groups: Groups;
   user: User;
-  dazims: Dazims;
-  isTooltip: boolean;
+  dazims?: Dazims;
+  isTooltip?: boolean;
   isPlus: boolean;
   onClickDazim: () => void;
 };

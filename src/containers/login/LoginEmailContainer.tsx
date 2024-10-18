@@ -1,13 +1,11 @@
 import { login } from '@lib/api/user';
-import useDarkMode from '@lib/hooks/useDarkMode';
 
 import Button from '@components/common/Button';
 import CheckBox from '@components/common/CheckBox';
 import Input from '@components/common/Input';
 import TopBar from '@components/common/TopBar';
 
-import { ReactComponent as LogoDark } from '@assets/images/common/logo-mix-dark.svg';
-import { ReactComponent as Logo } from '@assets/images/common/logo-mix.svg';
+import { ReactComponent as Logo } from '@assets/images/common/logo-blue.svg';
 
 import { useMutation } from '@tanstack/react-query';
 
@@ -18,7 +16,6 @@ import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginEmailContainer = () => {
-  const isDarkMode = useDarkMode();
   const navigate = useNavigate();
   const {
     control,
@@ -55,7 +52,7 @@ const LoginEmailContainer = () => {
       <div>
         <TopBar title="로그인" backLink="/login" />
         <div className="px-[16px]">
-          {isDarkMode ? <LogoDark /> : <Logo />}
+          <Logo />
           <p className="py-[22px] text-[20px] font-semibold text-gray-100 dark:text-white">
             시작해볼까요?
           </p>

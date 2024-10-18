@@ -14,7 +14,7 @@ const FeedNotFound = () => {
 
   return (
     <>
-      <TopBar title="피드" backLink="/" />
+      <TopBar title="피드" />
       <div className="mt-[166px] flex flex-col items-center">
         <p className="text-gray-100 text-[16px] mb-[22px] dark:text-gray-30">
           피드가 아직 없으시네요, 다짐을 등록해주세요!

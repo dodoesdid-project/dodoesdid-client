@@ -3,6 +3,7 @@ import showToast from '@lib/utils/toast';
 import { ReactComponent as DodoesdidFull } from '@assets/images/common/dodoesdid-full.svg';
 import { ReactComponent as DodoesdidHalf } from '@assets/images/common/dodoesdid-half.svg';
 import { ReactComponent as DodoesdidHide } from '@assets/images/common/dodoesdid-hide.svg';
+import CameraIcon from '@assets/images/home/camera-blue.png';
 import { ReactComponent as PlusIcon } from '@assets/images/home/plus.svg';
 
 import { DazimUser } from '../../../types/dazims';
@@ -104,14 +105,16 @@ const HomeDazim = ({
             onClick={onClick}
           >
             {/* 사진 */}
-            {user?.dazim?.photo ? (
+            {user?.dazim?.photo && (
               <img
                 src={user?.dazim?.photo}
                 alt="다짐이미지"
                 className="w-[100%] h-[100%] object-cover"
               />
-            ) : (
-              <PlusIcon />
+            )}
+            {!user?.dazim?.content && isPlus && <PlusIcon />}
+            {user?.dazim?.content && !user?.dazim?.isSuccess && (
+              <img src={CameraIcon} />
             )}
             {/* 두더지 */}
             {!user?.dazim ? (
@@ -149,16 +152,16 @@ const HomeDazim = ({
             onClick={onClick}
           >
             {/* 사진 */}
-            {user?.dazim?.photo ? (
+            {user?.dazim?.photo && (
               <img
                 src={user?.dazim?.photo}
                 alt="다짐이미지"
                 className="w-[100%] h-[100%] object-cover"
               />
-            ) : isPlus ? (
-              <PlusIcon />
-            ) : (
-              ''
+            )}
+            {!user?.dazim?.content && isPlus && <PlusIcon />}
+            {user?.dazim?.content && !user?.dazim?.isSuccess && (
+              <img src={CameraIcon} />
             )}
             {/* 두더지 */}
             {!user?.dazim ? (
@@ -168,7 +171,6 @@ const HomeDazim = ({
             ) : (
               <DodoesdidFull className="absolute bottom-[44px] right-[10px]" />
             )}
-
             {/* 글 */}
             {user?.dazim?.content && (
               <p className="w-[136px] py-[4px] px-[8px] truncate text-center bg-[rgba(0,0,0,.7)] rounded-[4px] text-white text-[14px] absolute bottom-[10px]">
