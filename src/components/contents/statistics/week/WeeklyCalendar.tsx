@@ -13,9 +13,9 @@ const WeeklyCalendar = ({ now, isRecordView, data }: IWeeklyCalendar) => {
   };
 
   return (
-    <div className="w-full text-center bg-white rounded-2xl h-full">
+    <div className="w-full text-center bg-white rounded-2xl h-full dark:bg-black">
       <section className="pt-8 px-4">
-        <span className="font-semibold text-gray-100">
+        <span className="font-semibold text-gray-100 dark:text-gray-30">
           한 주 동안
           <span className="font-semibold">{textDevision(isRecordView)}</span>가
           <br /> 다짐을 달성한 날이 표시돼요.
@@ -27,7 +27,10 @@ const WeeklyCalendar = ({ now, isRecordView, data }: IWeeklyCalendar) => {
       {/* 요일 헤더 */}
       <section className="flex justify-end px-6">
         {dayOfWeek.map((day, index) => (
-          <div key={index} className="flex pl-1 pr-2 py-2 text-gray-70">
+          <div
+            key={index}
+            className="flex pl-1 pr-2 py-2 text-gray-70 dark:text-gray-60"
+          >
             {day}
           </div>
         ))}

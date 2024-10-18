@@ -1,19 +1,23 @@
+import useDarkMode from '@lib/hooks/useDarkMode';
+
+import { ReactComponent as RightArrowDark } from '@assets/images/statistics/right-arrow-dark.svg';
 import { ReactComponent as RightArrow } from '@assets/images/statistics/right-arrow.svg';
 
 import { IMonthlyCard } from '../../../../types/statisticsType';
 import { addDays, format, startOfMonth } from 'date-fns';
 
 const MonthlyCard = ({ now, group, isRecordView }: IMonthlyCard) => {
+  const isDarkMode = useDarkMode();
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl bg-white border-[0.5px] border-gray-40 px-3 cursor-pointer">
+    <div className="flex flex-col items-center justify-center rounded-2xl bg-white border-[0.5px] border-gray-40 px-3 cursor-pointer dark:bg-black dark:border-gray-90">
       <section className="w-full">
         <div className="text-[17px] font-semibold py-3 px-1 flex items-center justify-between">
-          <span className="truncate w-full">
+          <span className="truncate w-full dark:text-gray-30">
             {group.name.length > 7
               ? `${group.name.substring(0, 7)}...`
               : group.name}
           </span>
-          <RightArrow />
+          {isDarkMode ? <RightArrowDark /> : <RightArrow />}
         </div>
 
         <div className="flex flex-col items-center justify-center ">
@@ -38,7 +42,9 @@ const MonthlyCard = ({ now, group, isRecordView }: IMonthlyCard) => {
                             ? isRecordView
                               ? 'bg-sub-400'
                               : 'bg-primary-500'
-                            : 'bg-gray-60'
+                            : isDarkMode
+                              ? 'bg-gray-90'
+                              : 'bg-gray-60'
                         }`}
                       >
                         {day}

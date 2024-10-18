@@ -3,9 +3,9 @@ import SingleDetail from './SingleDetail';
 
 const SingleGroup = ({ now, data, isRecordView }: IGroupDetail) => {
   return (
-    <div className="w-full text-center rounded-t-2xl bg-gray-30 ">
-      <section className="pt-2 pb-3 px-4 bg-white ">
-        <span className="font-semibold text-gray-90">
+    <div className="w-full text-center rounded-t-2xl bg-gray-30 dark:bg-[#2A2A2A] pb-[0.1px]">
+      <section className="pt-2 pb-3 px-4 bg-white dark:bg-black">
+        <span className="font-semibold text-gray-90 dark:text-gray-30">
           한 달 동안
           <span className={isRecordView ? 'text-sub-400' : 'text-primary-500'}>
             {isRecordView ? ` ${data[0].name} 그룹` : ' 내'}

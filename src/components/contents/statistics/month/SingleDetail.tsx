@@ -1,6 +1,8 @@
 import useCalendar from '@lib/hooks/useCalendar';
+import useIsDarkMode from '@lib/hooks/useIsDarkMode';
 
 import { ReactComponent as Failed } from '@assets/images/statistics/failed-big.svg';
+import { ReactComponent as FailedDark } from '@assets/images/statistics/failed-dark-big.svg';
 import { ReactComponent as SuccessGroup } from '@assets/images/statistics/success-group-big.svg';
 import { ReactComponent as SuccessIndi } from '@assets/images/statistics/success-indi-big.svg';
 
@@ -18,14 +20,19 @@ const SingleDetail = ({
   const monthCalendar = calendar.getMonthCalendar();
   const week = ['월', '화', '수', '목', '금', '토', '일'];
 
+  const isDarkMode = useIsDarkMode();
+
   return (
     <>
-      {/* 월 ~ 일 뿌려주기*/}
-      <div className="bg-white my-3 mx-4 rounded-2xl px-[21px] py-5">
+      {/* 월 ~ 일 뿌려주기 */}
+      <div className="bg-white my-3 mx-4 rounded-2xl px-[21px] py-5 dark:bg-black">
         <section>
           <div className="flex mb-3">
             {week.map((day, index) => (
-              <div key={index} className="flex-1 p-2 text-[11px]">
+              <div
+                key={index}
+                className="flex-1 p-2 text-[11px] dark:text-gray-30 font-semibold"
+              >
                 {day}
               </div>
             ))}
@@ -54,7 +61,7 @@ const SingleDetail = ({
                         <>
                           <div
                             className={twMerge(
-                              `text-gray-900 font-semibold`,
+                              `text-gray-900 font-semibold dark:text-gray-30`,
                               className,
                             )}
                           >
@@ -67,6 +74,8 @@ const SingleDetail = ({
                               ) : (
                                 <SuccessIndi />
                               )
+                            ) : isDarkMode ? (
+                              <FailedDark />
                             ) : (
                               <Failed />
                             )}
@@ -85,4 +94,5 @@ const SingleDetail = ({
     </>
   );
 };
+
 export default SingleDetail;
