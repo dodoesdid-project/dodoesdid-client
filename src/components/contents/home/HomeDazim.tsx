@@ -3,7 +3,7 @@ import showToast from '@lib/utils/toast';
 import { ReactComponent as DodoesdidFull } from '@assets/images/common/dodoesdid-full.svg';
 import { ReactComponent as DodoesdidHalf } from '@assets/images/common/dodoesdid-half.svg';
 import { ReactComponent as DodoesdidHide } from '@assets/images/common/dodoesdid-hide.svg';
-import CameraIcon from '@assets/images/home/camera-blue.png';
+import { ReactComponent as CameraIcon } from '@assets/images/home/camera-blue.svg';
 import { ReactComponent as PlusIcon } from '@assets/images/home/plus.svg';
 
 import { DazimUser } from '../../../types/dazims';
@@ -113,9 +113,7 @@ const HomeDazim = ({
               />
             )}
             {!user?.dazim?.content && isPlus && <PlusIcon />}
-            {user?.dazim?.content && !user?.dazim?.isSuccess && (
-              <img src={CameraIcon} />
-            )}
+            {user?.dazim?.content && !user?.dazim?.isSuccess && <CameraIcon />}
             {/* 두더지 */}
             {!user?.dazim ? (
               <DodoesdidHide className="absolute bottom-[44px] right-[10px]" />
@@ -160,9 +158,7 @@ const HomeDazim = ({
               />
             )}
             {!user?.dazim?.content && isPlus && <PlusIcon />}
-            {user?.dazim?.content && !user?.dazim?.isSuccess && (
-              <img src={CameraIcon} />
-            )}
+            {user?.dazim?.content && !user?.dazim?.isSuccess && <CameraIcon />}
             {/* 두더지 */}
             {!user?.dazim ? (
               <DodoesdidHide className="absolute bottom-[44px] right-[10px]" />
