@@ -1,10 +1,9 @@
 import Button from '@components/common/Button';
 
-import Tooltip from '@assets/images/onboarding/dodoesdid-tooltip.png';
-import Dodoesdid from '@assets/images/onboarding/dodoesdid.png';
-import EmojiFestival from '@assets/images/onboarding/emoji-festival.png';
-import EmojiFire from '@assets/images/onboarding/emoji-fire.png';
-import EmojiStar from '@assets/images/onboarding/emoji-star.png';
+import { ReactComponent as EmojiFestival } from '@assets/images/onboarding/emoji-festival.svg';
+import { ReactComponent as EmojiFire } from '@assets/images/onboarding/emoji-fire.svg';
+import { ReactComponent as EmojiStar } from '@assets/images/onboarding/emoji-star.svg';
+import { ReactComponent as Mascot } from '@assets/images/onboarding/mascot.svg';
 import { ReactComponent as Onboarding1 } from '@assets/images/onboarding/onboarding1.svg';
 import { ReactComponent as Onboarding2 } from '@assets/images/onboarding/onboarding2.svg';
 import { ReactComponent as Onboarding3 } from '@assets/images/onboarding/onboarding3.svg';
@@ -58,14 +57,7 @@ const OnBoardingPage = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Onboarding2 className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]" />
-            <img
-              src={Dodoesdid}
-              className="absolute top-[51%] translate-y-[-51%] right-[15%] animate-bounce"
-            />
-            <img
-              src={Tooltip}
-              className="absolute top-[44%] translate-y-[-44%] right-[5%] animate-bounce"
-            />
+            <Mascot className="absolute top-[45%] translate-y-[-45%] right-[8%] animate-bounce" />
             <div className="absolute bottom-0 bg-white h-[200px] w-full flex flex-col items-center desktop:w-[375px]">
               <span className="text-primary font-semibold text-[11px] border-[1px] border-solid border-primary-500 px-[8px] py-[4px] rounded-[32px] mt-[56px] mb-[16px]">
                 메인 홈
@@ -82,18 +74,9 @@ const OnBoardingPage = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Onboarding3 className="absolute left-[50%] translate-x-[-50%] top-[50%] translate-y-[-50%]" />
-            <img
-              src={EmojiFire}
-              className="absolute top-[34%] translate-y-[-34%] left-6 animate-bounce"
-            />
-            <img
-              src={EmojiFestival}
-              className="absolute top-[40%] translate-y-[-40%] right-10 animate-bounce"
-            />
-            <img
-              src={EmojiStar}
-              className="absolute top-[50%] translate-y-[-50%] left-6 animate-bounce"
-            />
+            <EmojiFire className="absolute top-[34%] translate-y-[-34%] left-6 animate-bounce" />
+            <EmojiFestival className="absolute top-[40%] translate-y-[-40%] right-10 animate-bounce" />
+            <EmojiStar className="absolute top-[50%] translate-y-[-50%] left-6 animate-bounce" />
             <div className="absolute bottom-0 bg-white h-[200px] w-full flex flex-col items-center desktop:w-[375px]">
               <span className="text-primary font-semibold text-[11px] border-[1px] border-solid border-primary-500 px-[8px] py-[4px] rounded-[32px] mt-[56px] mb-[16px]">
                 피드
