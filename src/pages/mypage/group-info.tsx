@@ -87,7 +87,7 @@ const MyGroupInfoPage = () => {
       try {
         await navigator.share({
           title: '초대 코드',
-          text: `두더지 그룹에 초대되었습니다. 초대코드: ${groupId}`,
+          text: `두더지 그룹에 초대되었습니다. 초대코드: ${groupDetail.inviteCode}`,
           url: `${defaultURL}/home/join-group?code=${groupDetail.inviteCode}`, // 여기에 초대링크 + id ?
         });
         console.log('초대 코드가 성공적으로 공유되었습니다.');

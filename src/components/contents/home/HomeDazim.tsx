@@ -62,7 +62,7 @@ const HomeDazim = ({
             <PlusIcon />
           </div>
         </div>
-      ) : isTooltip ? (
+      ) : isTooltip && isMe ? (
         <Tooltip
           open={!user?.dazim?.isSuccess}
           placement="right"
