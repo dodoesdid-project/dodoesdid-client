@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import React, { useEffect } from 'react';
-import { RouterProvider, useNavigate } from 'react-router-dom';
+import { RouterProvider, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,21 +19,11 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      ga.pageview(url); // 페이지 변경 시 GA pageview 호출
-    };
-
-    const unsubscribe = router.subscribe(() => {
-      handleRouteChange(window.location.pathname);
-    });
-
-    return () => {
-      unsubscribe(); // 이벤트 제거
-    };
-  }, [navigate]);
+    ga.pageview(location.pathname + location.search); // 페이지 변경 시 GA pageview 호출
+  }, [location]);
 
   return (
     <QueryClientProvider client={queryClient}>
